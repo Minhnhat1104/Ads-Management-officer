@@ -14,12 +14,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    // "jsx": "react-jsx",
-    "jsx": "react",
+    "jsx": "react-jsx",
+    // "jsx": "react",
     "baseUrl": ".",
     "esModuleInterop": true,
     "paths": {
-      "@base/*": ["src/base/*"]
+      "@base/*": ["src/base/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "extends": "./tsconfig-paths.json"

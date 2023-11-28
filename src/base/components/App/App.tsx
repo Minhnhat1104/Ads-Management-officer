@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { Toaster } from 'react-hot-toast';
 import '@fontsource/roboto/300.css';
@@ -10,7 +10,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ThemeCustomization from '@base/themes';
 import { RecoilRoot } from 'recoil';
-import { Box, CssBaseline } from '@mui/material';
+import { Box, CircularProgress, CssBaseline } from '@mui/material';
+import { routes } from '@base/routes';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -21,16 +22,17 @@ const queryClient = new QueryClient({
   },
 });
 
+const router = createBrowserRouter(routes);
+
 function App() {
   return (
     <RecoilRoot>
       <ThemeCustomization>
-        <CssBaseline />
         <QueryClientProvider client={queryClient}>
-          <Router>
-            <Toaster position="top-right" reverseOrder={false} />
-            <h1>MainPage</h1>
-          </Router>
+          <Toaster position="top-right" reverseOrder={false} />
+          <Suspense fallback={<CircularProgress />}>
+            <RouterProvider router={router} />
+          </Suspense>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeCustomization>

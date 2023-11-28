@@ -4,7 +4,8 @@
       "module-resolver",
       {
         "alias": {
-          "@base": "./src/base"
+          "@base": "./src/base",
+          "@pages": "./src/pages"
         }
       }
     ]

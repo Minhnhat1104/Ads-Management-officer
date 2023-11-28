@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "config-overrides": ["config-overrides.ts"]
+        }
+    }
+}

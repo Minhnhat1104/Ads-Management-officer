@@ -4,6 +4,7 @@ import { LabelValue } from '@base/types';
 import { Stack, Typography, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { HEADER_HEIGHT } from '@base/config/constants';
 
 const navItems: LabelValue[] = [
   {
@@ -31,7 +32,15 @@ const Header = () => {
   const border = `1px solid ${theme.palette.divider}`;
 
   return (
-    <Stack direction="row" alignItems="center" justifyContent="center" spacing={2} borderBottom={border} py={1}>
+    <Stack
+      height={HEADER_HEIGHT}
+      direction="row"
+      alignItems="center"
+      justifyContent="center"
+      spacing={2}
+      borderBottom={border}
+      py={1}
+    >
       {navItems.map((_item: LabelValue) => (
         // <Button
         //   key={_item.value}

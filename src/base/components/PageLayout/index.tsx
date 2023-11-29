@@ -1,13 +1,14 @@
 import { Button, Stack } from '@mui/material';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import Header from './Header';
+import { HEADER_HEIGHT } from '@base/config/constants';
 
 const PageLayout = () => {
   return (
     <Stack>
       <Header />
-      <Stack flex={1}>
+      <Stack height={`calc(100vh - ${HEADER_HEIGHT}px)`}>
         <Outlet />
       </Stack>
     </Stack>

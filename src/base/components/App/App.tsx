@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import '@goongmaps/goong-js/dist/goong-js.css';
 
 import { Toaster } from 'react-hot-toast';
 import '@fontsource/roboto/300.css';
@@ -10,7 +11,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ThemeCustomization from '@base/themes';
 import { RecoilRoot } from 'recoil';
-import { Box, CircularProgress, CssBaseline } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import { routes } from '@base/routes';
 
 // Create a client

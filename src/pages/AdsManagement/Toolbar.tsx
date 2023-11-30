@@ -9,9 +9,7 @@ interface ToolbarProps {}
 const Toolbar = (props: ToolbarProps) => {
   const queryClient = useQueryClient();
   const theme = useTheme();
-  const [keyword, setKeyword] = useState<string>('');
   const [open, setOpen] = useState<boolean>(false);
-  const anchorRef = useRef<any>(null);
 
   const border = `1px solid ${theme.palette.divider}`;
   return (

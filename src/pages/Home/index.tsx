@@ -5,7 +5,7 @@ const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set yo
 
 const Home = () => {
   const [viewport, setViewport] = useState({
-    width: '100vw',
+    width: '100%',
     height: '100%',
     latitude: 10.7631,
     longitude: 106.68246,

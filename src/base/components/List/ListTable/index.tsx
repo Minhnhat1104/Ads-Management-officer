@@ -7,9 +7,6 @@ import { Table as ReactTableType } from '@tanstack/table-core';
 import { BaseListProps } from '@base/components/List/Interface';
 import ListPagination from '@base/components/List/ListPagination';
 import { ReactTable8, onSortByFunc } from '@base/components/ReactTable8';
-
-import LoadMoreButton from './LoadMoreButton';
-
 export interface LoadMoreProps {
   totalItems: number;
   nextCursor?: string; //last item id in current list
@@ -110,8 +107,6 @@ const ListTable = (props: ListTableProps) => {
         isMultiSelection={isMultiSelection}
         isDraggable={isDraggable}
       />
-      {/* I using this load more to get more Data from Server without changing page */}
-      {loadMoreProps && <LoadMoreButton {...loadMoreProps} />}
       {pagingProps && (
         <ListPagination
           gotoPage={(page: number) => onPageChange && onPageChange(page, pagingProps.pageSize)}

@@ -137,7 +137,6 @@ const AdsManagement = (props: AdsManagementProps) => {
   }, [
     items,
     tableColumns,
-    ,
     // pagingProps
     selectedIds,
   ]);

@@ -8,7 +8,7 @@ const PageLayout = () => {
   return (
     <Stack>
       <Header />
-      <Stack height={`calc(100vh - ${HEADER_HEIGHT}px)`}>
+      <Stack height={`calc(100vh - ${HEADER_HEIGHT}px)`} width={'80%'} margin="auto">
         <Outlet />
       </Stack>
     </Stack>

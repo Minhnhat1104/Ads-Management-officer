@@ -1,7 +1,8 @@
 import { Dispatch, useRef, useState } from 'react';
 
-import { Box, Grid, Popover, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Button, Grid, Popover, Stack, Typography, useTheme } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
+import WritePage from './Write';
 
 interface ToolbarProps {}
 
@@ -15,12 +16,14 @@ const Toolbar = (props: ToolbarProps) => {
   const border = `1px solid ${theme.palette.divider}`;
   return (
     <>
-      <Grid container sx={{ mb: 2, p: 0.25 }}>
-        {/* <Grid item xs spacing={0.5} alignItems={'center'}>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 1 }}>
+        <Stack></Stack>
+        <Button size="small" variant="contained" sx={{ width: 'fit-content' }} onClick={() => setOpen(true)}>
+          Add
+        </Button>
+      </Stack>
 
-        </Grid> */}
-        <Grid item xs={12} display="flex" alignItems="center" justifyContent="flex-end"></Grid>
-      </Grid>
+      {open && <WritePage isOpen={open} onClose={() => setOpen(false)} />}
     </>
   );
 };

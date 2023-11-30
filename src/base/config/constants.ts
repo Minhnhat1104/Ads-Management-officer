@@ -11,4 +11,22 @@ export const LONG_RUNNING_TIME = 5 * 60 * 1000;
 export const DISPLAY_MODE_VIEW = 'DISPLAY_VIEW';
 export const DISPLAY_MODE_WRITE = 'DISPLAY_WRITE';
 
+// export const HEADER_HEIGHT = 60;
+
+// App Bar
+export const APP_BAR_HEIGHT = 60;
+// Side bar
+export const SIDE_BAR_WIDTH = 240;
+export const SIDE_BAR_MINI_WIDTH = 60;
+export const SIDE_BAR_ITEM_HEIGHT = 32;
+// Top menu items
 export const HEADER_HEIGHT = 60;
+export const TOP_MENU_HEIGHT = 50;
+export const TOP_MENU_WIDTH = 60;
+export const TOP_MENU_LENGTH = 6;
+// setitng List
+export const SPLIT_MIN_SIZE = 380;
+export const SPLIT_MAX_SIZE = 380;
+// Page
+export const CONTAINER_TITLE_HEIGHT = 55;
+export const CONTAINER_PADDING_X = 4;

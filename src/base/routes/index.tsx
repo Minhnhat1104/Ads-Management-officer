@@ -8,6 +8,7 @@ const Home = lazy(() => import('@pages/Home'));
 const AdsManagement = lazy(() => import('@pages/AdsManagement/List'));
 const ResidentReport = lazy(() => import('@pages/ResidentReport'));
 const AdsLicense = lazy(() => import('@pages/AdsLicense'));
+const Login = lazy(() => import('@pages/Login'));
 
 export const routes: RouteObject[] = [
   {
@@ -17,6 +18,10 @@ export const routes: RouteObject[] = [
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
       },
       {
         path: 'ads-management',

@@ -7,10 +7,11 @@ import { useMatch } from 'react-router-dom';
 
 const PageLayout = () => {
   const isHome = useMatch('/');
+  const isLogin = useMatch('/login');
 
   return (
     <Stack>
-      <Header />
+      {!isLogin && <Header />}
       <Stack height={`calc(100vh - ${HEADER_HEIGHT}px)`} width={isHome ? '100%' : '80%'} margin="auto">
         <Outlet />
       </Stack>

@@ -5,7 +5,7 @@ import { RouteObject } from 'react-router-dom';
 const PageLayout = lazy(() => import('@base/components/PageLayout'));
 
 const Home = lazy(() => import('@pages/Home'));
-const AdsManagement = lazy(() => import('@pages/AdsManagement'));
+const AdsManagement = lazy(() => import('@pages/AdsManagement/List'));
 const ResidentReport = lazy(() => import('@pages/ResidentReport'));
 const AdsLicense = lazy(() => import('@pages/AdsLicense'));
 

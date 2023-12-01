@@ -2,7 +2,7 @@ import { Dispatch, useRef, useState } from 'react';
 
 import { Box, Button, Grid, Popover, Stack, Typography, useTheme } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-import WritePage from './Write';
+import WritePage from '../Write';
 
 interface ToolbarProps {}
 

@@ -25,10 +25,11 @@ const WritePage = (props: WritePageProps) => {
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [
-    keyNames.KEY_NAME_ADS_NAME,
-    keyNames.KEY_NAME_ADS_RESPONSIBILITES,
-    keyNames.KEY_NAME_ADS_CATEGORY,
-    keyNames.KEY_NAME_ADS_RIGHT,
+    keyNames.KEY_NAME_ADS_1,
+    keyNames.KEY_NAME_ADS_2,
+    keyNames.KEY_NAME_ADS_3,
+    keyNames.KEY_NAME_ADS_4,
+    keyNames.KEY_NAME_ADS_5,
   ];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);

@@ -1,9 +1,9 @@
-import { TableCell, TableRow } from '@mui/material'
+import { TableCell, TableRow } from '@mui/material';
 
-import NoData from '@base/components/NoData'
+import NoData from '@base/components/NoData';
 
 interface NodataProps {
-  colspan: number
+  colspan: number;
 }
 
 function Nodata({ colspan }: NodataProps) {
@@ -13,7 +13,7 @@ function Nodata({ colspan }: NodataProps) {
         <NoData />
       </TableCell>
     </TableRow>
-  )
+  );
 }
 
-export default Nodata
+export default Nodata;

@@ -12,16 +12,20 @@ const navItems: LabelValue[] = [
     value: '/',
   },
   {
-    label: '  Ads Management',
+    label: 'Ads Management',
     value: 'ads-management',
   },
   {
-    label: '  Resident Report',
+    label: 'Resident Report',
     value: 'resident-report',
   },
   {
-    label: '  Ads license',
+    label: 'Ads license',
     value: 'ads-license',
+  },
+  {
+    label: 'Demo Page',
+    value: 'demo-page',
   },
 ];
 

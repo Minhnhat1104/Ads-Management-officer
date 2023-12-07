@@ -8,7 +8,7 @@ import { DEMO_OPTIONS } from 'src/constants/demo';
 
 const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_ADS_1]: {
-    languageKey: 'Title 1',
+    languageKey: 'RadioGroup',
     Component: baseComponents.RadioGroup,
     defaultValue: DEMO_OPTIONS[0],
     componentProps: {
@@ -16,7 +16,7 @@ const writeConfig: WriteConfig = {
     },
   },
   [keyNames.KEY_NAME_ADS_2]: {
-    languageKey: 'Title 2',
+    languageKey: 'CheckBox',
     Component: baseComponents.CheckBox,
     defaultValue: false,
     componentProps: {
@@ -27,7 +27,7 @@ const writeConfig: WriteConfig = {
     },
   },
   [keyNames.KEY_NAME_ADS_3]: {
-    languageKey: 'Title 3',
+    languageKey: 'CheckBoxGroup',
     Component: baseComponents.CheckBoxGroup,
     defaultValue: [],
     componentProps: {
@@ -35,7 +35,7 @@ const writeConfig: WriteConfig = {
     },
   },
   [keyNames.KEY_NAME_ADS_4]: {
-    languageKey: 'Title 4',
+    languageKey: 'SelectBox',
     Component: baseComponents.SelectBox,
     defaultValue: '',
     componentProps: {
@@ -43,7 +43,7 @@ const writeConfig: WriteConfig = {
     },
   },
   [keyNames.KEY_NAME_ADS_5]: {
-    languageKey: 'Title 5',
+    languageKey: 'QuillEditor',
     Component: baseComponents.QuillEditor,
     defaultValue: '',
     componentProps: {},

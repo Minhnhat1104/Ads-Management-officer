@@ -5,8 +5,9 @@ import { RouteObject } from 'react-router-dom';
 const PageLayout = lazy(() => import('@base/components/PageLayout'));
 
 const Home = lazy(() => import('@pages/Home'));
-const AdsManagement = lazy(() => import('@pages/AdsManagement/List'));
+const DemoPage = lazy(() => import('@pages/DemoPage/List'));
 const ResidentReport = lazy(() => import('@pages/ResidentReport'));
+const AdsManagement = lazy(() => import('@pages/AdsManagement'));
 const AdsLicense = lazy(() => import('@pages/AdsLicense'));
 const Login = lazy(() => import('@pages/Login'));
 
@@ -34,6 +35,10 @@ export const routes: RouteObject[] = [
       {
         path: 'ads-license',
         element: <AdsLicense />,
+      },
+      {
+        path: 'demo-page',
+        element: <DemoPage />,
       },
     ],
   },

@@ -71,9 +71,6 @@ const Home = () => {
           anchor="bottom"
           longitude={popupInfo.longitude}
           latitude={popupInfo.latitude}
-          closeButton={true}
-          closeOnClick={false}
-          closeButton={false}
           onClose={setPopupInfo}
           capturePointerMove={true}
         >

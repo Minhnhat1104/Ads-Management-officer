@@ -1,7 +1,3 @@
-import React from 'react';
+import { default as List } from './List';
 
-const AdsLicense = () => {
-  return <div>AdsLicense</div>;
-};
-
-export default AdsLicense;
+export default List;

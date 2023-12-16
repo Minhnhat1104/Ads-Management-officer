@@ -16,9 +16,9 @@ import ListTable, { ListTableProps } from '@base/components/List/ListTable';
 import { dummyData } from './dummyData';
 // import SortWritePage from '../Write';
 
-interface AdsManagementProps {}
+interface ResidentReportManagementProps {}
 
-const AdsManagement = (props: AdsManagementProps) => {
+const ResidentReportManagement = (props: ResidentReportManagementProps) => {
   const {} = props;
   const theme = useTheme();
   const queryClient = useQueryClient();
@@ -61,38 +61,44 @@ const AdsManagement = (props: AdsManagementProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Địa chỉ',
-      keyName: keyNames.KEY_NAME_HOME_ADDRESS,
+      languageKey: 'Thời gian gửi',
+      keyName: keyNames.KEY_NAME_REPORT_TIMESENT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Khu vực',
-      keyName: keyNames.KEY_NAME_HOME_SECTION,
+      languageKey: 'Họ và tên',
+      keyName: keyNames.KEY_NAME_REPORT_FULLNAME,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Loại vị trí',
-      keyName: keyNames.KEY_NAME_HOME_TYPE,
+      languageKey: 'Số điện thoại',
+      keyName: keyNames.KEY_NAME_REPORT_PHONENUMBER,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Hình thức quảng cáo',
-      keyName: keyNames.KEY_NAME_HOME_ADS_FORM,
+      languageKey: 'Bảng quảng cáo',
+      keyName: keyNames.KEY_NAME_REPORT_ADS_TABLE,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Hình ảnh điểm đặt bảng quảng cáp',
-      keyName: keyNames.KEY_NAME_HOME_ADS_IMAGE,
+      languageKey: 'Địa chỉ đặt bảng quảng cáo',
+      keyName: keyNames.KEY_NAME_REPORT_ADDRESS,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Quy hoạch',
-      keyName: keyNames.KEY_NAME_HOME_IS_ZONING,
+      languageKey: 'Loại hình báo cáo',
+      keyName: keyNames.KEY_NAME_REPORT_ADS_TYPE,
+      enableSorting: false,
+      width: 100,
+    },
+    {
+      languageKey: 'Tình trạng xử lý',
+      keyName: keyNames.KEY_NAME_REPORT_ISPROCESSING,
       enableSorting: false,
       width: 100,
     },
@@ -147,4 +153,4 @@ const AdsManagement = (props: AdsManagementProps) => {
   );
 };
 
-export default AdsManagement;
+export default ResidentReportManagement;

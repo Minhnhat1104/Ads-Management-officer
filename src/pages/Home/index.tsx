@@ -4,6 +4,7 @@ import { DiaDiem, dummyData } from './dummyData';
 import Pins from './Pins';
 import AdInfo from './AdInfo';
 import ControlPanel from './ControlPanel';
+// import mapboxgl from '@goongmaps/goong-js';
 
 const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set your goong maptiles key here
 

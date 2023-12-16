@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './base/components/App/App';
 import reportWebVitals from './reportWebVitals';
+import '@goongmaps/goong-geocoder/dist/goong-geocoder.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(

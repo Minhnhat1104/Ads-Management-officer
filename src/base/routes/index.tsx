@@ -6,7 +6,7 @@ const PageLayout = lazy(() => import('@base/components/PageLayout'));
 
 const Home = lazy(() => import('@pages/Home'));
 const DemoPage = lazy(() => import('@pages/DemoPage/List'));
-const ResidentReport = lazy(() => import('@pages/ResidentReport'));
+const ResidentReport = lazy(() => import('@pages/ResidentReport/List'));
 const AdsManagement = lazy(() => import('@pages/AdsManagement'));
 const AdsLicense = lazy(() => import('@pages/AdsLicense'));
 const Login = lazy(() => import('@pages/Login'));

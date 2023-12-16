@@ -1,6 +1,6 @@
 import CheckBoxGroup from '@base/components/CheckBoxGroup';
 import { LabelValue } from '@base/types';
-import { Box, useTheme } from '@mui/material';
+import { Box, Stack, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 
 const MAP_FILTER_OPTIONS: LabelValue[] = [

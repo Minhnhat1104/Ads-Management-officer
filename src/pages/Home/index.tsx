@@ -4,6 +4,7 @@ import { DiaDiem, dummyData } from './dummyData';
 import Pins from './Pins';
 import AdInfo from './AdInfo';
 import ControlPanel from './ControlPanel';
+import BoardList from './BoardList';
 
 const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set your goong maptiles key here
 
@@ -27,6 +28,11 @@ const Home = () => {
   });
 
   const [popupInfo, setPopupInfo] = useState<DiaDiem | null>(null);
+  const [boardData, setBoardData] = useState<{
+    longitude: number;
+    latitude: number;
+    data: any[];
+  } | null>(null);
 
   useEffect(() => {
     // Get user's location using browser's Geolocation API
@@ -56,20 +62,35 @@ const Home = () => {
       touchRotate={true}
       transitionDuration={100}
     >
-      <Pins data={dummyData} onClick={setPopupInfo} />
+      <Pins data={dummyData} setPopupInfo={setPopupInfo} setBoardData={setBoardData} />
 
-      {popupInfo && (
+      {popupInfo && boardData === null && (
         <Popup
           tipSize={5}
-          anchor="top"
+          offsetLeft={12}
+          anchor="bottom"
           longitude={popupInfo.longitude}
           latitude={popupInfo.latitude}
           closeButton={true}
           closeOnClick={false}
+          closeButton={false}
           onClose={setPopupInfo}
           capturePointerMove={true}
         >
           <AdInfo info={popupInfo} />
+        </Popup>
+      )}
+
+      {boardData && (
+        <Popup
+          tipSize={5}
+          offsetLeft={12}
+          anchor="bottom"
+          longitude={boardData.longitude}
+          latitude={boardData.latitude}
+          captureScroll // Stop propagation of mouse wheel event to the map component
+        >
+          <BoardList data={boardData.data} setBoardData={setBoardData} />
         </Popup>
       )}
 

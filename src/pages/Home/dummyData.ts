@@ -69,3 +69,63 @@ export const dummyData: DiaDiem[] = [
     longitude: 106.6942,
   },
 ];
+
+export interface AdBoardInterface {
+  name: string;
+  description: string;
+  size: string;
+  quantity: number;
+  form: string;
+  class: string;
+}
+
+export const dummyBoardList: AdBoardInterface[] = [
+  {
+    name: 'Trụ, cụm pano',
+    description: 'Đồng khởi - Nguyễn Du (Sở văn hóa và thể thao)',
+    size: '2.5m x 10m',
+    quantity: 1,
+    form: 'Cổ động chính trị',
+    class: 'Đất cong/Công viên/hành lang an toàn giao thông',
+  },
+  {
+    name: 'Trụ, cụm pano',
+    description: 'Đồng khởi - Nguyễn Du (Sở văn hóa và thể thao)',
+    size: '2.5m x 1.2m',
+    quantity: 1,
+    form: 'Cổ động chính trị',
+    class: 'Đất cong/Công viên/hành lang an toàn giao thông',
+  },
+  {
+    name: 'Trụ, cụm pano',
+    description: 'Đồng khởi - Nguyễn Du (Sở văn hóa và thể thao)',
+    size: '2.5m x 10m',
+    quantity: 1,
+    form: 'Cổ động chính trị',
+    class: 'Đất cong/Công viên/hành lang an toàn giao thông',
+  },
+  {
+    name: 'Trụ, cụm pano',
+    description: 'Đồng khởi - Nguyễn Du (Sở văn hóa và thể thao)',
+    size: '2.5m x 1.2m',
+    quantity: 1,
+    form: 'Cổ động chính trị',
+    class: 'Đất cong/Công viên/hành lang an toàn giao thông',
+  },
+  {
+    name: 'Trụ, cụm pano',
+    description: 'Đồng khởi - Nguyễn Du (Sở văn hóa và thể thao)',
+    size: '2.5m x 10m',
+    quantity: 1,
+    form: 'Cổ động chính trị',
+    class: 'Đất cong/Công viên/hành lang an toàn giao thông',
+  },
+  {
+    name: 'Trụ, cụm pano',
+    description: 'Đồng khởi - Nguyễn Du (Sở văn hóa và thể thao)',
+    size: '2.5m x 1.2m',
+    quantity: 1,
+    form: 'Cổ động chính trị',
+    class: 'Đất cong/Công viên/hành lang an toàn giao thông',
+  },
+];

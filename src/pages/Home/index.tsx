@@ -71,8 +71,7 @@ const Home = () => {
           anchor="bottom"
           longitude={popupInfo.longitude}
           latitude={popupInfo.latitude}
-          onClose={setPopupInfo}
-          capturePointerMove={true}
+          capturePointerMove
         >
           <AdInfo info={popupInfo} />
         </Popup>

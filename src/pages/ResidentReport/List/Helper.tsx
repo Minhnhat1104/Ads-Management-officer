@@ -3,6 +3,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 import * as keyNames from './keyNames';
 import { CheckCircle } from '@mui/icons-material';
+import WritePage from '../Write';
+import { useState } from 'react';
 
 export const getMapColumns = () => {
   return {
@@ -30,8 +32,16 @@ export const getMapColumns = () => {
           {data?.[col] ? (
             <CheckCircle fontSize="small" color="success" />
           ) : (
-            <CancelIcon fontSize="small" color="error" /> // Thay thế 'CancelIcon' bằng icon hủy bỏ của bạn
+            <CancelIcon fontSize="small" color="error" />
           )}
+        </>
+      );
+    },
+    ['Detail'](col: string, data: any) {
+      return (
+        <>
+          Xem chi tiết
+          {/* {open && <WritePage isOpen={open} onClose={() => setOpen(false)} />} */}
         </>
       );
     },

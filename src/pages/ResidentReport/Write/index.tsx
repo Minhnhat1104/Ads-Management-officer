@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Box, Button, Grid, Stack, useTheme } from '@mui/material';
+import { Box, Button, Grid, ImageList, ImageListItem, Stack, useTheme } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-
+import { ImageReport, itemData } from '../dummyData';
 import writeConfig from './config';
 import * as keyNames from './config/keyNames';
 import { finalizeParams } from './payload';
@@ -34,7 +34,7 @@ const WritePage = (props: WritePageProps) => {
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
-  //react-hook
+  //react-hook-form
   const {
     handleSubmit,
     watch,
@@ -109,19 +109,22 @@ const WritePage = (props: WritePageProps) => {
 
   return (
     <>
-      <MiModal title={title ? title : 'Add Modal'} isOpen={isOpen} footer={Footer} onClose={onClose} size="sm">
+      <MiModal title={title ? title : 'Chi tiết báo cáo'} isOpen={isOpen} footer={Footer} onClose={onClose} size="sm">
         <form>
           <Suspense fallback={<></>}>
             <Box padding={2}>
-              <WriteFields
-                fields={fields}
-                watch={watch}
-                setValue={setValue}
-                control={control}
-                errors={errors}
-                isEdit={!!updateData}
-                updateData={updateData}
-              />
+              <ImageList sx={{ width: 500, height: 450, marginTop: 10 }} cols={3} rowHeight={164}>
+                {itemData.map((item) => (
+                  <ImageListItem key={item.img}>
+                    <img
+                      srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                      src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                      alt={item.title}
+                      loading="lazy"
+                    />
+                  </ImageListItem>
+                ))}
+              </ImageList>
             </Box>
           </Suspense>
         </form>

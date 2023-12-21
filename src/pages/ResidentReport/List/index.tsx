@@ -49,6 +49,7 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
   // ========== Table ========
   const handleOnChecked = (checkedIds: string[]) => {
     setSelectedIds(checkedIds);
+    console.log(checkedIds);
   };
 
   const handleEdit = (sortId: string) => {
@@ -102,6 +103,12 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
       enableSorting: false,
       width: 100,
     },
+    {
+      languageKey: 'Chi tiết',
+      keyName: 'Detail',
+      enableSorting: false,
+      width: 100,
+    },
   ];
 
   const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { handleEdit }, [])], []);
@@ -123,8 +130,8 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
   //render table list
   const TableMemo = useMemo(() => {
     const listTableProps: ListTableProps = {
-      // onRowChecked: handleOnChecked,
-      // checkedIds: selectedIds,
+      onRowChecked: handleOnChecked,
+      checkedIds: selectedIds,
       rows: items || [],
       // pagingProps,
       onPageChange: handlePagingChange,

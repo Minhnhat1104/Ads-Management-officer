@@ -40,7 +40,7 @@ function BoardList(props: BoardListProps) {
         setBoardData(null);
       }}
     >
-      <Stack spacing={1} width={400} maxHeight={300} className="scroll-box">
+      <Stack spacing={1} width={400} maxHeight={300} className="scroll-box" sx={{ overflowY: 'auto' }}>
         {data?.map((_item: any, i: number) => (
           <Box p={1} border={border} key={i}>
             <Typography sx={{ fontSize: 20, fontWeight: 500 }}>{_item?.name}</Typography>

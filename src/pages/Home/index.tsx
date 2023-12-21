@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ReactMapGL, { GeolocateControl, FullscreenControl, Marker, Popup } from '@goongmaps/goong-map-react';
+import ReactMapGL, {
+  GeolocateControl,
+  FullscreenControl,
+  Marker,
+  Popup,
+  FlyToInterpolator,
+} from '@goongmaps/goong-map-react';
 import { DiaDiem, dummyData } from './dummyData';
 import Pins from './Pins';
 import AdInfo from './AdInfo';
@@ -23,7 +29,7 @@ const Home = () => {
   const [viewport, setViewport] = useState({
     width: '100%',
     height: '100%',
-    latitude: 10.7631,
+    latitude: -74.1,
     longitude: 106.68246,
     zoom: 16,
   });
@@ -54,6 +60,17 @@ const Home = () => {
       }
     );
   }, []); // em
+
+  const handleViewportChange = (updatedViewport: any) => {
+    // Xử lý dữ liệu truyền về từ Component B
+    setViewport(updatedViewport);
+  };
+
+  // useEffect(() => {
+  //   // Thực hiện bất kỳ xử lý nào bạn cần khi viewport thay đổi
+  //   // Ví dụ: Gọi API, xử lý dữ liệu, etc.
+  //   console.log('Viewport changed:', viewport);
+  // }, [viewport]);
 
   return (
     <ReactMapGL
@@ -91,7 +108,7 @@ const Home = () => {
         </Popup>
       )}
 
-      <ControlPanel />
+      <ControlPanel viewport={viewport} onViewportChange={handleViewportChange} />
 
       {/* Current location user */}
       <GeolocateControl

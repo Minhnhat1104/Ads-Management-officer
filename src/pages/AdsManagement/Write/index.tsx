@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { Box, Button, Grid, ImageList, ImageListItem, Stack, Typography, useTheme } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-import { ImageReport, itemData } from '../dummyData';
+// import { ImageReport, itemData } from '../dummyData';
 import writeConfig from './config';
 import * as keyNames from './config/keyNames';
 import { finalizeParams } from './payload';
@@ -136,7 +136,7 @@ const WritePage = (props: WritePageProps) => {
 
               <Stack>
                 <Typography sx={{ fontSize: 18, fontWeight: 500 }}>Hình ảnh chi tiết: </Typography>
-                <ImageList sx={{ width: 720, height: 450 }} cols={3} rowHeight={164}>
+                {/* <ImageList sx={{ width: 720, height: 450 }} cols={3} rowHeight={164}>
                   {itemData.map((item) => (
                     <ImageListItem key={item.img}>
                       <img
@@ -147,7 +147,7 @@ const WritePage = (props: WritePageProps) => {
                       />
                     </ImageListItem>
                   ))}
-                </ImageList>
+                </ImageList> */}
               </Stack>
             </Box>
           </Suspense>

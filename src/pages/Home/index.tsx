@@ -10,6 +10,7 @@ import { DiaDiem, dummyData } from './dummyData';
 import Pins from './Pins';
 import AdInfo from './AdInfo';
 import ControlPanel from './ControlPanel';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import BoardList from './BoardList';
 
@@ -107,6 +108,10 @@ const Home = () => {
           <BoardList data={boardData.data} setBoardData={setBoardData} />
         </Popup>
       )}
+
+      <Marker longitude={viewport.longitude} latitude={viewport.latitude}>
+        <LocationOnIcon />
+      </Marker>
 
       <ControlPanel viewport={viewport} onViewportChange={handleViewportChange} />
 

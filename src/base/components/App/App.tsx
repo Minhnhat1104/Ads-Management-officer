@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import '@goongmaps/goong-js/dist/goong-js.css';
 
 import { Toaster } from 'react-hot-toast';
@@ -16,7 +16,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ThemeCustomization from '@base/themes';
 import { RecoilRoot } from 'recoil';
 import { CircularProgress } from '@mui/material';
-import { routes } from '@base/routes';
+import { Routes } from '@base/routes';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -27,7 +27,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const router = createBrowserRouter(routes);
+// const router = createBrowserRouter(routes);
 
 function App() {
   return (
@@ -36,7 +36,10 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Toaster position="top-right" reverseOrder={false} />
           <Suspense fallback={<CircularProgress />}>
-            <RouterProvider router={router} />
+            {/* <RouterProvider router={router} /> */}
+            <Router>
+              <Routes />
+            </Router>
           </Suspense>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

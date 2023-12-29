@@ -13,7 +13,8 @@ import * as keyNames from './keyNames';
 import Toolbar from './Toolbar';
 import { FieldsData, makeTable8Columns } from '@base/components/ReactTable8/Helper';
 import ListTable, { ListTableProps } from '@base/components/List/ListTable';
-import { dummyData } from './dummyData';
+import axios from 'axios';
+// import { dummyData } from './dummyData';
 // import SortWritePage from '../Write';
 
 interface ResidentReportManagementProps {}
@@ -25,7 +26,7 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
 
   // state
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [items, setItems] = useState<any[]>(dummyData);
+  const [items, setItems] = useState<any[]>([]);
   const [openWrite, setOpenWrite] = useState<{
     sortId: string;
     isOpen: boolean;
@@ -35,16 +36,18 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
 
   // call data
 
-  //init data
-  // useEffect(() => {
-  //   if (data?.rows) {
-  //     if (!_.isEqual(items, data?.rows)) {
-  //       setItems(data?.rows);
-  //     }
-  //   } else {
-  //     setItems([]);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/reports');
+        setItems(response.data); // assuming the data is directly in the response
+      } catch (error) {
+        console.error('Failed to fetch data', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // ========== Table ========
   const handleOnChecked = (checkedIds: string[]) => {
@@ -62,14 +65,20 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Thời gian gửi',
-      keyName: keyNames.KEY_NAME_REPORT_TIMESENT,
+      languageKey: 'Quận',
+      keyName: keyNames.KEY_NAME_REPORT_DISTRICT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Họ và tên',
-      keyName: keyNames.KEY_NAME_REPORT_FULLNAME,
+      languageKey: 'Phường',
+      keyName: keyNames.KEY_NAME_REPORT_WARD,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Tên',
+      keyName: keyNames.KEY_NAME_REPORT_FIRSTNAME,
       enableSorting: false,
       width: 'auto',
     },
@@ -80,14 +89,8 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
       width: 'auto',
     },
     {
-      languageKey: 'Bảng quảng cáo',
-      keyName: keyNames.KEY_NAME_REPORT_ADS_TABLE,
-      enableSorting: false,
-      width: 'auto',
-    },
-    {
-      languageKey: 'Địa chỉ đặt bảng quảng cáo',
-      keyName: keyNames.KEY_NAME_REPORT_ADDRESS,
+      languageKey: 'Email',
+      keyName: keyNames.KEY_NAME_REPORT_EMAIL,
       enableSorting: false,
       width: 'auto',
     },

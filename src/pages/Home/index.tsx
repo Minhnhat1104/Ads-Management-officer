@@ -13,6 +13,8 @@ import ControlPanel from './ControlPanel';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import BoardList from './BoardList';
+import axios from 'axios';
+import api from '@base/api/api';
 
 const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set your goong maptiles key here
 
@@ -35,12 +37,8 @@ const Home = () => {
     zoom: 16,
   });
 
-  const [popupInfo, setPopupInfo] = useState<DiaDiem | null>(null);
-  const [boardData, setBoardData] = useState<{
-    longitude: number;
-    latitude: number;
-    data: any[];
-  } | null>(null);
+  const [popupInfo, setPopupInfo] = useState<any>(null);
+  const [boardData, setBoardData] = useState<any>(null);
 
   useEffect(() => {
     // Get user's location using browser's Geolocation API
@@ -73,6 +71,27 @@ const Home = () => {
   //   console.log('Viewport changed:', viewport);
   // }, [viewport]);
 
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  };
+
+  const [locationAds, setLocationAds] = useState<any[]>([]);
+  const [advertisements, setAdvertisements] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const placementsResponse = await api.get('/placements');
+        setLocationAds(placementsResponse.data);
+      } catch (error) {
+        console.error('Failed to fetch data', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <ReactMapGL
       {...viewport}
@@ -81,15 +100,15 @@ const Home = () => {
       touchRotate={true}
       transitionDuration={100}
     >
-      <Pins data={dummyData} setPopupInfo={setPopupInfo} setBoardData={setBoardData} />
+      {locationAds && <Pins data={locationAds} setPopupInfo={setPopupInfo} setBoardData={setBoardData} />}
 
       {popupInfo && boardData === null && (
         <Popup
           tipSize={5}
           offsetLeft={12}
           anchor="bottom"
-          longitude={popupInfo.longitude}
-          latitude={popupInfo.latitude}
+          longitude={parseFloat(popupInfo.lng)}
+          latitude={parseFloat(popupInfo.lat)}
           capturePointerMove
         >
           <AdInfo info={popupInfo} />
@@ -101,17 +120,17 @@ const Home = () => {
           tipSize={5}
           offsetLeft={12}
           anchor="bottom"
-          longitude={boardData.longitude}
-          latitude={boardData.latitude}
+          longitude={boardData.lng}
+          latitude={boardData.lat}
           captureScroll // Stop propagation of mouse wheel event to the map component
         >
-          <BoardList data={boardData.data} setBoardData={setBoardData} />
+          <BoardList locationAds={locationAds} boardData={boardData} setBoardData={setBoardData} />
         </Popup>
       )}
 
-      <Marker longitude={viewport.longitude} latitude={viewport.latitude}>
+      {/* <Marker longitude={viewport.longitude} latitude={viewport.latitude}>
         <LocationOnIcon />
-      </Marker>
+      </Marker> */}
 
       <ControlPanel viewport={viewport} onViewportChange={handleViewportChange} />
 

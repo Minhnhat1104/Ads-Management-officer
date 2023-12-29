@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Marker } from '@goongmaps/goong-map-react';
 import { Avatar, Typography, useTheme } from '@mui/material';
 import { dummyBoardList } from './dummyData';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 // Important for perf: the markers never change, avoid rerender when the map viewport changes
 interface PinProps {
@@ -14,20 +16,39 @@ function Pins(props: PinProps) {
   const { data, setPopupInfo, setBoardData } = props;
   const theme = useTheme();
 
+  const handleButtonClick = async (city: any, lng: any, lat: any) => {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    };
+
+    try {
+      // Make the API call using axios
+      const response = await axios.get(`http://localhost:4000/advertisement/placement/${city.id}`, { headers });
+
+      // Assuming response.data contains the data you want to update
+      setBoardData({
+        lng,
+        lat,
+        data: response.data,
+      });
+
+      console.log('BOARD: ', lng, lat, response.data);
+
+      // console.log('API Response:', response.data);
+    } catch (error) {
+      console.error('Failed to fetch data', error);
+    }
+  };
+
   return (
     <>
       {data.map((city, index) => (
-        <Marker key={`marker-${index}`} longitude={city.longitude} latitude={city.latitude}>
+        <Marker key={`marker-${index}`} longitude={parseFloat(city.lng)} latitude={parseFloat(city.lat)}>
           <div
             onMouseEnter={() => setPopupInfo(city)}
             onMouseLeave={() => setPopupInfo(null)}
-            onClick={() =>
-              setBoardData({
-                longitude: city.longitude,
-                latitude: city.latitude,
-                data: dummyBoardList,
-              })
-            }
+            onClick={() => handleButtonClick(city, parseFloat(city.lng), parseFloat(city.lat))}
           >
             <Avatar
               // onClick={() => onClick(city)}

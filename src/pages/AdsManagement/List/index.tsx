@@ -13,7 +13,8 @@ import * as keyNames from './keyNames';
 import Toolbar from './Toolbar';
 import { FieldsData, makeTable8Columns } from '@base/components/ReactTable8/Helper';
 import ListTable, { ListTableProps } from '@base/components/List/ListTable';
-import { dummyData } from './dummyData';
+import axios from 'axios';
+// import { dummyData } from './dummyData';
 // import SortWritePage from '../Write';
 
 interface AdsManagementProps {}
@@ -25,7 +26,7 @@ const AdsManagement = (props: AdsManagementProps) => {
 
   // state
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [items, setItems] = useState<any[]>(dummyData);
+  const [items, setItems] = useState<any[]>([]);
   const [openWrite, setOpenWrite] = useState<{
     sortId: string;
     isOpen: boolean;
@@ -35,16 +36,18 @@ const AdsManagement = (props: AdsManagementProps) => {
 
   // call data
 
-  //init data
-  // useEffect(() => {
-  //   if (data?.rows) {
-  //     if (!_.isEqual(items, data?.rows)) {
-  //       setItems(data?.rows);
-  //     }
-  //   } else {
-  //     setItems([]);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/advertisement');
+        setItems(response.data); // assuming the data is directly in the response
+      } catch (error) {
+        console.error('Failed to fetch data', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // ========== Table ========
   const handleOnChecked = (checkedIds: string[]) => {
@@ -62,47 +65,47 @@ const AdsManagement = (props: AdsManagementProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Thời gian gửi',
-      keyName: keyNames.KEY_NAME_REPORT_TIMESENT,
+      languageKey: 'Địa điểm',
+      keyName: keyNames.KEY_NAME_ADS_PLACEMENT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Họ và tên',
-      keyName: keyNames.KEY_NAME_REPORT_FULLNAME,
+      languageKey: 'Chiều dài',
+      keyName: keyNames.KEY_NAME_ADS_WIDTH,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Số điện thoại',
-      keyName: keyNames.KEY_NAME_REPORT_PHONENUMBER,
+      languageKey: 'Chiều cao',
+      keyName: keyNames.KEY_NAME_ADS_HEIGHT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Bảng quảng cáo',
-      keyName: keyNames.KEY_NAME_REPORT_ADS_TABLE,
+      languageKey: 'Hình ảnh',
+      keyName: keyNames.KEY_NAME_ADS_IMAGE,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Địa chỉ đặt bảng quảng cáo',
-      keyName: keyNames.KEY_NAME_REPORT_ADDRESS,
+      languageKey: 'Số lượng',
+      keyName: keyNames.KEY_NAME_ADS_AMOUNT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Loại hình báo cáo',
-      keyName: keyNames.KEY_NAME_REPORT_ADS_TYPE,
+      languageKey: 'Loại bảng quảng cáo',
+      keyName: keyNames.KEY_NAME_ADS_TYPE,
       enableSorting: false,
       width: 100,
     },
-    {
-      languageKey: 'Tình trạng xử lý',
-      keyName: keyNames.KEY_NAME_REPORT_ISPROCESSING,
-      enableSorting: false,
-      width: 100,
-    },
+    // {
+    //   languageKey: 'Tình trạng xử lý',
+    //   keyName: keyNames.KEY_NAME_REPORT_ISPROCESSING,
+    //   enableSorting: false,
+    //   width: 100,
+    // },
     {
       languageKey: 'Chi tiết',
       keyName: 'Detail',

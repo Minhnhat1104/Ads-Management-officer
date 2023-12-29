@@ -5,31 +5,39 @@ import { LabelValue } from '@base/types';
 import { useEffect, useRef } from 'react';
 
 interface BoardListProps {
-  data: any[];
+  locationAds: any[];
+  boardData: any;
   setBoardData: React.Dispatch<any>;
 }
 
-const bodyFields: LabelValue[] = [
+const advertisementFields: LabelValue[] = [
   {
-    label: 'Kích thước',
-    value: 'size',
+    label: 'Chiều dài',
+    value: 'width',
+  },
+  {
+    label: 'Chiều rộng',
+    value: 'height',
   },
   {
     label: 'Số lượng',
-    value: 'quantity',
+    value: 'amount',
   },
+];
+
+const placementFields: LabelValue[] = [
   {
     label: 'Hình thức',
-    value: 'form',
+    value: 'format',
   },
   {
     label: 'Phân loại',
-    value: 'class',
+    value: 'locationType',
   },
 ];
 
 function BoardList(props: BoardListProps) {
-  const { data, setBoardData } = props;
+  const { locationAds, boardData, setBoardData } = props;
   const theme = useTheme();
 
   const border = `1px solid ${theme.palette.divider}`;
@@ -41,18 +49,34 @@ function BoardList(props: BoardListProps) {
       }}
     >
       <Stack spacing={1} width={400} maxHeight={300} className="scroll-box" sx={{ overflowY: 'auto' }}>
-        {data?.map((_item: any, i: number) => (
-          <Box p={1} border={border} key={i}>
-            <Typography sx={{ fontSize: 20, fontWeight: 500 }}>{_item?.name}</Typography>
+        {boardData &&
+          locationAds
+            ?.filter((_item: any) => parseFloat(_item.lat) === boardData.lat && parseFloat(_item.lng) === boardData.lng)
+            .map((_item: any, i: number) => (
+              <Box p={1} key={i}>
+                {boardData.data.map((item: any, j: number) => (
+                  // Ensure you return the JSX elements
 
-            {bodyFields?.map((_field: LabelValue) => (
-              <Stack key={_field.value} direction="row" spacing={0.5}>
-                <Typography fontWeight={500}>{`${_field.label}:`}</Typography>
-                <Typography>{_item[_field.value]}</Typography>
-              </Stack>
+                  <Box key={j} border={border} marginTop={'5px'} padding={'5px'}>
+                    {<Typography sx={{ fontSize: 20, fontWeight: 500 }}>{item?.advertisingType}</Typography>}
+
+                    {advertisementFields?.map((_field: LabelValue) => (
+                      <Stack key={_field.value} direction="row" spacing={0.5}>
+                        <Typography fontWeight={500}>{`${_field.label}:`}</Typography>
+                        <Typography>{item[_field.value]}</Typography>
+                      </Stack>
+                    ))}
+
+                    {placementFields?.map((_field: LabelValue) => (
+                      <Stack key={_field.value} direction="row" spacing={0.5}>
+                        <Typography fontWeight={500}>{`${_field.label}:`}</Typography>
+                        <Typography>{_item[_field.value]}</Typography>
+                      </Stack>
+                    ))}
+                  </Box>
+                ))}
+              </Box>
             ))}
-          </Box>
-        ))}
       </Stack>
     </ClickAwayListener>
   );

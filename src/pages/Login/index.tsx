@@ -11,12 +11,20 @@ import WriteFields from './WriteFields';
 import { getWriteForm } from '@base/utils/getWriteForm';
 import LoadingButton from '@base/components/LoadingButton';
 
+import axios from 'axios';
+import { useAuth } from '@base/auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 interface LoginProps {}
 
 const Login = (props: LoginProps) => {
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [keyNames.KEY_NAME_LOGIN_USER_NAME, keyNames.KEY_NAME_LOGIN_PASSWORD];
+
+  const { isAuthenticated, login } = useAuth();
+
+  const navigate = useNavigate();
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
@@ -46,17 +54,25 @@ const Login = (props: LoginProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params); // define add or update here
-    // mAdd.mutate(parsedParams, {
-    //   onSuccess(data, variables: any, context) {
-    //     setTimeout(() => {
-    //       queryClient.invalidateQueries([queryKeys.adminResources]);
-    //     }, SET_TIMEOUT);
 
-    //     onClose && onClose();
-    //     reset && reset();
-    //   }
-    // });
+    try {
+      const response = await axios.post('http://localhost:4000/auth/signin', parsedParams);
+      // handle response here
+      console.log(response.data);
+      login(response.data);
+    } catch (error) {
+      // handle error here
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    // Kiểm tra xem có token trong localStorage không
+    if (isAuthenticated) {
+      // Nếu có, chuyển hướng đến trang todo hoặc trang chính của ứng dụng
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   const border = `1px solid ${theme.palette.divider}`;
 
@@ -75,7 +91,7 @@ const Login = (props: LoginProps) => {
                 variant="contained"
                 // loading={mAdd.isLoading}
                 onClick={() => {
-                  handleSubmit((data) => onSubmit(data), onError)();
+                  handleSubmit((formData) => onSubmit(formData), onError)();
                 }}
               >
                 Đăng nhập

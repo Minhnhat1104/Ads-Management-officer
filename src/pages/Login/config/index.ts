@@ -7,7 +7,7 @@ import * as keyNames from './keyNames';
 
 const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_LOGIN_USER_NAME]: {
-    languageKey: 'Tên đăng nhập',
+    languageKey: 'Email',
     Component: TextField,
     defaultValue: '',
     componentProps: {},

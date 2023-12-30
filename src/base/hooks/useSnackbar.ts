@@ -4,9 +4,9 @@ import toast from 'react-hot-toast';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import { useTheme } from '@mui/material';
 
-export const useSnackbar = () => {
+export const useSnackBar = () => {
   const theme = useTheme();
-  const enqueueSuccess = (msg: string) => {
+  const enqueueSuccessBar = (msg: string) => {
     toast.success(msg, {
       // icon: <DoneOutlinedIcon />,
       iconTheme: {
@@ -16,7 +16,7 @@ export const useSnackbar = () => {
       duration: 3000,
     });
   };
-  const enqueueError = (msg: string) => {
+  const enqueueErrorBar = (msg: string) => {
     toast.error(msg, {
       // icon: <DoneOutlinedIcon />,
       iconTheme: {
@@ -26,5 +26,5 @@ export const useSnackbar = () => {
       duration: 3000,
     });
   };
-  return { enqueueSuccess, enqueueError };
+  return { enqueueSuccessBar, enqueueErrorBar };
 };

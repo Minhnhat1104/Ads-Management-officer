@@ -1,3 +1,3 @@
 export const queryKeys = {
-  imageList: 'imageList',
+  auth_login: 'auth_login',
 };

@@ -14,7 +14,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import BoardList from './BoardList';
 import axios from 'axios';
-import api from '@base/api/api';
+import { axiosApi } from '@base/utils/axios/api';
 
 const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set your goong maptiles key here
 
@@ -82,7 +82,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const placementsResponse = await api.get('/placements');
+        const placementsResponse = await axiosApi.get('/placements');
         setLocationAds(placementsResponse.data);
       } catch (error) {
         console.error('Failed to fetch data', error);

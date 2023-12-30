@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useMemo } from 'react';
+import React, { Suspense, useContext, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box, Button, Grid, Link, Stack, Typography, useTheme } from '@mui/material';
@@ -11,17 +11,18 @@ import WriteFields from './WriteFields';
 import { getWriteForm } from '@base/utils/getWriteForm';
 import LoadingButton from '@base/components/LoadingButton';
 
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuthMutation } from '@base/hooks/useAuthMutation';
+import { AuthContext } from '@base/auth/AuthProvider';
 
 interface LoginProps {}
 
 const Login = (props: LoginProps) => {
   const theme = useTheme();
   const queryClient = useQueryClient();
-  const layoutFields: string[] = [keyNames.KEY_NAME_LOGIN_USER_NAME, keyNames.KEY_NAME_LOGIN_PASSWORD];
-
   const navigate = useNavigate();
+
+  const layoutFields: string[] = [keyNames.KEY_NAME_LOGIN_USER_NAME, keyNames.KEY_NAME_LOGIN_PASSWORD];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
@@ -40,23 +41,26 @@ const Login = (props: LoginProps) => {
     mode: 'onChange',
   });
 
-  // const { mAdd } = useAdminResourceMutation();
+  const { mLogin } = useAuthMutation();
+  const { setIsAuthenticated } = useContext(AuthContext);
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
     console.log('error', errors, e);
   };
 
-  const login = (token: any) => {
+  const login = (data: any) => {
     // Optionally, you can save the token to localStorage or a cookie
-    localStorage.setItem('accessToken', token.accessToken);
-    localStorage.setItem('refreshToken', token.refreshToken);
+    localStorage.setItem('accessToken', data.accessToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
+    setIsAuthenticated && setIsAuthenticated(true);
   };
 
   const logout = () => {
     /* logic to handle user logout */
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    setIsAuthenticated && setIsAuthenticated(false);
   };
 
   //submit form
@@ -64,15 +68,11 @@ const Login = (props: LoginProps) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params); // define add or update here
 
-    try {
-      const response = await axios.post('http://localhost:4000/auth/signin', parsedParams);
-      // handle response here
-      console.log(response.data);
-      login(response.data);
-    } catch (error) {
-      // handle error here
-      console.error(error);
-    }
+    mLogin.mutate(parsedParams, {
+      onSuccess(data, variables, context) {
+        login(data);
+      },
+    });
   };
 
   const border = `1px solid ${theme.palette.divider}`;
@@ -90,7 +90,7 @@ const Login = (props: LoginProps) => {
               <LoadingButton
                 size="medium"
                 variant="contained"
-                // loading={mAdd.isLoading}
+                loading={mLogin.isLoading}
                 onClick={() => {
                   handleSubmit((formData) => onSubmit(formData), onError)();
                 }}

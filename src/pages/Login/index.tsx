@@ -12,7 +12,6 @@ import { getWriteForm } from '@base/utils/getWriteForm';
 import LoadingButton from '@base/components/LoadingButton';
 
 import axios from 'axios';
-import { useAuth } from '@base/auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {}
@@ -21,8 +20,6 @@ const Login = (props: LoginProps) => {
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [keyNames.KEY_NAME_LOGIN_USER_NAME, keyNames.KEY_NAME_LOGIN_PASSWORD];
-
-  const { isAuthenticated, login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -50,6 +47,18 @@ const Login = (props: LoginProps) => {
     console.log('error', errors, e);
   };
 
+  const login = (token: any) => {
+    // Optionally, you can save the token to localStorage or a cookie
+    localStorage.setItem('accessToken', token.accessToken);
+    localStorage.setItem('refreshToken', token.refreshToken);
+  };
+
+  const logout = () => {
+    /* logic to handle user logout */
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  };
+
   //submit form
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
@@ -65,14 +74,6 @@ const Login = (props: LoginProps) => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    // Kiểm tra xem có token trong localStorage không
-    if (isAuthenticated) {
-      // Nếu có, chuyển hướng đến trang todo hoặc trang chính của ứng dụng
-      navigate('/');
-    }
-  }, [isAuthenticated, navigate]);
 
   const border = `1px solid ${theme.palette.divider}`;
 

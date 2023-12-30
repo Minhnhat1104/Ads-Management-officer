@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom/client';
 import App from './base/components/App/App';
 import reportWebVitals from './reportWebVitals';
 import '@goongmaps/goong-geocoder/dist/goong-geocoder.css';
-import { AuthProvider } from '@base/auth/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <App />
   </React.StrictMode>
 );
 

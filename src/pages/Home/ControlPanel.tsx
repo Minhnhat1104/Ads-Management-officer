@@ -64,32 +64,32 @@ const ControlPanel = (prop: any) => {
   //   prop.onViewportChange(viewport);
   // };
 
-  const getCoordinates = async (locationName: string, apiKey = GOONG_API_KEY) => {
-    const encodedLocationName = encodeURIComponent(locationName.trim());
+  // const getCoordinates = async (locationName: string, apiKey = GOONG_API_KEY) => {
+  //   const encodedLocationName = encodeURIComponent(locationName.trim());
 
-    const url = `https://rsapi.goong.io/geocode?address=${encodeURIComponent(encodedLocationName)}&api_key=${apiKey}`;
+  //   const url = `https://rsapi.goong.io/geocode?address=${encodeURIComponent(encodedLocationName)}&api_key=${apiKey}`;
 
-    try {
-      const response = await axios.get(url);
-      const { data } = response;
-      if (data && data.results && data.results.length > 0) {
-        console.log(data.results);
-        setAns(data.results);
-      } else {
-        setAns([]); // Clear the results in case there were previous results
-      }
-    } catch (error) {
-      throw new Error('Error: ' + JSON.stringify(error));
-    }
-  };
+  //   try {
+  //     const response = await axios.get(url);
+  //     const { data } = response;
+  //     if (data && data.results && data.results.length > 0) {
+  //       console.log(data.results);
+  //       setAns(data.results);
+  //     } else {
+  //       setAns([]); // Clear the results in case there were previous results
+  //     }
+  //   } catch (error) {
+  //     throw new Error('Error: ' + JSON.stringify(error));
+  //   }
+  // };
 
-  useEffect(() => {
-    if (search !== '') {
-      getCoordinates(search);
-    } else {
-      setAns([]);
-    }
-  }, [search]);
+  // useEffect(() => {
+  //   if (search !== '') {
+  //     getCoordinates(search);
+  //   } else {
+  //     setAns([]);
+  //   }
+  // }, [search]);
 
   return (
     <Stack

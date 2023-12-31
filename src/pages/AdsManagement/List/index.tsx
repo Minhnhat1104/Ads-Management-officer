@@ -13,9 +13,8 @@ import * as keyNames from './keyNames';
 import Toolbar from './Toolbar';
 import { FieldsData, makeTable8Columns } from '@base/components/ReactTable8/Helper';
 import ListTable, { ListTableProps } from '@base/components/List/ListTable';
-import axios from 'axios';
-// import { dummyData } from './dummyData';
-// import SortWritePage from '../Write';
+import { usePlacements } from 'src/hooks/usePlacements';
+import { ListPaginationProps } from '@base/components/List/ListPagination';
 
 interface AdsManagementProps {}
 
@@ -35,19 +34,15 @@ const AdsManagement = (props: AdsManagementProps) => {
   const [paging, setPaging] = useState<{ page: number; size: number }>({ page: 1, size: LIST_TABLE_PAGE_SIZE });
 
   // call data
+  const { data } = usePlacements();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:4000/advertisement');
-        setItems(response.data); // assuming the data is directly in the response
-      } catch (error) {
-        console.error('Failed to fetch data', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (data) {
+      setItems(data);
+    } else {
+      setItems([]);
+    }
+  }, [data]);
 
   // ========== Table ========
   const handleOnChecked = (checkedIds: string[]) => {
@@ -65,52 +60,46 @@ const AdsManagement = (props: AdsManagementProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Địa điểm',
-      keyName: keyNames.KEY_NAME_ADS_PLACEMENT,
+      languageKey: 'Phường',
+      keyName: keyNames.KEY_NAME_PLACEMENT_WARD,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Chiều dài',
-      keyName: keyNames.KEY_NAME_ADS_WIDTH,
+      languageKey: 'Quận',
+      keyName: keyNames.KEY_NAME_PLACEMENT_DISTRICT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Chiều cao',
-      keyName: keyNames.KEY_NAME_ADS_HEIGHT,
+      languageKey: 'Trạng thái quy hoạch',
+      keyName: keyNames.KEY_NAME_PLACEMENT_PLANNED,
       enableSorting: false,
       width: 'auto',
     },
     {
       languageKey: 'Hình ảnh',
-      keyName: keyNames.KEY_NAME_ADS_IMAGE,
+      keyName: keyNames.KEY_NAME_PLACEMENT_IMAGE,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Số lượng',
-      keyName: keyNames.KEY_NAME_ADS_AMOUNT,
+      languageKey: 'Loại Đất',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATIONTYPE,
       enableSorting: false,
       width: 'auto',
     },
     {
       languageKey: 'Loại bảng quảng cáo',
-      keyName: keyNames.KEY_NAME_ADS_TYPE,
+      keyName: keyNames.KEY_NAME_PLACEMENT_FORMAT,
       enableSorting: false,
-      width: 100,
+      width: 'auto',
     },
-    // {
-    //   languageKey: 'Tình trạng xử lý',
-    //   keyName: keyNames.KEY_NAME_REPORT_ISPROCESSING,
-    //   enableSorting: false,
-    //   width: 100,
-    // },
     {
-      languageKey: 'Chi tiết',
-      keyName: 'Detail',
+      languageKey: '',
+      keyName: keyNames.KEY_NAME_PLACEMENT_ACTIONS,
       enableSorting: false,
-      width: 100,
+      width: 50,
     },
   ];
 
@@ -128,6 +117,7 @@ const AdsManagement = (props: AdsManagementProps) => {
   //   pageSize: paging?.size || LIST_TABLE_PAGE_SIZE,
   //   pageIndex: paging?.page || 1,
   // };
+
   const border = `1px solid ${theme.palette.divider}`;
 
   //render table list

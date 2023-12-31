@@ -1,26 +1,22 @@
-import { Box, Button, IconButton, Stack, Theme, Typography } from '@mui/material';
+import { Box, Button, IconButton, Stack, Theme, Tooltip, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 import * as keyNames from './keyNames';
-import { CheckCircle } from '@mui/icons-material';
-import WritePage from '../Write';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { Visibility } from '@mui/icons-material';
 
 export const getMapColumns = () => {
-  // const [open, setOpen] = useState<boolean>(false);
   return {
-    [keyNames.KEY_NAME_ADS_PLACEMENT](col: string, data: any) {
+    [keyNames.KEY_NAME_PLACEMENT_WARD](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
-    [keyNames.KEY_NAME_ADS_WIDTH](col: string, data: any) {
-      return <Typography>{data?.[col] + 'm' || ''}</Typography>;
+    [keyNames.KEY_NAME_PLACEMENT_DISTRICT](col: string, data: any) {
+      return <Typography>{data?.[col] || ''}</Typography>;
     },
-    [keyNames.KEY_NAME_ADS_HEIGHT](col: string, data: any) {
-      return <Typography>{data?.[col] + 'm' || ''}</Typography>;
+    [keyNames.KEY_NAME_PLACEMENT_PLANNED](col: string, data: any) {
+      return <Typography>{data?.[col] ? 'Đã quy hoạch' : 'Chưa quy hoạch'}</Typography>;
     },
-    [keyNames.KEY_NAME_ADS_IMAGE](col: string, data: any) {
-      return (
+    [keyNames.KEY_NAME_PLACEMENT_IMAGE](col: string, data: any) {
+      return data?.[col] ? (
         <Box
           component="img"
           sx={{
@@ -32,39 +28,30 @@ export const getMapColumns = () => {
           alt="Ads."
           src={data?.[col] || ''}
         />
+      ) : (
+        <Typography>Chưa có hình ảnh</Typography>
       );
     },
-    [keyNames.KEY_NAME_ADS_AMOUNT](col: string, data: any) {
+    [keyNames.KEY_NAME_PLACEMENT_LOCATIONTYPE](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
-    [keyNames.KEY_NAME_ADS_TYPE](col: string, data: any) {
-      return <Typography>{data?.[col].name || ''}</Typography>;
+    [keyNames.KEY_NAME_PLACEMENT_FORMAT](col: string, data: any) {
+      return <Typography>{data?.[col] || ''}</Typography>;
     },
-    // [keyNames.KEY_NAME_REPORT_ISPROCESSING](col: string, data: any) {
-    //   return (
-    //     <>
-    //       {data?.[col] ? (
-    //         <CheckCircle fontSize="small" color="success" />
-    //       ) : (
-    //         <CancelIcon fontSize="small" color="error" />
-    //       )}
-    //     </>
-    //   );
-    // },
-    ['Detail'](col: string, data: any) {
+    [keyNames.KEY_NAME_PLACEMENT_ACTIONS](col: string, data: any) {
       return (
-        <>
-          <Button
-            variant="contained"
+        <Tooltip title="Xem chi tiết">
+          <IconButton
+            size="small"
             onClick={() => {
               // setOpen(true);
               console.log('Detail clicked');
             }}
+            color="primary"
           >
-            Xem chi tiết
-          </Button>
-          {/* {open && <WritePage isOpen={open} onClose={() => setOpen(false)} />} */}
-        </>
+            <Visibility fontSize="small" />
+          </IconButton>
+        </Tooltip>
       );
     },
   };

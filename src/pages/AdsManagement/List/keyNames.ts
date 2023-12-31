@@ -1,6 +1,7 @@
-export const KEY_NAME_ADS_PLACEMENT = 'placementId';
-export const KEY_NAME_ADS_WIDTH = 'width';
-export const KEY_NAME_ADS_HEIGHT = 'height';
-export const KEY_NAME_ADS_IMAGE = 'image';
-export const KEY_NAME_ADS_AMOUNT = 'amount';
-export const KEY_NAME_ADS_TYPE = 'advertisingType';
+export const KEY_NAME_PLACEMENT_WARD = 'ward';
+export const KEY_NAME_PLACEMENT_DISTRICT = 'district';
+export const KEY_NAME_PLACEMENT_PLANNED = 'planned';
+export const KEY_NAME_PLACEMENT_IMAGE = 'image';
+export const KEY_NAME_PLACEMENT_LOCATIONTYPE = 'locationType';
+export const KEY_NAME_PLACEMENT_FORMAT = 'format';
+export const KEY_NAME_PLACEMENT_ACTIONS = 'actions';

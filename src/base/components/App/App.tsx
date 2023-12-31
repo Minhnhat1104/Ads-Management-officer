@@ -18,6 +18,7 @@ import { RecoilRoot } from 'recoil';
 import { CircularProgress } from '@mui/material';
 import AuthProvider from '@base/auth/AuthProvider';
 import { routes } from '@base/routes';
+import LinearLoader from './LinearLoader';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -55,6 +56,7 @@ function App() {
         <ThemeCustomization>
           <QueryClientProvider client={queryClient}>
             <Toaster position="top-right" reverseOrder={false} />
+            <LinearLoader />
             <Suspense fallback={<CircularProgress />}>
               <AuthProvider>
                 <Routes>{getRoutes(routes)}</Routes>

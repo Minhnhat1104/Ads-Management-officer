@@ -13,41 +13,37 @@ import * as keyNames from './keyNames';
 import Toolbar from './Toolbar';
 import { FieldsData, makeTable8Columns } from '@base/components/ReactTable8/Helper';
 import ListTable, { ListTableProps } from '@base/components/List/ListTable';
-import axios from 'axios';
-// import { dummyData } from './dummyData';
-// import SortWritePage from '../Write';
+import { ListPaginationProps } from '@base/components/List/ListPagination';
+import { useNavigate } from 'react-router';
+import { useReports } from 'src/hooks/useReports';
 
-interface ResidentReportManagementProps {}
+interface AdsManagementProps {}
 
-const ResidentReportManagement = (props: ResidentReportManagementProps) => {
+const AdsManagement = (props: AdsManagementProps) => {
   const {} = props;
   const theme = useTheme();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   // state
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [items, setItems] = useState<any[]>([]);
-  const [openWrite, setOpenWrite] = useState<{
-    sortId: string;
-    isOpen: boolean;
-  }>({ sortId: '', isOpen: false });
-  const [keyword, setKeyword] = useState<string>('');
   const [paging, setPaging] = useState<{ page: number; size: number }>({ page: 1, size: LIST_TABLE_PAGE_SIZE });
 
   // call data
+  const params = {
+    page: paging?.page,
+    limit: paging?.size,
+  };
+  const { data } = useReports(params);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:4000/reports');
-        setItems(response.data); // assuming the data is directly in the response
-      } catch (error) {
-        console.error('Failed to fetch data', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (data?.data) {
+      setItems(data?.data);
+    } else {
+      setItems([]);
+    }
+  }, [data]);
 
   // ========== Table ========
   const handleOnChecked = (checkedIds: string[]) => {
@@ -55,21 +51,12 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
     console.log(checkedIds);
   };
 
-  const handleEdit = (sortId: string) => {
-    setOpenWrite({
-      sortId,
-      isOpen: true,
-    });
+  const gotoView = (data: any) => {
+    navigate(`/resident-report/${data?.id}`);
   };
 
   //table props
   const fields: FieldsData = [
-    {
-      languageKey: 'Quận',
-      keyName: keyNames.KEY_NAME_REPORT_DISTRICT,
-      enableSorting: false,
-      width: 'auto',
-    },
     {
       languageKey: 'Phường',
       keyName: keyNames.KEY_NAME_REPORT_WARD,
@@ -77,14 +64,20 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
       width: 'auto',
     },
     {
-      languageKey: 'Tên',
-      keyName: keyNames.KEY_NAME_REPORT_FIRSTNAME,
+      languageKey: 'Quận',
+      keyName: keyNames.KEY_NAME_REPORT_DISTRICT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Số điện thoại',
-      keyName: keyNames.KEY_NAME_REPORT_PHONENUMBER,
+      languageKey: 'Họ',
+      keyName: keyNames.KEY_NAME_REPORT_LAST_NAME,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Tên',
+      keyName: keyNames.KEY_NAME_REPORT_FIRST_NAME,
       enableSorting: false,
       width: 'auto',
     },
@@ -95,26 +88,32 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
       width: 'auto',
     },
     {
-      languageKey: 'Loại hình báo cáo',
-      keyName: keyNames.KEY_NAME_REPORT_ADS_TYPE,
+      languageKey: 'SĐT',
+      keyName: keyNames.KEY_NAME_REPORT_PHONE,
       enableSorting: false,
-      width: 100,
+      width: 'auto',
     },
     {
-      languageKey: 'Tình trạng xử lý',
-      keyName: keyNames.KEY_NAME_REPORT_ISPROCESSING,
+      languageKey: 'Loại',
+      keyName: keyNames.KEY_NAME_REPORT_TYPE,
       enableSorting: false,
-      width: 100,
+      width: 'auto',
     },
     {
-      languageKey: 'Chi tiết',
-      keyName: 'Detail',
+      languageKey: 'Trạng thái',
+      keyName: keyNames.KEY_NAME_REPORT_STATE,
       enableSorting: false,
-      width: 100,
+      width: 'auto',
+    },
+    {
+      languageKey: '',
+      keyName: keyNames.KEY_NAME_REPORT_ACTIONS,
+      enableSorting: false,
+      width: 50,
     },
   ];
 
-  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { handleEdit }, [])], []);
+  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { gotoView }, [])], []);
 
   const handlePagingChange = (page: number, size: number) => {
     const newPaging = { ...paging, page, size };
@@ -122,12 +121,13 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
   };
 
   // List paging
-  // const pagingProps: ListPaginationProps = {
-  //   pageTotal: data?.attr?.maxpage || 1, // page quantity
-  //   pageCount: data?.attr?.total ? Number(data?.attr?.total) : 0, // total item quantity
-  //   pageSize: paging?.size || LIST_TABLE_PAGE_SIZE,
-  //   pageIndex: paging?.page || 1,
-  // };
+  const pagingProps: ListPaginationProps = {
+    pageTotal: data?.meta?.totalPages || 1, // page quantity
+    pageCount: data?.meta?.totalItems ? Number(data?.meta?.totalItems) : 0, // total item quantity
+    pageSize: paging?.size || LIST_TABLE_PAGE_SIZE,
+    pageIndex: paging?.page || 1,
+  };
+
   const border = `1px solid ${theme.palette.divider}`;
 
   //render table list
@@ -136,7 +136,7 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
       onRowChecked: handleOnChecked,
       checkedIds: selectedIds,
       rows: items || [],
-      // pagingProps,
+      pagingProps,
       onPageChange: handlePagingChange,
       columns: tableColumns,
       sx: {
@@ -163,4 +163,4 @@ const ResidentReportManagement = (props: ResidentReportManagementProps) => {
   );
 };
 
-export default ResidentReportManagement;
+export default AdsManagement;

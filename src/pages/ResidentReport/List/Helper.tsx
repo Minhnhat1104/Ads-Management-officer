@@ -1,8 +1,8 @@
-import { Box, Button, IconButton, Stack, Theme, Typography } from '@mui/material';
+import { Box, Button, Chip, IconButton, Stack, Theme, Tooltip, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 import * as keyNames from './keyNames';
-import { CheckCircle } from '@mui/icons-material';
+import { CheckCircle, Visibility } from '@mui/icons-material';
 import WritePage from '../Write';
 import { useState } from 'react';
 
@@ -10,48 +10,45 @@ export const getMapColumns = () => {
   // const [open, setOpen] = useState<boolean>(false);
 
   return {
-    [keyNames.KEY_NAME_REPORT_DISTRICT](col: string, data: any) {
-      return <Typography>{data?.[col] || ''}</Typography>;
-    },
     [keyNames.KEY_NAME_REPORT_WARD](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
-    [keyNames.KEY_NAME_REPORT_PHONENUMBER](col: string, data: any) {
+    [keyNames.KEY_NAME_REPORT_DISTRICT](col: string, data: any) {
+      return <Typography>{data?.[col] || ''}</Typography>;
+    },
+    [keyNames.KEY_NAME_REPORT_FIRST_NAME](col: string, data: any) {
+      return <Typography>{data?.[col] || ''}</Typography>;
+    },
+    [keyNames.KEY_NAME_REPORT_LAST_NAME](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
     [keyNames.KEY_NAME_REPORT_EMAIL](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
-    [keyNames.KEY_NAME_REPORT_FIRSTNAME](col: string, data: any) {
+    [keyNames.KEY_NAME_REPORT_PHONE](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
-    [keyNames.KEY_NAME_REPORT_ADS_TYPE](col: string, data: any) {
-      return <Typography>{data?.[col] || ''}</Typography>;
-    },
-    [keyNames.KEY_NAME_REPORT_ISPROCESSING](col: string, data: any) {
+    [keyNames.KEY_NAME_REPORT_STATE](col: string, data: any) {
       return (
         <>
           {data?.[col] ? (
-            <CheckCircle fontSize="small" color="success" />
+            <Chip color="success" size="small" label="Đã xử lí" />
           ) : (
-            <CancelIcon fontSize="small" color="error" />
+            <Chip color="warning" size="small" label="Chưa xử lí" />
           )}
         </>
       );
     },
-    ['Detail'](col: string, data: any) {
+    [keyNames.KEY_NAME_REPORT_TYPE](col: string, data: any) {
+      return <Typography>{data?.[col] || ''}</Typography>;
+    },
+    [keyNames.KEY_NAME_REPORT_ACTIONS](col: string, data: any, extra: any) {
       return (
-        <>
-          <Button
-            onClick={() => {
-              // setOpen(true);
-              console.log('Detail clicked');
-            }}
-          >
-            Xem chi tiết
-          </Button>
-          {/* {open && <WritePage isOpen={open} onClose={() => setOpen(false)} />} */}
-        </>
+        <Tooltip title="Xem chi tiết" placement="top">
+          <IconButton size="small" onClick={() => extra?.gotoView && extra?.gotoView(data)} color="primary">
+            <Visibility fontSize="small" />
+          </IconButton>
+        </Tooltip>
       );
     },
   };

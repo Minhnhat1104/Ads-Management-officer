@@ -1,7 +1,9 @@
-export const KEY_NAME_REPORT_DISTRICT = 'district';
 export const KEY_NAME_REPORT_WARD = 'ward';
-export const KEY_NAME_REPORT_PHONENUMBER = 'phone';
-export const KEY_NAME_REPORT_FIRSTNAME = 'first_name';
+export const KEY_NAME_REPORT_DISTRICT = 'district';
+export const KEY_NAME_REPORT_FIRST_NAME = 'first_name';
+export const KEY_NAME_REPORT_LAST_NAME = 'last_name';
 export const KEY_NAME_REPORT_EMAIL = 'email';
-export const KEY_NAME_REPORT_ADS_TYPE = 'type';
-export const KEY_NAME_REPORT_ISPROCESSING = 'isProcessing';
+export const KEY_NAME_REPORT_PHONE = 'phone';
+export const KEY_NAME_REPORT_STATE = 'state';
+export const KEY_NAME_REPORT_TYPE = 'type';
+export const KEY_NAME_REPORT_ACTIONS = 'actions';

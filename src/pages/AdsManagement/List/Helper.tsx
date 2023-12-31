@@ -38,17 +38,10 @@ export const getMapColumns = () => {
     [keyNames.KEY_NAME_PLACEMENT_FORMAT](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
-    [keyNames.KEY_NAME_PLACEMENT_ACTIONS](col: string, data: any) {
+    [keyNames.KEY_NAME_PLACEMENT_ACTIONS](col: string, data: any, extra: any) {
       return (
         <Tooltip title="Xem chi tiết">
-          <IconButton
-            size="small"
-            onClick={() => {
-              // setOpen(true);
-              console.log('Detail clicked');
-            }}
-            color="primary"
-          >
+          <IconButton size="small" onClick={() => extra?.gotoView && extra?.gotoView(data)} color="primary">
             <Visibility fontSize="small" />
           </IconButton>
         </Tooltip>

@@ -13,17 +13,19 @@ import * as keyNames from './keyNames';
 import Toolbar from './Toolbar';
 import { FieldsData, makeTable8Columns } from '@base/components/ReactTable8/Helper';
 import ListTable, { ListTableProps } from '@base/components/List/ListTable';
-import { usePlacements } from 'src/hooks/usePlacements';
 import { ListPaginationProps } from '@base/components/List/ListPagination';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import { useAdvertisements } from 'src/hooks/useAdvertisements';
 
-interface AdsManagementProps {}
+interface ViewProps {}
 
-const AdsManagement = (props: AdsManagementProps) => {
+const View = (props: ViewProps) => {
   const {} = props;
   const theme = useTheme();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const urlParams = useParams();
+  const { id: placementId } = urlParams;
 
   // state
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -35,7 +37,7 @@ const AdsManagement = (props: AdsManagementProps) => {
     page: paging?.page,
     limit: paging?.size,
   };
-  const { data } = usePlacements(params);
+  const { data } = useAdvertisements(params, placementId);
 
   useEffect(() => {
     if (data?.data) {
@@ -58,44 +60,44 @@ const AdsManagement = (props: AdsManagementProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Phường',
-      keyName: keyNames.KEY_NAME_PLACEMENT_WARD,
+      languageKey: 'Chiều dài',
+      keyName: keyNames.KEY_NAME_ADS_WIDTH,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Quận',
-      keyName: keyNames.KEY_NAME_PLACEMENT_DISTRICT,
-      enableSorting: false,
-      width: 'auto',
-    },
-    {
-      languageKey: 'Trạng thái quy hoạch',
-      keyName: keyNames.KEY_NAME_PLACEMENT_PLANNED,
+      languageKey: 'Chiều rộng',
+      keyName: keyNames.KEY_NAME_ADS_HEIGHT,
       enableSorting: false,
       width: 'auto',
     },
     {
       languageKey: 'Hình ảnh',
-      keyName: keyNames.KEY_NAME_PLACEMENT_IMAGE,
+      keyName: keyNames.KEY_NAME_ADS_IMAGE,
+      enableSorting: false,
+      width: 'auto',
+    },
+    // {
+    //   languageKey: 'Hình ảnh',
+    //   keyName: keyNames.KEY_NAME_ADS_PLACEMENT_ID,
+    //   enableSorting: false,
+    //   width: 'auto',
+    // },
+    {
+      languageKey: 'Số Lượng',
+      keyName: keyNames.KEY_NAME_ADS_AMOUNT,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Loại Đất',
-      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATIONTYPE,
+      languageKey: 'Loại',
+      keyName: keyNames.KEY_NAME_ADS_ADVERTISING_TYPE,
       enableSorting: false,
       width: 'auto',
     },
     {
-      languageKey: 'Loại bảng quảng cáo',
-      keyName: keyNames.KEY_NAME_PLACEMENT_FORMAT,
-      enableSorting: false,
-      width: 'auto',
-    },
-    {
-      languageKey: '',
-      keyName: keyNames.KEY_NAME_PLACEMENT_ACTIONS,
+      languageKey: 'Ngày',
+      keyName: keyNames.KEY_NAME_ADS_END_DATE,
       enableSorting: false,
       width: 50,
     },
@@ -145,10 +147,10 @@ const AdsManagement = (props: AdsManagementProps) => {
 
   return (
     <>
-      <Toolbar />
+      <Toolbar placementId={placementId || ''} />
       {TableMemo}
     </>
   );
 };
 
-export default AdsManagement;
+export default View;

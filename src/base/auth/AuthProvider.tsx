@@ -1,6 +1,6 @@
 // AuthContext.tsx
 import { createContext, useContext, ReactNode, useState, useEffect, Dispatch } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useMatch } from 'react-router';
 
 interface AuthContextProps {
   isAuthenticated?: boolean;
@@ -19,6 +19,7 @@ const AuthProvider = (props: AuthProviderProps) => {
 
   const storedToken = localStorage.getItem('accessToken');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const matchLogin = useMatch('/login');
 
   useEffect(() => {
     if (!storedToken) {
@@ -26,11 +27,13 @@ const AuthProvider = (props: AuthProviderProps) => {
       navigate('/login');
       setIsAuthenticated(false);
     } else {
-      // Nếu có, chuyển hướng đến trang todo hoặc trang chính của ứng dụng
-      navigate('/');
+      // Nếu có và đang ở /login, chuyển hướng đến trang todo hoặc trang chính của ứng dụng
+      if (matchLogin) {
+        navigate('/');
+      }
       setIsAuthenticated(true);
     }
-  }, [storedToken, isAuthenticated]);
+  }, [storedToken, matchLogin]);
 
   // return <AuthContext.Provider value={{ login, logout }}>{children}</AuthContext.Provider>;
   return (

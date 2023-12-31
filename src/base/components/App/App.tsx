@@ -34,13 +34,13 @@ function App() {
   const getRoutes = (routes: RouteObject[]) => {
     const recursion = (routes: RouteObject[]) => (
       <>
-        {routes.map(({ path, element, children }, i: number) => {
-          return children ? (
-            <Route key={path || 'index'} path={path} element={element}>
-              {recursion(children)}
+        {routes.map((_route: any, i: number) => {
+          return _route?.children ? (
+            <Route key={_route?.path || 'index'} {..._route}>
+              {recursion(_route?.children)}
             </Route>
           ) : (
-            <Route key={path || 'index'} path={path} element={element} />
+            <Route key={_route?.path || 'index'} {..._route} />
           );
         })}
       </>

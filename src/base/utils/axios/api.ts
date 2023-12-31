@@ -52,7 +52,7 @@ axiosApi.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
-        const response = await axios.get('http://localhost:4000/auth/refresh', {
+        const response = await axiosNoInterceptors.get('auth/refresh', {
           headers: {
             Authorization: `Bearer ${refreshToken}`,
           },

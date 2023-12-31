@@ -13,8 +13,8 @@ import ControlPanel from './ControlPanel';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import BoardList from './BoardList';
-import axios from 'axios';
 import { axiosApi } from '@base/utils/axios/api';
+import { usePlacements } from 'src/hooks/usePlacements';
 
 const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set your goong maptiles key here
 
@@ -29,6 +29,10 @@ const geolocateControlStyle = {
 };
 
 const Home = () => {
+  // state
+  const [popupInfo, setPopupInfo] = useState<any>(null);
+  const [boardData, setBoardData] = useState<any>(null);
+  const [locationAds, setLocationAds] = useState<any[]>([]);
   const [viewport, setViewport] = useState({
     width: '100%',
     height: '100%',
@@ -36,9 +40,6 @@ const Home = () => {
     longitude: 106.68246,
     zoom: 16,
   });
-
-  const [popupInfo, setPopupInfo] = useState<any>(null);
-  const [boardData, setBoardData] = useState<any>(null);
 
   useEffect(() => {
     // Get user's location using browser's Geolocation API
@@ -58,12 +59,7 @@ const Home = () => {
         console.error('Error getting user location:', error);
       }
     );
-  }, []); // em
-
-  const handleViewportChange = (updatedViewport: any) => {
-    // Xử lý dữ liệu truyền về từ Component B
-    setViewport(updatedViewport);
-  };
+  }, []);
 
   // useEffect(() => {
   //   // Thực hiện bất kỳ xử lý nào bạn cần khi viewport thay đổi
@@ -71,26 +67,20 @@ const Home = () => {
   //   console.log('Viewport changed:', viewport);
   // }, [viewport]);
 
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-  };
-
-  const [locationAds, setLocationAds] = useState<any[]>([]);
-  const [advertisements, setAdvertisements] = useState<any[]>([]);
+  const { data } = usePlacements();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const placementsResponse = await axiosApi.get('/placements');
-        setLocationAds(placementsResponse.data);
-      } catch (error) {
-        console.error('Failed to fetch data', error);
-      }
-    };
+    if (data) {
+      setLocationAds(data);
+    } else {
+      setLocationAds([]);
+    }
+  }, [data]);
 
-    fetchData();
-  }, []);
+  const handleViewportChange = (updatedViewport: any) => {
+    // Xử lý dữ liệu truyền về từ Component B
+    setViewport(updatedViewport);
+  };
 
   return (
     <ReactMapGL

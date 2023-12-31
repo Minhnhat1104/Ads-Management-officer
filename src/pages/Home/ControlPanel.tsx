@@ -3,7 +3,7 @@ import { LabelValue } from '@base/types';
 import { Box, Stack, TextField, Typography, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FlyToInterpolator } from '@goongmaps/goong-map-react';
+import { GOONG_API_KEY } from 'src/constants/goongmap';
 
 interface Location {
   lat: number;
@@ -27,8 +27,6 @@ interface LocationResult {
   lat_location: number;
   long_location: number;
 }
-
-const GOONG_KEY = '3ODORfsw6oNLKjsJ7PV5Y7YleXqp1FaNDsv4oj36';
 
 const MAP_FILTER_OPTIONS: LabelValue[] = [
   {
@@ -66,7 +64,7 @@ const ControlPanel = (prop: any) => {
   //   prop.onViewportChange(viewport);
   // };
 
-  const getCoordinates = async (locationName: string, apiKey = GOONG_KEY) => {
+  const getCoordinates = async (locationName: string, apiKey = GOONG_API_KEY) => {
     const encodedLocationName = encodeURIComponent(locationName.trim());
 
     const url = `https://rsapi.goong.io/geocode?address=${encodeURIComponent(encodedLocationName)}&api_key=${apiKey}`;

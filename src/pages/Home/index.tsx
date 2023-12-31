@@ -6,8 +6,7 @@ import ControlPanel from './ControlPanel';
 
 import BoardList from './BoardList';
 import { usePlacements } from 'src/hooks/usePlacements';
-
-const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set your goong maptiles key here
+import { GOONG_MAPTILES_KEY } from 'src/constants/goongmap';
 
 const fullscreenControlStyle = {
   right: 10,

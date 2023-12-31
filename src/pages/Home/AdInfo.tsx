@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { DiaDiem } from './dummyData';
 import { Stack, Typography } from '@mui/material';
 
 interface AdInfoProps {
-  info: DiaDiem;
+  info: any;
 }
 
 function AdInfo(props: AdInfoProps) {

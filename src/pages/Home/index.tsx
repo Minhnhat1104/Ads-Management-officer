@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ReactMapGL, {
-  GeolocateControl,
-  FullscreenControl,
-  Marker,
-  Popup,
-  FlyToInterpolator,
-} from '@goongmaps/goong-map-react';
-import { DiaDiem, dummyData } from './dummyData';
+import ReactMapGL, { GeolocateControl, FullscreenControl, Popup } from '@goongmaps/goong-map-react';
 import Pins from './Pins';
 import AdInfo from './AdInfo';
 import ControlPanel from './ControlPanel';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import BoardList from './BoardList';
-import { axiosApi } from '@base/utils/axios/api';
 import { usePlacements } from 'src/hooks/usePlacements';
 
 const GOONG_MAPTILES_KEY = '15pyrTUaBGMXx0b9LxJpuSUPOkWVmLyDueIcbgrW'; // Set your goong maptiles key here

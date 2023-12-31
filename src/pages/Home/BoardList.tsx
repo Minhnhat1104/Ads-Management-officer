@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { AdBoardInterface, DiaDiem } from './dummyData';
 import { Box, ClickAwayListener, Stack, Typography, useTheme } from '@mui/material';
 import { LabelValue } from '@base/types';
-import { useEffect, useRef } from 'react';
 
 interface BoardListProps {
   locationAds: any[];

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Marker } from '@goongmaps/goong-map-react';
 import { Avatar, Typography, useTheme } from '@mui/material';
-import { dummyBoardList } from './dummyData';
-import { useEffect } from 'react';
 import axios from 'axios';
 
 // Important for perf: the markers never change, avoid rerender when the map viewport changes

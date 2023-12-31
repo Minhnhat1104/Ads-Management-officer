@@ -3,9 +3,10 @@ import { isArray } from 'lodash';
 
 import { axiosAPI, CustomAxiosConfigType } from '@base/utils/axios/api';
 
-export function useMutationPost<T, E extends {} = {}, V extends {} = {}>(
+export function useMutationCustom<T, E extends {} = {}, V extends {} = {}>(
   queryKey: any[],
   endPoint: string,
+  method: string,
   options?: UseMutationOptions<T, E, V>,
   header?: any,
   responseType?: string,
@@ -16,7 +17,7 @@ export function useMutationPost<T, E extends {} = {}, V extends {} = {}>(
   const response = useMutation<T, E, V>(
     [key],
     (payload: V) => {
-      return axiosAPI<T>(endPoint, 'POST', payload, header, responseType, customConfig, useInterceptors);
+      return axiosAPI<T>(endPoint, method, payload, header, responseType, customConfig, useInterceptors);
     },
     options
   );
@@ -24,4 +25,4 @@ export function useMutationPost<T, E extends {} = {}, V extends {} = {}>(
   return response;
 }
 
-export default useMutationPost;
+export default useMutationCustom;

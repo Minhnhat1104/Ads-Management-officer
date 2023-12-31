@@ -1,14 +1,14 @@
 import { queryKeys } from '@base/config/queryKeys';
-import useMutationCustom from './useMutationCustom';
-import { useSnackBar } from './useSnackBar';
+import useMutationCustom from '@base/hooks/useMutationCustom';
+import { useSnackBar } from '@base/hooks/useSnackBar';
 
-export const useAuthMutation = () => {
+export const useReportMutation = (id: string) => {
   const { enqueueSuccessBar, enqueueErrorBar } = useSnackBar();
 
-  const mLogin = useMutationCustom(
+  const mSave = useMutationCustom(
     [queryKeys.auth_login],
-    'POST',
-    'auth/signin',
+    `reports/${id}`,
+    'PATCH',
     {
       onSuccess: (data: any, variables: any, context: any) => {
         enqueueSuccessBar('Login Successfully');
@@ -23,5 +23,5 @@ export const useAuthMutation = () => {
     false
   );
 
-  return { mLogin };
+  return { mSave };
 };

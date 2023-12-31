@@ -21,7 +21,7 @@ const ViewFields = (props: ViewFieldsProps) => {
       {fieldConfigs?.map((_field: ViewFieldConfig, i: number) => {
         let renderValue = null;
         if (_field?.getValue) {
-          if (_field?.getValue(data, _field.value) === 'string') {
+          if (typeof _field?.getValue(data, _field.value) === 'string') {
             renderValue = <Typography>{_field?.getValue(data, _field.value)}</Typography>;
           } else {
             renderValue = _field?.getValue(data, _field.value);

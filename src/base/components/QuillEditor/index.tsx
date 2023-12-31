@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
@@ -29,7 +30,11 @@ function QuillEditor(props: QuillEditorProps) {
     onChange && onChange(nVal);
   };
 
-  return <ReactQuill theme="snow" value={content} onChange={handleOnChange} style={{ height: height }} />;
+  return (
+    <Box sx={{ '& .ql-container': { height: 'calc(100% - 42px)' } }}>
+      <ReactQuill theme="snow" value={content} onChange={handleOnChange} style={{ height }} />
+    </Box>
+  );
 }
 
 export default QuillEditor;

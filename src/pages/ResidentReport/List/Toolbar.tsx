@@ -23,16 +23,11 @@ const Toolbar = (props: ToolbarProps) => {
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 1 }}>
         <Stack></Stack>
         <Stack direction="row" spacing={1}>
-          {/* <Button size="small" variant="contained" sx={{ width: 'fit-content' }} onClick={() => setOpen(true)}>
-            Add
-          </Button> */}
           <IconButton onClick={handleRefresh} sx={{ border }}>
             <Refresh fontSize="small" />
           </IconButton>
         </Stack>
       </Stack>
-
-      {open && <WritePage isOpen={open} onClose={() => setOpen(false)} />}
     </>
   );
 };

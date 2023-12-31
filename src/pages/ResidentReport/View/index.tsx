@@ -6,6 +6,7 @@ import { useReportByReportId } from 'src/hooks/useReportByReportId';
 import { placementFields } from './config/placementField';
 import { Stack, Typography } from '@mui/material';
 import { contractFields } from './config/contractFields';
+import Write from '../Write';
 
 const View = () => {
   const { id } = useParams();
@@ -25,6 +26,8 @@ const View = () => {
       {/* contract field */}
       <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Hợp đồng quảng cáo</Typography>
       <ViewFields data={data?.contract} fieldConfigs={contractFields} />
+
+      <Write id={id || ''} />
     </Stack>
   );
 };

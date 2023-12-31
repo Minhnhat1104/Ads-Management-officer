@@ -1,4 +1,4 @@
-import { Chip } from '@mui/material';
+import { Box, Chip } from '@mui/material';
 import { ViewFieldConfig } from '../ViewFields';
 
 export const reportFields: ViewFieldConfig[] = [
@@ -52,5 +52,8 @@ export const reportFields: ViewFieldConfig[] = [
   {
     label: 'Giải pháp',
     value: 'solution',
+    getValue(value, keyName) {
+      return value?.[keyName] ? <Box dangerouslySetInnerHTML={{ __html: value?.[keyName] }} /> : '';
+    },
   },
 ];

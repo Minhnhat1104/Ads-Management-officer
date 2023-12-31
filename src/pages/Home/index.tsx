@@ -104,7 +104,7 @@ const Home = () => {
           latitude={boardData.lat}
           captureScroll // Stop propagation of mouse wheel event to the map component
         >
-          <BoardList locationAds={locationAds} boardData={boardData} setBoardData={setBoardData} />
+          <BoardList boardData={boardData} setBoardData={setBoardData} />
         </Popup>
       )}
 

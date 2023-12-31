@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Marker } from '@goongmaps/goong-map-react';
 import { Avatar, Typography, useTheme } from '@mui/material';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { usePlacement } from 'src/hooks/usePlacement';
+import { useAdvertisements } from 'src/hooks/useAdvertisements';
 
 interface PinItemProps {
   city: any;
@@ -17,7 +16,7 @@ const PinItem = (props: PinItemProps) => {
 
   const [enabled, setEnabled] = useState<boolean>(false);
 
-  const { data } = usePlacement(city.id, {
+  const { data } = useAdvertisements(null, city.id, {
     enabled,
   });
 

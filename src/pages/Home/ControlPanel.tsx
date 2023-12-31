@@ -104,7 +104,7 @@ const ControlPanel = (prop: any) => {
         variant="outlined"
         margin="normal"
         value={search}
-        autoComplete="nope"
+        autoComplete="none"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setSearch(event.target.value);
         }}

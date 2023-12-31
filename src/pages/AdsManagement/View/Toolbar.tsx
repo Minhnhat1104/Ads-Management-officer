@@ -26,7 +26,7 @@ const Toolbar = (props: ToolbarProps) => {
   };
 
   const handleBack = () => {
-    navigate('/ads-management');
+    navigate(-1);
   };
 
   return (

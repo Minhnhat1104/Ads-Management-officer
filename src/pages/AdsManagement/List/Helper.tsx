@@ -40,7 +40,7 @@ export const getMapColumns = () => {
     },
     [keyNames.KEY_NAME_PLACEMENT_ACTIONS](col: string, data: any, extra: any) {
       return (
-        <Tooltip title="Xem chi tiết">
+        <Tooltip title="Xem chi tiết" placement="top">
           <IconButton size="small" onClick={() => extra?.gotoView && extra?.gotoView(data)} color="primary">
             <Visibility fontSize="small" />
           </IconButton>

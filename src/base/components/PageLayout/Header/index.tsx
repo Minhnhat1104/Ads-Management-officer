@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 import { HEADER_HEIGHT } from '@base/config/constants';
 import { useAccounts } from 'src/hooks/useAccounts';
 import { usePlacements } from 'src/hooks/usePlacements';
-import DetailUser from './DetailUser';
 import { AuthContext } from '@base/auth/AuthProvider';
 import MiModal from '@base/components/MiModal';
 
@@ -135,13 +134,26 @@ const Header = () => {
             <MiModal
               title={'Detail User Information'}
               isOpen={open}
-              size={false}
-              children={undefined}
               onClose={() => {
                 setOpen(false);
                 console.log(open);
               }}
-            ></MiModal>
+              size="sm"
+            >
+              <Stack alignItems="center" justifyContent="center" padding={4}>
+                <Typography style={{ fontSize: 24, fontWeight: 800, padding: 4 }}>{account.roleName}</Typography>
+                <Typography style={{ fontSize: 18, fontWeight: 600 }}>
+                  Họ tên: {account?.firstName + ' ' + account?.lastName}
+                </Typography>
+                <Typography style={{ fontSize: 18, fontWeight: 600, padding: 4 }}>Email: {account?.email}</Typography>
+                <Typography style={{ fontSize: 18, fontWeight: 600, padding: 4 }}>
+                  Số điện thoại: {account?.phone}
+                </Typography>
+                <Typography style={{ fontSize: 18, fontWeight: 600, padding: 4 }}>
+                  Địa bàn: {account.ward + ', ' + account?.district}
+                </Typography>
+              </Stack>
+            </MiModal>
           )}
         </Stack>
       </Grid>

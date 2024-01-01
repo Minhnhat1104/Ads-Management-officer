@@ -11,4 +11,7 @@ export const queryKeys = {
   // home
   placements: 'home_placements',
   placementView: 'home_placementView',
+
+  //account
+  accounts: 'account',
 };

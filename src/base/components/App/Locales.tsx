@@ -20,20 +20,9 @@ interface Props {
 
 const Locales = ({ children }: Props) => {
   const { initAppSetting } = useConfig();
-  // const { appSetting, isLoading } = useAppSetting();
 
   dayjs.tz.setDefault('Asia/Seoul');
 
-  // useEffect(() => {
-  //   if (!isLoading && appSetting?.value) {
-  //     try {
-  //       const data = JSON.parse(appSetting.value as string) as DefaultConfigProps;
-  //       initAppSetting(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // }, [appSetting]);
   return <>{children}</>;
 };
 

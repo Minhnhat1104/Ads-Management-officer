@@ -76,13 +76,6 @@ function BoardList(props: BoardListProps) {
                       ))}
                     </Stack>
                   </Stack>
-
-                  {/* {placementFields?.map((_field: LabelValue) => (
-                    <Stack key={_field.value} direction="row" spacing={0.5}>
-                      <Typography fontWeight={500} sx={{ whiteSpace: 'nowrap' }}>{`${_field.label}:`}</Typography>
-                      <Typography>{_item[_field.value]}</Typography>
-                    </Stack>
-                  ))} */}
                 </Box>
               ))}
             </Box>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { LabelValue } from '@base/types';
 import { Box, Button, Grid, Stack, Typography, useTheme } from '@mui/material';
@@ -8,6 +8,9 @@ import { NavLink } from 'react-router-dom';
 import { HEADER_HEIGHT } from '@base/config/constants';
 import { useAccounts } from 'src/hooks/useAccounts';
 import { usePlacements } from 'src/hooks/usePlacements';
+import DetailUser from './DetailUser';
+import { AuthContext } from '@base/auth/AuthProvider';
+import MiModal from '@base/components/MiModal';
 
 const navItems: LabelValue[] = [
   {
@@ -36,6 +39,10 @@ const Header = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
+  const { setIsAuthenticated } = useContext(AuthContext);
+
+  const [open, setOpen] = useState<boolean>(false);
+
   const [account, setAccount] = useState<any>();
 
   const { data } = useAccounts();
@@ -43,7 +50,7 @@ const Header = () => {
   useEffect(() => {
     if (data) {
       setAccount(data);
-      // console.log('🚀 ~ file: index.tsx:43 ~ data:', data);
+      console.log('🚀 ~ file: index.tsx:43 ~ data:', data);
     } else {
       setAccount(null);
       // console.log('🚀 ~ file: index.tsx:43 ~ data:', data);
@@ -98,6 +105,14 @@ const Header = () => {
           borderBottom={border}
           py={1}
           marginRight={4}
+          sx={{
+            cursor: 'pointer',
+            transition: 'color 0.3s ease-in-out', // Add a smooth transition for the color change
+            '&:hover': {
+              color: '#2196f3', // Change the color on hover
+            },
+          }}
+          onClick={() => setOpen(true)}
         >
           <AccountCircleIcon fontSize="small" />
           {account && (
@@ -105,9 +120,29 @@ const Header = () => {
               {account.firstName + ' ' + account.lastName}
             </Typography>
           )}
-          {/* <Button variant="contained" color="error">
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => {
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('refreshToken');
+              setIsAuthenticated && setIsAuthenticated(false);
+            }}
+          >
             Đăng xuất
-          </Button> */}
+          </Button>
+          {open && (
+            <MiModal
+              title={'Detail User Information'}
+              isOpen={open}
+              size={false}
+              children={undefined}
+              onClose={() => {
+                setOpen(false);
+                console.log(open);
+              }}
+            ></MiModal>
+          )}
         </Stack>
       </Grid>
     </Grid>

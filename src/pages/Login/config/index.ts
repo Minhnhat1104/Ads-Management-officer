@@ -11,12 +11,17 @@ const writeConfig: WriteConfig = {
     Component: TextField,
     defaultValue: '',
     componentProps: {},
+    validate: (value: any) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(value) || 'Vui lòng nhập một địa chỉ email hợp lệ';
+    },
   },
   [keyNames.KEY_NAME_LOGIN_PASSWORD]: {
     languageKey: 'Mật khẩu',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
+    validate: (value: any) => !!value || 'Vui lòng nhập mật khẩu',
   },
 };
 

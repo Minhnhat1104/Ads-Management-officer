@@ -7,14 +7,14 @@ export const useAuthMutation = () => {
 
   const mLogin = useMutationCustom(
     [queryKeys.auth_login],
-    'POST',
     'auth/signin',
+    'POST',
     {
       onSuccess: (data: any, variables: any, context: any) => {
         enqueueSuccessBar('Login Successfully');
       },
       onError: (error: any, variables: any, context: any) => {
-        enqueueSuccessBar('Login Fail');
+        enqueueErrorBar('Login Fail');
       },
     },
     undefined,

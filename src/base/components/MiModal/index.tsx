@@ -133,23 +133,6 @@ const MiModal = (props: MiModalProps) => {
             {title}
           </Grid>
           <Grid item>
-            {/* {!isMobile && (
-              <Tooltip title={miState.isMinimize ? t('ncrm_common_maximize') : t('ncrm_common_minimize')} placement="top">
-                <IconButton
-                  size="medium"
-                  sx={{ color: theme.palette.common.white }}
-                  // sx={{ color: alpha(theme.palette.common.white, 0.5) }}
-                  onClick={() => {
-                    setMiState({
-                      ...miState,
-                      isMinimize: !miState.isMinimize,
-                    });
-                  }}
-                >
-                  {miState.isMinimize ? <LaunchOutlined /> : <Minimize sx={{ mb: 2 }} />}
-                </IconButton>
-              </Tooltip>
-            )} */}
             {!isMobile && (
               <Tooltip
                 title={miState.anchor === MIMODAL_ANCHOR_CENTER ? 'Swipt to right' : 'Swipt to center'}

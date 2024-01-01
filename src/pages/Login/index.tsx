@@ -34,6 +34,7 @@ const Login = (props: LoginProps) => {
     setValue,
     control,
     getValues,
+    register,
     formState: { errors, isValid },
   } = useForm({
     defaultValues,
@@ -80,9 +81,19 @@ const Login = (props: LoginProps) => {
   return (
     <>
       <form style={{ width: 'fit-content', margin: 'auto' }}>
+        <Typography variant="h5" sx={{ textAlign: 'center', mb: 2, fontSize: 40, marginBottom: 6 }}>
+          Đăng nhập tài khoản cán bộ
+        </Typography>
         <Suspense fallback={<></>}>
           <Stack padding={2} spacing={2} width={500} border={border}>
-            <WriteFields fields={fields} watch={watch} setValue={setValue} control={control} errors={errors} />
+            <WriteFields
+              fields={fields}
+              watch={watch}
+              setValue={setValue}
+              control={control}
+              errors={errors}
+              // {...register('firstName', { required: true })}
+            />
             <Stack>
               <Typography color={theme.palette.primary.main} sx={{ cursor: 'pointer' }}>
                 Quên mật khẩu

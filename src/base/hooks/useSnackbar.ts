@@ -20,10 +20,15 @@ export const useSnackBar = () => {
     toast.error(msg, {
       // icon: <DoneOutlinedIcon />,
       iconTheme: {
-        primary: theme.palette.success.main,
+        primary: theme.palette.error.light,
         secondary: theme.palette.secondary.main,
       },
       duration: 3000,
+      style: {
+        backgroundColor: 'red', // Màu sắc nền thông báo
+        color: 'white', // Màu chữ
+        fontWeight: 700,
+      },
     });
   };
   return { enqueueSuccessBar, enqueueErrorBar };

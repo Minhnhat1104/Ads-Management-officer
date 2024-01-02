@@ -145,7 +145,7 @@ const AdsManagement = (props: AdsManagementProps) => {
 
   return (
     <>
-      <Toolbar />
+      <Toolbar fields={fields} items={items} />
       {TableMemo}
     </>
   );

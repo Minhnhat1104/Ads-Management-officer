@@ -11,7 +11,6 @@ const writeConfig: WriteConfig = {
     languageKey: 'Email',
     Component: TextField,
     defaultValue: '',
-    componentProps: { label: 'Email' },
     validate: (value: any) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(value) || 'Vui lòng nhập một địa chỉ email hợp lệ';

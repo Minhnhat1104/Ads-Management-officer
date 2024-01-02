@@ -1,6 +1,6 @@
 import { queryKeys } from '@base/config/queryKeys';
 import useMutationCustom from '@base/hooks/useMutationCustom';
-import { useSnackBar } from '@base/hooks/useSnackBar';
+import { useSnackBar } from '@base/hooks/useSnackbar';
 
 export const useReportMutation = (id: string) => {
   const { enqueueSuccessBar, enqueueErrorBar } = useSnackBar();

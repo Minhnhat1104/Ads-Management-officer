@@ -1,10 +1,10 @@
 import { TextField } from '@mui/material';
-import { TextFieldProps } from '@mui/material/TextField';
 
 // import * as baseComponents from '@base/configs/WriteField/components';
 import { WriteConfig, WriteFieldItem } from '@base/types/common';
 
 import * as keyNames from './keyNames';
+import PasswordField from '@base/components/PasswordField';
 
 const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_LOGIN_USER_NAME]: {
@@ -19,7 +19,7 @@ const writeConfig: WriteConfig = {
   },
   [keyNames.KEY_NAME_LOGIN_PASSWORD]: {
     languageKey: 'Mật khẩu',
-    Component: TextField,
+    Component: PasswordField,
     defaultValue: '',
     componentProps: {},
     validate: (value: any) => !!value || 'Vui lòng nhập mật khẩu',

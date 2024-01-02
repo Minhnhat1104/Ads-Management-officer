@@ -41,6 +41,15 @@ const Header = () => {
   const { setIsAuthenticated } = useContext(AuthContext);
 
   const [open, setOpen] = useState<boolean>(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    console.log('Open check', open);
+  };
+
+  useEffect(() => {
+    console.log('Open check effect', open);
+  }, [open]);
 
   const [account, setAccount] = useState<any>();
 
@@ -111,7 +120,7 @@ const Header = () => {
               color: '#2196f3', // Change the color on hover
             },
           }}
-          onClick={() => setOpen(true)}
+          onClick={handleOpen}
         >
           <AccountCircleIcon fontSize="small" />
           {account && (
@@ -131,15 +140,7 @@ const Header = () => {
             Đăng xuất
           </Button>
           {open && (
-            <MiModal
-              title={'Detail User Information'}
-              isOpen={open}
-              onClose={() => {
-                setOpen(false);
-                console.log(open);
-              }}
-              size="sm"
-            >
+            <MiModal title={'Detail User Information'} isOpen={open} onClose={handleClose} size="sm">
               <Stack alignItems="center" justifyContent="center" padding={4}>
                 <Typography style={{ fontSize: 24, fontWeight: 800, padding: 4 }}>{account.roleName}</Typography>
                 <Typography style={{ fontSize: 18, fontWeight: 600 }}>

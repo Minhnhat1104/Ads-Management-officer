@@ -22,6 +22,11 @@ export interface WriteFieldItem {
   parseParam?: (value: any) => {} | null; // use to parse final value of component before submit form
 }
 
+export interface PasswordFieldProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
 export interface WriteConfig {
   [x: string]: WriteFieldItem;
 }

@@ -1,7 +1,8 @@
 import { TextField } from '@mui/material';
+import { TextFieldProps } from '@mui/material/TextField';
 
 // import * as baseComponents from '@base/configs/WriteField/components';
-import { WriteConfig } from '@base/types/common';
+import { WriteConfig, WriteFieldItem } from '@base/types/common';
 
 import * as keyNames from './keyNames';
 

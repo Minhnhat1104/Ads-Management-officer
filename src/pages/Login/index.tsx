@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useEffect, useMemo } from 'react';
+import React, { Suspense, useContext, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box, Button, Grid, Link, Stack, Typography, useTheme } from '@mui/material';
@@ -45,6 +45,11 @@ const Login = (props: LoginProps) => {
   const { mLogin } = useAuthMutation();
   const { setIsAuthenticated } = useContext(AuthContext);
 
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
   //when submit error, call this
   const onError = (errors: any, e: any) => {
     console.log('error', errors, e);
@@ -86,14 +91,7 @@ const Login = (props: LoginProps) => {
         </Typography>
         <Suspense fallback={<></>}>
           <Stack padding={2} spacing={2} width={500} border={border}>
-            <WriteFields
-              fields={fields}
-              watch={watch}
-              setValue={setValue}
-              control={control}
-              errors={errors}
-              // {...register('firstName', { required: true })}
-            />
+            <WriteFields fields={fields} watch={watch} setValue={setValue} control={control} errors={errors} />
             <Stack>
               <Typography color={theme.palette.primary.main} sx={{ cursor: 'pointer' }}>
                 Quên mật khẩu

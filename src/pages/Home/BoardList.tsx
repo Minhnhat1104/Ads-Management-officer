@@ -81,7 +81,7 @@ function BoardList(props: BoardListProps) {
             </Box>
           ))
         ) : (
-          <NoData />
+          <NoData label="Không có bảng quảng cáo nào" />
         )}
       </Stack>
     </ClickAwayListener>

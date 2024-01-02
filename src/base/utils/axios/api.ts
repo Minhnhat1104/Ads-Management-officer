@@ -3,6 +3,7 @@ import { toast } from 'react-hot-toast';
 import axios, { AxiosRequestConfig, AxiosResponse, ResponseType } from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import merge from 'lodash/merge';
+import { HOST_URL } from '@base/base';
 
 export const contentFormHeaders = {
   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -19,7 +20,7 @@ export const axiosApi = axios.create({
     Accept: 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
-  baseURL: 'http://localhost:8000',
+  baseURL: HOST_URL,
 });
 
 export const axiosNoInterceptors = axios.create({
@@ -28,7 +29,7 @@ export const axiosNoInterceptors = axios.create({
     Accept: 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
-  baseURL: 'http://localhost:8000',
+  baseURL: HOST_URL,
 });
 
 axiosApi.interceptors.request.use(

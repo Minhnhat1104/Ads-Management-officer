@@ -14,7 +14,7 @@ export const profileFields: ViewFieldConfig[] = [
     label: 'Họ và Tên',
     value: 'name',
     getValue(value, keyName) {
-      return value?.firstName + value?.lastName;
+      return value?.firstName + ' ' + value?.lastName;
     },
   },
   {

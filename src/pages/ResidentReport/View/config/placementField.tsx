@@ -17,8 +17,4 @@ export const placementFields: ViewFieldConfig[] = [
     label: 'Loại',
     value: 'locationType',
   },
-  {
-    label: 'Trạng thái',
-    value: 'planned',
-  },
 ];

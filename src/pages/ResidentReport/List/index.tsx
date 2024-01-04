@@ -106,7 +106,7 @@ const AdsManagement = (props: AdsManagementProps) => {
       width: 'auto',
     },
     {
-      languageKey: '',
+      languageKey: 'Xem chi tiết',
       keyName: keyNames.KEY_NAME_REPORT_ACTIONS,
       enableSorting: false,
       width: 50,

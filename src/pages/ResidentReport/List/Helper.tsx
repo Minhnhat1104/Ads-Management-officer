@@ -31,7 +31,7 @@ export const getMapColumns = () => {
     [keyNames.KEY_NAME_REPORT_STATE](col: string, data: any) {
       return (
         <>
-          {data?.[col] ? (
+          {data?.[col] === 1 ? (
             <Chip color="success" size="small" label="Đã xử lí" />
           ) : (
             <Chip color="warning" size="small" label="Chưa xử lí" />

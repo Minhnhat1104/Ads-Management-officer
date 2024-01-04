@@ -1,5 +1,6 @@
 import { Box, Chip } from '@mui/material';
 import { ViewFieldConfig } from '../ViewFields';
+import dayjs from 'dayjs';
 
 export const reportFields: ViewFieldConfig[] = [
   {
@@ -23,6 +24,13 @@ export const reportFields: ViewFieldConfig[] = [
     value: 'phone',
   },
   {
+    label: 'Thời điểm gửi báo cáo',
+    value: 'created',
+    getValue(value, keyName) {
+      return value?.[keyName] ? dayjs(value?.[keyName]).format('DD/MM/YYYY') : '';
+    },
+  },
+  {
     label: 'Nội dung',
     value: 'content',
   },
@@ -32,7 +40,7 @@ export const reportFields: ViewFieldConfig[] = [
     getValue(value, keyName) {
       return (
         <>
-          {value?.[keyName] ? (
+          {value?.[keyName] === 1 ? (
             <Chip color="success" size="small" label="Đã xử lí" />
           ) : (
             <Chip color="warning" size="small" label="Chưa xử lí" />
@@ -44,16 +52,22 @@ export const reportFields: ViewFieldConfig[] = [
   {
     label: 'Ảnh 1',
     value: 'firstImage',
+    getValue(value, keyName) {
+      return value?.[keyName] ? value : 'Không có ảnh minh hoạ';
+    },
   },
   {
     label: 'Ảnh 2',
     value: 'secondImage',
+    getValue(value, keyName) {
+      return value?.[keyName] ? value : 'Không có ảnh minh hoạ';
+    },
   },
   {
     label: 'Giải pháp',
     value: 'solution',
     getValue(value, keyName) {
-      return value?.[keyName] ? <Box dangerouslySetInnerHTML={{ __html: value?.[keyName] }} /> : '';
+      return value?.[keyName] ? <Box dangerouslySetInnerHTML={{ __html: value?.[keyName] }} /> : 'Chưa có giải pháp';
     },
   },
 ];

@@ -1,16 +1,17 @@
 import dayjs from 'dayjs';
 import { ViewFieldConfig } from '../ViewFields';
+import { Chip } from '@mui/material';
 
 export const contractFields: ViewFieldConfig[] = [
   {
-    label: 'Phường',
+    label: 'Ngày bắt đầu',
     value: 'startDate',
     getValue(value, keyName) {
       return value?.[keyName] ? dayjs(value?.[keyName]).format('DD/MM/YYYY') : '';
     },
   },
   {
-    label: 'Quận',
+    label: 'Ngày kết thúc',
     value: 'endDate',
     getValue(value, keyName) {
       return value?.[keyName] ? dayjs(value?.[keyName]).format('DD/MM/YYYY') : '';
@@ -19,6 +20,17 @@ export const contractFields: ViewFieldConfig[] = [
   {
     label: 'Trạng thái',
     value: 'state',
+    getValue(value, keyName) {
+      return (
+        <>
+          {value?.[keyName] === 1 ? (
+            <Chip color="success" size="small" label="Đang hoạt động" />
+          ) : (
+            <Chip color="warning" size="small" label="Đã hết hạn" />
+          )}
+        </>
+      );
+    },
   },
   {
     label: 'Tên công ty',

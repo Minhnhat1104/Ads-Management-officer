@@ -1,8 +1,9 @@
-import { Dispatch, useRef, useState } from 'react';
+import { useState } from 'react';
 
-import { Box, Button, Grid, Popover, Stack, Typography, useTheme } from '@mui/material';
+import { Button, IconButton, Stack, useTheme } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-// import WritePage from '../Write';
+import { Refresh } from '@mui/icons-material';
+import { queryKeys } from '@base/config/queryKeys';
 
 interface ToolbarProps {}
 
@@ -12,16 +13,20 @@ const Toolbar = (props: ToolbarProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const border = `1px solid ${theme.palette.divider}`;
+
+  const handleRefresh = () => {
+    queryClient.invalidateQueries([queryKeys.requests]);
+  };
   return (
     <>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 1 }}>
         <Stack></Stack>
-        <Button size="small" variant="contained" sx={{ width: 'fit-content' }} onClick={() => setOpen(true)}>
-          New Request
-        </Button>
+        <Stack direction="row" spacing={1}>
+          <IconButton onClick={handleRefresh} sx={{ border }}>
+            <Refresh fontSize="small" />
+          </IconButton>
+        </Stack>
       </Stack>
-
-      {/* {open && <WritePage isOpen={open} onClose={() => setOpen(false)} />} */}
     </>
   );
 };

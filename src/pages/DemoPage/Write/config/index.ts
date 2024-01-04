@@ -42,10 +42,10 @@ const writeConfig: WriteConfig = {
       options: DEMO_OPTIONS,
     },
   },
-  [keyNames.KEY_NAME_ADS_5]: {
-    languageKey: 'QuillEditor',
-    Component: baseComponents.QuillEditor,
-    defaultValue: '',
+  [keyNames.KEY_NAME_ADS_6]: {
+    languageKey: 'ImageUpload',
+    Component: baseComponents.ImageUpload,
+    defaultValue: null,
     componentProps: {},
   },
 };

@@ -6,3 +6,4 @@ export const CheckBoxGroup = lazy(() => import('@base/components/CheckBoxGroup')
 export const SelectBox = lazy(() => import('@base/components/SelectBox'));
 export const QuillEditor = lazy(() => import('@base/components/QuillEditor'));
 export const ImageList = lazy(() => import('@base/components/ImageList'));
+export const ImageUpload = lazy(() => import('@base/components/ImageUpload'));

@@ -30,6 +30,7 @@ const WritePage = (props: WritePageProps) => {
     keyNames.KEY_NAME_ADS_3,
     keyNames.KEY_NAME_ADS_4,
     keyNames.KEY_NAME_ADS_5,
+    keyNames.KEY_NAME_ADS_6,
   ];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);

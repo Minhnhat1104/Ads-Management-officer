@@ -1,6 +1,10 @@
 export const queryKeys = {
   auth_login: 'auth_login',
 
+  // request
+  requests: 'request_requests',
+  requestStorageImage: 'request_storageImage',
+
   // report
   reports: 'report_reports',
   reportViewByReportId: 'report_reportViewByReportId',

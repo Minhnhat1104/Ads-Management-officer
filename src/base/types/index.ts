@@ -1,5 +1,5 @@
-export interface LabelValue {
-  label: string;
-  value: string;
+export interface LabelValue<T = string, V = string> {
+  label: T;
+  value: V;
   extra?: any;
 }

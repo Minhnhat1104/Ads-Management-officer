@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import { Button, IconButton, Stack, useTheme } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-import { Refresh } from '@mui/icons-material';
+import { Add, Refresh } from '@mui/icons-material';
 import { queryKeys } from '@base/config/queryKeys';
+import WritePage from '../Write';
 
 interface ToolbarProps {}
 
@@ -22,11 +23,16 @@ const Toolbar = (props: ToolbarProps) => {
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 1 }}>
         <Stack></Stack>
         <Stack direction="row" spacing={1}>
+          <Button onClick={() => setOpen(true)} size="small" variant="contained" startIcon={<Add />}>
+            Thêm yêu cầu
+          </Button>
           <IconButton onClick={handleRefresh} sx={{ border }}>
             <Refresh fontSize="small" />
           </IconButton>
         </Stack>
       </Stack>
+
+      {open && <WritePage isOpen={open} onClose={() => setOpen(false)} />}
     </>
   );
 };

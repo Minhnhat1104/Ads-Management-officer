@@ -15,12 +15,13 @@ import { FieldsData, makeTable8Columns } from '@base/components/ReactTable8/Help
 import ListTable, { ListTableProps } from '@base/components/List/ListTable';
 import { ListPaginationProps } from '@base/components/List/ListPagination';
 import { useNavigate } from 'react-router';
-import { useReports } from 'src/hooks/useReports';
 import { useRequests } from 'src/hooks/useRequests';
+import { userRequestMutation } from 'src/hooks/userRequestMutation';
+import { queryKeys } from '@base/config/queryKeys';
 
-interface AdsManagementProps {}
+interface AdsLicenseProps {}
 
-const AdsManagement = (props: AdsManagementProps) => {
+const AdsLicense = (props: AdsLicenseProps) => {
   const {} = props;
   const theme = useTheme();
   const queryClient = useQueryClient();
@@ -37,6 +38,7 @@ const AdsManagement = (props: AdsManagementProps) => {
     limit: paging?.size,
   };
   const { data } = useRequests(params);
+  const { mCancel } = userRequestMutation();
 
   useEffect(() => {
     if (data?.data) {
@@ -52,8 +54,15 @@ const AdsManagement = (props: AdsManagementProps) => {
     console.log(checkedIds);
   };
 
-  const gotoView = (data: any) => {
-    navigate(`/resident-report/${data?.id}`);
+  const cancelRequest = (data: any) => {
+    const params = {
+      id: data?.id,
+    };
+    mCancel.mutate(params, {
+      onSuccess(data, variables, context) {
+        queryClient.invalidateQueries([queryKeys.requests]);
+      },
+    });
   };
 
   //table props
@@ -89,14 +98,26 @@ const AdsManagement = (props: AdsManagementProps) => {
       width: 'auto',
     },
     {
-      languageKey: 'Approver',
+      languageKey: 'Người xử lí',
       keyName: keyNames.KEY_NAME_REQUEST_APPROVER,
       enableSorting: false,
       width: 'auto',
     },
+    {
+      languageKey: 'Email người xử lí',
+      keyName: keyNames.KEY_NAME_REQUEST_APPROVER_EMAIL,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: '',
+      keyName: keyNames.KEY_NAME_REQUEST_ACTIONS,
+      enableSorting: false,
+      width: 50,
+    },
   ];
 
-  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { gotoView }, [])], []);
+  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { cancelRequest }, [])], []);
 
   const handlePagingChange = (page: number, size: number) => {
     const newPaging = { ...paging, page, size };
@@ -146,4 +167,4 @@ const AdsManagement = (props: AdsManagementProps) => {
   );
 };
 
-export default AdsManagement;
+export default AdsLicense;

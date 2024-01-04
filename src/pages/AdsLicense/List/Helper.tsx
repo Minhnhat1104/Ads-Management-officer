@@ -2,7 +2,7 @@ import { Box, Button, Chip, IconButton, Stack, Theme, Tooltip, Typography } from
 import CancelIcon from '@mui/icons-material/Cancel';
 
 import * as keyNames from './keyNames';
-import { Visibility } from '@mui/icons-material';
+import { Close, Visibility } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import { REQUEST_STATUS_OPTIONS } from 'src/constants';
 import { LabelValue } from '@base/types';
@@ -12,15 +12,9 @@ export const getMapColumns = () => {
 
   return {
     [keyNames.KEY_NAME_REQUEST_STATUS](col: string, data: any) {
-      return (
-        <Chip
-          label={
-            REQUEST_STATUS_OPTIONS.find((_option: LabelValue<string, number>) => _option?.value === data?.[col])
-              ?.label || ''
-          }
-          size="small"
-        />
-      );
+      const option =
+        REQUEST_STATUS_OPTIONS.find((_option: LabelValue<string, number>) => _option?.value === data?.[col]) || null;
+      return <Chip label={option?.label || ''} size="small" color={option?.extra || 'secondary'} />;
     },
     [keyNames.KEY_NAME_REQUEST_CREATEDAT](col: string, data: any) {
       return <Typography>{data?.[col] ? dayjs(data?.[col]).format('DD/MM/YYYY HH:mm') : ''}</Typography>;
@@ -35,17 +29,25 @@ export const getMapColumns = () => {
       return <Typography>{data?.requester?.email || ''}</Typography>;
     },
     [keyNames.KEY_NAME_REQUEST_APPROVER](col: string, data: any) {
-      return <Typography>{data?.[col] || ''}</Typography>;
+      return <Typography>{data?.approver?.lastName + ' ' + data?.approver?.firstName || ''}</Typography>;
     },
-
-    // [keyNames.KEY_NAME_REPORT_ACTIONS](col: string, data: any, extra: any) {
-    //   return (
-    //     <Tooltip title="Xem chi tiết" placement="top">
-    //       <IconButton size="small" onClick={() => extra?.gotoView && extra?.gotoView(data)} color="primary">
-    //         <Visibility fontSize="small" />
-    //       </IconButton>
-    //     </Tooltip>
-    //   );
-    // },
+    [keyNames.KEY_NAME_REQUEST_APPROVER_EMAIL](col: string, data: any) {
+      return <Typography>{data?.approver?.email || ''}</Typography>;
+    },
+    [keyNames.KEY_NAME_REQUEST_ACTIONS](col: string, data: any, extra: any) {
+      return (
+        <>
+          {data?.status === 0 ? (
+            <Tooltip title="Hủy yêu cầu" placement="top">
+              <IconButton size="small" onClick={() => extra?.cancelRequest && extra?.cancelRequest(data)} color="error">
+                <Close fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            ''
+          )}
+        </>
+      );
+    },
   };
 };

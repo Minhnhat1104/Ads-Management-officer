@@ -4,6 +4,7 @@ export const queryKeys = {
   // request
   requests: 'request_requests',
   requestStorageImage: 'request_storageImage',
+  requestCancel: 'request_requestCancel',
 
   // report
   reports: 'report_reports',

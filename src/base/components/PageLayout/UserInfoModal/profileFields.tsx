@@ -5,6 +5,10 @@ export const profileFields: ViewFieldConfig[] = [
   {
     label: 'Vai trò',
     value: 'roleName',
+    getValue(value, keyName) {
+      if (value.roleName === 'DEPARTMENT') return 'Cán bộ sở';
+      return 'Cán bộ phường';
+    },
   },
   {
     label: 'Họ và Tên',

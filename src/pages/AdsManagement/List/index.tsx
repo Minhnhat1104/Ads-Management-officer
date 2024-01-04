@@ -75,12 +75,12 @@ const AdsManagement = (props: AdsManagementProps) => {
       enableSorting: false,
       width: 'auto',
     },
-    {
-      languageKey: 'Hình ảnh',
-      keyName: keyNames.KEY_NAME_PLACEMENT_IMAGE,
-      enableSorting: false,
-      width: 'auto',
-    },
+    // {
+    //   languageKey: 'Hình ảnh',
+    //   keyName: keyNames.KEY_NAME_PLACEMENT_IMAGE,
+    //   enableSorting: false,
+    //   width: 'auto',
+    // },
     {
       languageKey: 'Loại Đất',
       keyName: keyNames.KEY_NAME_PLACEMENT_LOCATIONTYPE,

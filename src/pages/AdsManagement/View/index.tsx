@@ -96,7 +96,7 @@ const View = (props: ViewProps) => {
       width: 'auto',
     },
     {
-      languageKey: 'Ngày',
+      languageKey: 'Ngày hết hạn',
       keyName: keyNames.KEY_NAME_ADS_END_DATE,
       enableSorting: false,
       width: 50,

@@ -55,6 +55,10 @@ const AdsManagement = (props: AdsManagementProps) => {
     navigate(`/ads-management/${data?.id}`);
   };
 
+  const handleFilter = (data: any) => {
+    setItems(data);
+  };
+
   //table props
   const fields: FieldsData = [
     {
@@ -145,7 +149,7 @@ const AdsManagement = (props: AdsManagementProps) => {
 
   return (
     <>
-      <Toolbar fields={fields} items={items} />
+      <Toolbar fields={fields} items={items} onHandleFilter={handleFilter} />
       {TableMemo}
     </>
   );

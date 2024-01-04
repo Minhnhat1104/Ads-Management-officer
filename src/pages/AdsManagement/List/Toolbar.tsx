@@ -6,10 +6,13 @@ import WritePage from '../Write';
 import { Refresh } from '@mui/icons-material';
 import { queryKeys } from '@base/config/queryKeys';
 import { FieldsData } from '@base/components/ReactTable8/Helper';
+import SelectBox from '@base/components/SelectBox';
+import { LabelValue } from '@base/types';
 
 interface ToolbarProps {
-  fields: FieldsData;
+  fields: any[];
   items: any[];
+  onHandleFilter: any;
 }
 
 const Toolbar = (props: ToolbarProps) => {
@@ -17,8 +20,9 @@ const Toolbar = (props: ToolbarProps) => {
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
 
-  const [filter, setFilter] = useState();
-  const [valueFilter, setValueFilter] = useState();
+  const [filter, setFilter] = useState<LabelValue | undefined>(undefined);
+  const [valueFilter, setValueFilter] = useState<LabelValue | undefined>(undefined);
+  const [optionsForValueFilter, setOptionsForValueFilter] = useState<LabelValue[]>([]);
 
   const border = `1px solid ${theme.palette.divider}`;
 
@@ -31,39 +35,31 @@ const Toolbar = (props: ToolbarProps) => {
         <Stack direction="row" alignItems="center" minWidth={250} justifyContent="space-between">
           <Stack>
             <InputLabel id="demo-simple-select-label">Title</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+            <SelectBox
               value={filter}
-              label="Age"
-              onChange={() => setFilter(filter)}
-            >
-              {props.fields.map((field, index) => {
-                return (
-                  <MenuItem key={index} value={field.keyName}>
-                    {field.languageKey}
-                  </MenuItem>
-                );
-              })}
-            </Select>
+              placeholder="Click to select..."
+              onChange={(selectedOption) => {
+                console.log(selectedOption);
+                setFilter((prevFilter) => {
+                  const newFilter = { label: selectedOption.label, value: selectedOption.value };
+                  const filterValue = newFilter ? newFilter.value : '';
+                  setOptionsForValueFilter(props.items.map((v) => ({ label: v[filterValue], value: v[filterValue] })));
+                  return newFilter;
+                });
+              }}
+              options={props.fields.map((v) => ({ label: v.languageKey, value: v.keyName }))}
+            ></SelectBox>
           </Stack>
           <Stack>
             <InputLabel id="demo-simple-select-label">Value</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={filter}
-              label="Age"
-              onChange={() => setFilter(filter)}
-            >
-              {props.items.map((field, index) => {
-                return (
-                  <MenuItem key={index} value={2}>
-                    {field.filter}
-                  </MenuItem>
-                );
-              })}
-            </Select>
+            <SelectBox
+              value={valueFilter}
+              placeholder="Click to select..."
+              onChange={(selectedOption) => {
+                setValueFilter({ label: selectedOption.label, value: selectedOption.value });
+              }}
+              options={optionsForValueFilter}
+            ></SelectBox>
           </Stack>
         </Stack>
 

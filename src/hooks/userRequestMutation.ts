@@ -13,22 +13,21 @@ export const userRequestMutation = () => {
     'POST',
     {
       onSuccess: (data: any, variables: any, context: any) => {
-        enqueueSuccessBar('Login Successfully');
+        enqueueSuccessBar('Upload Successfully');
       },
       onError: (error: any, variables: any, context: any) => {
-        enqueueSuccessBar('Login Fail');
+        enqueueSuccessBar('Upload Fail');
       },
     },
     { 'Content-Type': 'multipart/form-data' },
     undefined,
-    undefined,
-    false
+    undefined
   );
 
   const mCancel = useMutation(
     [queryKeys.requestCancel],
     (payload: any) => {
-      return axiosAPI(`requests/cancel/${payload?.id}`, 'POST');
+      return axiosAPI(`requests/cancel/${payload?.id}`, 'DELETE');
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {
@@ -40,5 +39,14 @@ export const userRequestMutation = () => {
     }
   );
 
-  return { mUploadImage, mCancel };
+  const mCreateRequest = useMutationCustom([queryKeys.requestCreate], `requests`, 'POST', {
+    onSuccess: (data: any, variables: any, context: any) => {
+      enqueueSuccessBar('Create Report Successfully');
+    },
+    onError: (error: any, variables: any, context: any) => {
+      enqueueSuccessBar('Create Report Fail');
+    },
+  });
+
+  return { mUploadImage, mCancel, mCreateRequest };
 };

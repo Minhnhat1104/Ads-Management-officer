@@ -13,6 +13,7 @@ import { SET_TIMEOUT } from '@base/config/constants';
 import MiModal from '@base/components/MiModal';
 import LoadingButton from '@base/components/LoadingButton';
 import { userRequestMutation } from 'src/hooks/userRequestMutation';
+import { queryKeys } from '@base/config/queryKeys';
 
 interface WritePageProps {
   title?: string;
@@ -54,7 +55,7 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  const { mUploadImage } = userRequestMutation();
+  const { mUploadImage, mCreateRequest } = userRequestMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -65,24 +66,24 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params); // define add or update here
-    console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
     const paramUpload: any = {
-      file: parsedParams[keyNames.KEY_NAME_REQUEST_IMAGE]?.[0],
+      file: params[keyNames.KEY_NAME_REQUEST_IMAGE]?.[0],
     };
 
     const imageUrl = await mUploadImage.mutateAsync(paramUpload);
-    console.log('🚀 ~ file: index.tsx:74 ~ imageUrl:', imageUrl);
+    parsedParams.image = imageUrl;
+    console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
 
-    // mAdd.mutate(parsedParams, {
-    //   onSuccess(data, variables: any, context) {
-    //     setTimeout(() => {
-    //       queryClient.invalidateQueries([queryKeys.adminResources]);
-    //     }, SET_TIMEOUT);
+    await mCreateRequest.mutateAsync(parsedParams, {
+      onSuccess(data, variables: any, context) {
+        setTimeout(() => {
+          queryClient.invalidateQueries([queryKeys.requests]);
+        }, SET_TIMEOUT);
 
-    //     onClose && onClose();
-    //     reset && reset();
-    //   }
-    // });
+        onClose && onClose();
+        reset && reset();
+      },
+    });
   };
 
   const border = `1px solid ${theme.palette.divider}`;

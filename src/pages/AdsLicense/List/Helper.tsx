@@ -23,13 +23,17 @@ export const getMapColumns = () => {
       return <Typography>{data?.company?.name || ''}</Typography>;
     },
     [keyNames.KEY_NAME_REQUEST_REQUESTER](col: string, data: any) {
-      return <Typography>{data?.requester?.lastName + ' ' + data?.requester?.firstName || ''}</Typography>;
+      return (
+        <Typography>{data?.requester ? data?.requester?.lastName + ' ' + data?.requester?.firstName : ''}</Typography>
+      );
     },
     [keyNames.KEY_NAME_REQUEST_REQUEST_EMAIL](col: string, data: any) {
       return <Typography>{data?.requester?.email || ''}</Typography>;
     },
     [keyNames.KEY_NAME_REQUEST_APPROVER](col: string, data: any) {
-      return <Typography>{data?.approver?.lastName + ' ' + data?.approver?.firstName || ''}</Typography>;
+      return (
+        <Typography>{data?.approver ? data?.approver?.lastName + ' ' + data?.approver?.firstName : ''}</Typography>
+      );
     },
     [keyNames.KEY_NAME_REQUEST_APPROVER_EMAIL](col: string, data: any) {
       return <Typography>{data?.approver?.email || ''}</Typography>;

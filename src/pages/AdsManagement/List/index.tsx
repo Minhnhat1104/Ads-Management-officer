@@ -55,8 +55,19 @@ const AdsManagement = (props: AdsManagementProps) => {
     navigate(`/ads-management/${data?.id}`);
   };
 
-  const handleFilter = (data: any) => {
-    setItems(data);
+  const handleFilter = (label: any, value: any) => {
+    console.log('LIST CHECK: ', label, value);
+    let filteredItems;
+
+    if (label === 'planned' && value === 'Đã quy hoạch') {
+      filteredItems = data?.data.filter((item: { [x: string]: any }) => item[label] === true);
+    } else if (label === 'planned' && value === 'Chưa quy hoạch') {
+      filteredItems = data?.data.filter((item: { [x: string]: any }) => item[label] === false);
+    } else {
+      filteredItems = data?.data.filter((item: { [x: string]: any }) => item[label] === value);
+    }
+
+    setItems(filteredItems);
   };
 
   //table props
@@ -79,12 +90,6 @@ const AdsManagement = (props: AdsManagementProps) => {
       enableSorting: false,
       width: 'auto',
     },
-    // {
-    //   languageKey: 'Hình ảnh',
-    //   keyName: keyNames.KEY_NAME_PLACEMENT_IMAGE,
-    //   enableSorting: false,
-    //   width: 'auto',
-    // },
     {
       languageKey: 'Loại Đất',
       keyName: keyNames.KEY_NAME_PLACEMENT_LOCATIONTYPE,

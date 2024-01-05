@@ -29,6 +29,39 @@ const Toolbar = (props: ToolbarProps) => {
   const handleRefresh = () => {
     queryClient.invalidateQueries([queryKeys.placements]);
   };
+
+  function getUniqueOptions(items: any, filterValue: string) {
+    const uniqueValues = new Set();
+
+    const options = items.map((v: { [x: string]: any }) => {
+      let value;
+      let label;
+
+      if (filterValue === 'planned') {
+        label = v[filterValue] ? 'Đã quy hoạch' : 'Chưa quy hoạch';
+        value = v[filterValue] ? 'Đã quy hoạch' : 'Chưa quy hoạch';
+      } else {
+        label = v[filterValue];
+        value = v[filterValue];
+      }
+
+      return {
+        label: label,
+        value: value,
+      };
+    });
+
+    const uniqueOptions = options.filter((option: { value: unknown }) => {
+      if (uniqueValues.has(option.value)) {
+        return false;
+      }
+      uniqueValues.add(option.value);
+      return true;
+    });
+
+    return uniqueOptions;
+  }
+
   return (
     <>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 1 }}>
@@ -39,11 +72,12 @@ const Toolbar = (props: ToolbarProps) => {
               value={filter}
               placeholder="Click to select..."
               onChange={(selectedOption) => {
-                console.log(selectedOption);
                 setFilter((prevFilter) => {
                   const newFilter = { label: selectedOption.label, value: selectedOption.value };
                   const filterValue = newFilter ? newFilter.value : '';
-                  setOptionsForValueFilter(props.items.map((v) => ({ label: v[filterValue], value: v[filterValue] })));
+                  const uniqueOptions = getUniqueOptions(props.items, filterValue);
+
+                  setOptionsForValueFilter(uniqueOptions);
                   return newFilter;
                 });
               }}
@@ -57,6 +91,7 @@ const Toolbar = (props: ToolbarProps) => {
               placeholder="Click to select..."
               onChange={(selectedOption) => {
                 setValueFilter({ label: selectedOption.label, value: selectedOption.value });
+                props.onHandleFilter(filter?.value, selectedOption.value);
               }}
               options={optionsForValueFilter}
             ></SelectBox>

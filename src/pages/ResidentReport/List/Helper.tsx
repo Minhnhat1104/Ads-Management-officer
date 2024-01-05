@@ -5,11 +5,15 @@ import * as keyNames from './keyNames';
 import { CheckCircle, Visibility } from '@mui/icons-material';
 import WritePage from '../Write';
 import { useState } from 'react';
+import dayjs from 'dayjs';
 
 export const getMapColumns = () => {
   // const [open, setOpen] = useState<boolean>(false);
 
   return {
+    [keyNames.KEY_NAME_REPORT_CREATED](col: string, data: any) {
+      return <Typography>{dayjs(data?.[col]).format('DD/MM/YYYY') || ''}</Typography>;
+    },
     [keyNames.KEY_NAME_REPORT_WARD](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },

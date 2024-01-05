@@ -1,3 +1,4 @@
+export const KEY_NAME_REPORT_CREATED = 'created';
 export const KEY_NAME_REPORT_WARD = 'ward';
 export const KEY_NAME_REPORT_DISTRICT = 'district';
 export const KEY_NAME_REPORT_FIRST_NAME = 'first_name';

@@ -41,6 +41,11 @@ export const getMapColumns = () => {
     [keyNames.KEY_NAME_REQUEST_ACTIONS](col: string, data: any, extra: any) {
       return (
         <>
+          <Tooltip title="Xem chi tiết" placement="top">
+            <IconButton size="small" onClick={() => extra?.cancelRequest && extra?.gotoView(data)} color="primary">
+              <Visibility fontSize="small" />
+            </IconButton>
+          </Tooltip>
           {data?.status === 0 ? (
             <Tooltip title="Hủy yêu cầu" placement="top">
               <IconButton size="small" onClick={() => extra?.cancelRequest && extra?.cancelRequest(data)} color="error">

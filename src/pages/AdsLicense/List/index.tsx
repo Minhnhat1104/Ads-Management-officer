@@ -65,6 +65,10 @@ const AdsLicense = (props: AdsLicenseProps) => {
     });
   };
 
+  const gotoView = (data: any) => {
+    navigate(`/ads-license/${data?.id}`);
+  };
+
   //table props
   const fields: FieldsData = [
     {
@@ -117,7 +121,10 @@ const AdsLicense = (props: AdsLicenseProps) => {
     },
   ];
 
-  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { cancelRequest }, [])], []);
+  const tableColumns = useMemo(
+    () => [...makeTable8Columns(fields, getMapColumns(), { cancelRequest, gotoView }, [])],
+    []
+  );
 
   const handlePagingChange = (page: number, size: number) => {
     const newPaging = { ...paging, page, size };

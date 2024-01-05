@@ -7,6 +7,7 @@ import { placementFields } from './config/placementField';
 import { Stack, Typography } from '@mui/material';
 import { contractFields } from './config/contractFields';
 import Write from '../Write';
+import { advertisementFields } from './config/advertisementFields';
 
 const View = () => {
   const { id } = useParams();
@@ -21,12 +22,32 @@ const View = () => {
       <ViewFields data={data} fieldConfigs={reportFields} />
 
       {/* placement field */}
-      <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Địa điểm</Typography>
-      <ViewFields data={data?.placement} fieldConfigs={placementFields} />
+      {data?.placement !== null ? (
+        <>
+          <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Địa điểm</Typography>
+          <ViewFields data={data?.placement} fieldConfigs={placementFields} />
+        </>
+      ) : null}
+
+      {/* advertisement field */}
+      {data?.advertisement !== null ? (
+        <>
+          <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Bảng quảng cáo</Typography>
+          <ViewFields data={data?.advertisement} fieldConfigs={advertisementFields} />
+        </>
+      ) : (
+        <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Không có bảng quảng cáo</Typography>
+      )}
 
       {/* contract field */}
-      <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Hợp đồng quảng cáo</Typography>
-      <ViewFields data={data?.contract} fieldConfigs={contractFields} />
+      {data?.contract !== null ? (
+        <>
+          <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Hợp đồng quảng cáo</Typography>
+          <ViewFields data={data?.contract} fieldConfigs={contractFields} />
+        </>
+      ) : (
+        <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Không có hợp đồng quảng cáo</Typography>
+      )}
 
       <Write id={id || ''} />
     </Stack>

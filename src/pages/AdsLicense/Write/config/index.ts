@@ -10,35 +10,35 @@ const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_REQUEST_WIDTH]: {
     languageKey: 'Chiều dài',
     Component: TextField,
-    defaultValue: DEMO_OPTIONS[0],
+    defaultValue: 0,
     componentProps: {
       type: 'number',
-      options: DEMO_OPTIONS,
       endAdornment: 'm',
     },
+    validate: (value: any) => value || 'Hãy nhập chiều dài',
   },
   [keyNames.KEY_NAME_REQUEST_HEIGHT]: {
     languageKey: 'Chiều rộng',
     Component: TextField,
-    defaultValue: false,
+    defaultValue: 0,
     componentProps: {
       type: 'number',
     },
+    validate: (value: any) => value || 'Hãy nhập chiều rộng',
   },
   [keyNames.KEY_NAME_REQUEST_IMAGE]: {
     languageKey: 'Hình ảnh',
     Component: baseComponents.ImageUpload,
-    defaultValue: [],
-    componentProps: {
-      options: DEMO_OPTIONS,
-      endAdornment: 'm',
-    },
+    defaultValue: null,
+    componentProps: {},
+    validate: (value: any) => value || 'Hãy thêm hình ảnh',
   },
   [keyNames.KEY_NAME_REQUEST_PLACEMENT]: {
     languageKey: 'Vị trí',
     Component: baseComponents.PlacementSelect,
     defaultValue: null,
     componentProps: {},
+    validate: (value: any) => value || 'Hãy chọn vị trí',
   },
   [keyNames.KEY_NAME_REQUEST_AMOUNT]: {
     languageKey: 'Số lượng',
@@ -47,30 +47,35 @@ const writeConfig: WriteConfig = {
     componentProps: {
       type: 'number',
     },
+    validate: (value: any) => value || 'Hãy nhập số lượng',
   },
   [keyNames.KEY_NAME_REQUEST_ADVERTISING_TYPE]: {
     languageKey: 'Loại quảng cáo',
     Component: baseComponents.AdTypeSelect,
     defaultValue: null,
     componentProps: {},
+    validate: (value: any) => value || 'Hãy chọn loại quảng cáo',
   },
   [keyNames.KEY_NAME_REQUEST_COMPANY]: {
     languageKey: 'Công ty',
-    Component: TextField,
+    Component: baseComponents.CompanySelect,
     defaultValue: null,
     componentProps: {},
+    validate: (value: any) => value || 'Hãy chọn công ty',
   },
   [keyNames.KEY_NAME_REQUEST_START_DATE]: {
     languageKey: 'Ngày bắt đầu',
     Component: baseComponents.DatePicker,
     defaultValue: null,
     componentProps: {},
+    validate: (value: any) => value || 'Hãy chọn ngày bắt đầu',
   },
   [keyNames.KEY_NAME_REQUEST_END_DATE]: {
     languageKey: 'Ngày kết thúc',
     Component: baseComponents.DatePicker,
     defaultValue: null,
     componentProps: {},
+    validate: (value: any) => value || 'Hãy nhập ngày kết thúc',
   },
 };
 

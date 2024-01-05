@@ -10,3 +10,4 @@ export const ImageList = lazy(() => import('@base/components/ImageList'));
 export const ImageUpload = lazy(() => import('@base/components/ImageUpload'));
 export const PlacementSelect = lazy(() => import('@base/components/PlacementSelect'));
 export const AdTypeSelect = lazy(() => import('@base/components/AdTypeSelect'));
+export const CompanySelect = lazy(() => import('@base/components/CompanySelect'));

@@ -1,6 +1,9 @@
 export const queryKeys = {
   auth_login: 'auth_login',
 
+  //company
+  companies: 'company_companies',
+
   // ađvertisement
   adTypes: 'advertisement_adTypes',
 

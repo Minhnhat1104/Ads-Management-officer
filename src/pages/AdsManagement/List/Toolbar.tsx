@@ -28,6 +28,9 @@ const Toolbar = (props: ToolbarProps) => {
 
   const handleRefresh = () => {
     queryClient.invalidateQueries([queryKeys.placements]);
+    props.onHandleFilter();
+    setFilter({ label: '', value: '' });
+    setOptionsForValueFilter([]);
   };
 
   function getUniqueOptions(items: any, filterValue: string) {

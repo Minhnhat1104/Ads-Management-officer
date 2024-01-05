@@ -11,6 +11,7 @@ const ResidentReportView = lazy(() => import('@pages/ResidentReport/View'));
 const AdsManagement = lazy(() => import('@pages/AdsManagement/List'));
 const AdsManagementView = lazy(() => import('@pages/AdsManagement/View'));
 const AdsLicense = lazy(() => import('@pages/AdsLicense'));
+const AdsLicenseView = lazy(() => import('@pages/AdsLicense/View'));
 const Login = lazy(() => import('@pages/Login'));
 
 export const routes: RouteObject[] = [
@@ -45,6 +46,10 @@ export const routes: RouteObject[] = [
       {
         path: 'ads-license',
         element: <AdsLicense />,
+      },
+      {
+        path: 'ads-license/:id',
+        element: <AdsLicenseView />,
       },
       {
         path: 'demo-page',

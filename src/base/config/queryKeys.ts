@@ -9,6 +9,7 @@ export const queryKeys = {
 
   // request
   requests: 'request_requests',
+  requestView: 'request_requestView',
   requestStorageImage: 'request_storageImage',
   requestCancel: 'request_requestCancel',
   requestCreate: 'request_requestCreate',

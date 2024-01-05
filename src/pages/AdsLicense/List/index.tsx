@@ -72,18 +72,6 @@ const AdsLicense = (props: AdsLicenseProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Trạng thái',
-      keyName: keyNames.KEY_NAME_REQUEST_STATUS,
-      enableSorting: false,
-      width: 'auto',
-    },
-    {
-      languageKey: 'Ngày tạo',
-      keyName: keyNames.KEY_NAME_REQUEST_CREATEDAT,
-      enableSorting: false,
-      width: 'auto',
-    },
-    {
       languageKey: 'Công ty',
       keyName: keyNames.KEY_NAME_REQUEST_COMPANY,
       enableSorting: false,
@@ -114,10 +102,22 @@ const AdsLicense = (props: AdsLicenseProps) => {
       width: 'auto',
     },
     {
+      languageKey: 'Ngày tạo',
+      keyName: keyNames.KEY_NAME_REQUEST_CREATEDAT,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Trạng thái',
+      keyName: keyNames.KEY_NAME_REQUEST_STATUS,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
       languageKey: '',
       keyName: keyNames.KEY_NAME_REQUEST_ACTIONS,
       enableSorting: false,
-      width: 50,
+      width: 100,
     },
   ];
 

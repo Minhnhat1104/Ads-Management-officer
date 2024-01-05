@@ -12,6 +12,7 @@ import { getWriteForm } from '@base/utils/getWriteForm';
 import { SET_TIMEOUT } from '@base/config/constants';
 import MiModal from '@base/components/MiModal';
 import LoadingButton from '@base/components/LoadingButton';
+import { userRequestMutation } from 'src/hooks/userRequestMutation';
 
 interface WritePageProps {
   title?: string;
@@ -53,7 +54,7 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  // const { mAdd } = useAdminResourceMutation();
+  const { mUploadImage } = userRequestMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -64,6 +65,14 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params); // define add or update here
+    console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
+    const paramUpload: any = {
+      file: parsedParams[keyNames.KEY_NAME_REQUEST_IMAGE]?.[0],
+    };
+
+    const imageUrl = await mUploadImage.mutateAsync(paramUpload);
+    console.log('🚀 ~ file: index.tsx:74 ~ imageUrl:', imageUrl);
+
     // mAdd.mutate(parsedParams, {
     //   onSuccess(data, variables: any, context) {
     //     setTimeout(() => {

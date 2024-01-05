@@ -9,3 +9,4 @@ export const DatePicker = lazy(() => import('@base/components/DatePicker'));
 export const ImageList = lazy(() => import('@base/components/ImageList'));
 export const ImageUpload = lazy(() => import('@base/components/ImageUpload'));
 export const PlacementSelect = lazy(() => import('@base/components/PlacementSelect'));
+export const AdTypeSelect = lazy(() => import('@base/components/AdTypeSelect'));

@@ -50,7 +50,7 @@ const writeConfig: WriteConfig = {
   },
   [keyNames.KEY_NAME_REQUEST_ADVERTISING_TYPE]: {
     languageKey: 'Loại quảng cáo',
-    Component: TextField,
+    Component: baseComponents.AdTypeSelect,
     defaultValue: null,
     componentProps: {},
   },

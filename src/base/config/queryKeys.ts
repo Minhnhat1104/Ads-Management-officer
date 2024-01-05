@@ -1,6 +1,9 @@
 export const queryKeys = {
   auth_login: 'auth_login',
 
+  // ađvertisement
+  adTypes: 'advertisement_adTypes',
+
   // request
   requests: 'request_requests',
   requestStorageImage: 'request_storageImage',

@@ -27,7 +27,7 @@ export const reportFields: ViewFieldConfig[] = [
     label: 'Thời điểm gửi báo cáo',
     value: 'created',
     getValue(value, keyName) {
-      return value?.[keyName] ? dayjs(value?.[keyName]).format('DD/MM/YYYY') : '';
+      return value?.[keyName] ? dayjs(value?.[keyName]).format('DD/MM/YYYY HH:mm') : '';
     },
   },
   {

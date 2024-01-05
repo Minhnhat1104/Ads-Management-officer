@@ -12,7 +12,7 @@ export const getMapColumns = () => {
 
   return {
     [keyNames.KEY_NAME_REPORT_CREATED](col: string, data: any) {
-      return <Typography>{dayjs(data?.[col]).format('DD/MM/YYYY') || ''}</Typography>;
+      return <Typography>{dayjs(data?.[col]).format('DD/MM/YYYY HH:mm') || ''}</Typography>;
     },
     [keyNames.KEY_NAME_REPORT_WARD](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;

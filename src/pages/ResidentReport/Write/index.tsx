@@ -38,6 +38,7 @@ const Write = (props: WriteProps) => {
 
         setTimeout(() => {
           queryClient.invalidateQueries([queryKeys.reportViewByReportId, id]);
+          queryClient.invalidateQueries([queryKeys.reports]);
         }, SET_TIMEOUT);
       },
     });

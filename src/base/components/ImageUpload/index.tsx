@@ -34,6 +34,7 @@ const ImageUpload = (props: ImageUploadProps) => {
       setFiles(files);
       onChange && onChange(files);
     },
+    multiple: false,
   });
 
   const baseStyle = {

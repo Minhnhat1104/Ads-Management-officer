@@ -17,9 +17,9 @@ import { ListPaginationProps } from '@base/components/List/ListPagination';
 import { useNavigate } from 'react-router';
 import { useReports } from 'src/hooks/useReports';
 
-interface AdsManagementProps {}
+interface ResidentReportProps {}
 
-const AdsManagement = (props: AdsManagementProps) => {
+const ResidentReport = (props: ResidentReportProps) => {
   const {} = props;
   const theme = useTheme();
   const queryClient = useQueryClient();
@@ -169,4 +169,4 @@ const AdsManagement = (props: AdsManagementProps) => {
   );
 };
 
-export default AdsManagement;
+export default ResidentReport;

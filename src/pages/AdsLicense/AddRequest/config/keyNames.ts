@@ -1,0 +1,9 @@
+export const KEY_NAME_REQUEST_WIDTH = 'width';
+export const KEY_NAME_REQUEST_HEIGHT = 'height';
+export const KEY_NAME_REQUEST_IMAGE = 'image';
+export const KEY_NAME_REQUEST_PLACEMENT = 'placementId';
+export const KEY_NAME_REQUEST_AMOUNT = 'amount';
+export const KEY_NAME_REQUEST_ADVERTISING_TYPE = 'advertisingTypeId';
+export const KEY_NAME_REQUEST_COMPANY = 'companyId';
+export const KEY_NAME_REQUEST_START_DATE = 'startDate';
+export const KEY_NAME_REQUEST_END_DATE = 'endDate';

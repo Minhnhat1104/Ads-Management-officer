@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 
 import { Box, Button, Grid, Stack, useTheme } from '@mui/material';
-import ReactMapGL, { GeolocateControl, FullscreenControl, Popup } from '@goongmaps/goong-map-react';
+
 // project
 import { useQueryClient } from '@tanstack/react-query';
 import _ from 'lodash';
@@ -19,9 +19,7 @@ import writeConfig from '../config';
 import WriteFields from '../WriteFields';
 import Toolbar from '../Toolbar';
 import LoadingButton from '@base/components/LoadingButton';
-import { GOONG_MAPTILES_KEY } from 'src/constants/goongmap';
-import Pins from '@pages/Home/Pins';
-import { usePlacements } from 'src/hooks/usePlacements';
+import MiniMap from '../Map';
 
 interface AddRequestProps {}
 
@@ -66,48 +64,6 @@ const AddRequest = (props: AddRequestProps) => {
     mode: 'onChange',
   });
 
-  // MAP
-  const [viewport, setViewport] = useState({
-    width: '100%',
-    height: '100%',
-    latitude: -74.1,
-    longitude: 106.68246,
-    zoom: 16,
-  });
-  const [popupInfo, setPopupInfo] = useState<any>(null);
-  const [boardData, setBoardData] = useState<any>(null);
-  const [locationAds, setLocationAds] = useState<any[]>([]);
-
-  const { data } = usePlacements();
-
-  useEffect(() => {
-    if (data) {
-      setLocationAds(data);
-    } else {
-      setLocationAds([]);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    // Get user's location using browser's Geolocation API
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        // Set the initial viewport state with user location
-        setViewport((prevViewport) => ({
-          ...prevViewport,
-          latitude,
-          longitude,
-          zoom: 12, // set the zoom level as needed
-        }));
-        console.log(latitude, longitude);
-      },
-      (error) => {
-        console.error('Error getting user location:', error);
-      }
-    );
-  }, []);
-
   const { mUploadImage, mCreateRequest } = userRequestMutation();
 
   //when submit error, call this
@@ -143,15 +99,7 @@ const AddRequest = (props: AddRequestProps) => {
     <>
       <Toolbar placementId={''} />
 
-      <ReactMapGL
-        {...viewport}
-        onViewportChange={(nextViewport: any) => setViewport(nextViewport)}
-        goongApiAccessToken={GOONG_MAPTILES_KEY}
-        touchRotate={true}
-        transitionDuration={100}
-      >
-        {locationAds && <Pins data={locationAds} setPopupInfo={setPopupInfo} setBoardData={setBoardData} />}
-      </ReactMapGL>
+      <MiniMap />
 
       <form style={{ height: 300 }}>
         <Suspense fallback={<></>}>

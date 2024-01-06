@@ -23,7 +23,10 @@ const PinItem = (props: PinItemProps) => {
     enabled,
   });
 
+  const [isClicked, setIsClicked] = useState(false);
+
   const handleClick = () => {
+    // setIsClicked((prevIsClicked) => !prevIsClicked);
     onPinItemClick(city);
   };
 
@@ -33,7 +36,11 @@ const PinItem = (props: PinItemProps) => {
         <Avatar
           // onClick={() => onClick(city)}
           alt="QC"
-          sx={{ width: 24, height: 24, bgcolor: isSelected ? deepOrange[500] : theme.palette.primary.main }}
+          sx={{
+            width: 24,
+            height: 24,
+            bgcolor: isSelected ? deepOrange[500] : theme.palette.primary.main,
+          }}
         >
           <Typography fontSize={12}>QC</Typography>
         </Avatar>

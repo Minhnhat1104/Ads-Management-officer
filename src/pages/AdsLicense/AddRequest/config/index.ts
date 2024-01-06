@@ -5,6 +5,7 @@ import { WriteConfig } from '@base/types/common';
 
 import * as keyNames from './keyNames';
 import { DEMO_OPTIONS } from 'src/constants/demo';
+import Button from '@base/themes/overrides/Button';
 
 const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_REQUEST_WIDTH]: {
@@ -63,6 +64,7 @@ const writeConfig: WriteConfig = {
     componentProps: {},
     validate: (value: any) => !!value || 'Hãy chọn công ty',
   },
+
   [keyNames.KEY_NAME_REQUEST_START_DATE]: {
     languageKey: 'Ngày bắt đầu',
     Component: baseComponents.DatePicker,

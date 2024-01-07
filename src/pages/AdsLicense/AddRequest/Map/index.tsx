@@ -11,7 +11,7 @@ const geolocateControlStyle = {
   top: 10,
 };
 
-const MiniMap = () => {
+const MiniMap = (props: any) => {
   // MAP
   const [viewport, setViewport] = useState({
     width: '100%',
@@ -34,7 +34,8 @@ const MiniMap = () => {
 
   const handleSetSelectedPin = (selectedPin: any) => {
     setSelectedPin(selectedPin);
-    console.log('selectedPin:', selectedPin);
+    props.onSelectedPlacement(selectedPin);
+    // console.log('selectedPin:', selectedPin);
   };
 
   useEffect(() => {

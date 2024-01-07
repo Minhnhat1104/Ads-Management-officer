@@ -72,6 +72,7 @@ const WritePage = (props: WritePageProps) => {
 
     const imageUrl = await mUploadImage.mutateAsync(paramUpload);
     parsedParams.image = imageUrl;
+
     console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
 
     await mCreateRequest.mutateAsync(parsedParams, {

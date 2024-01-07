@@ -61,6 +61,8 @@ const WritePage = (props: WritePageProps) => {
     console.log('error', errors, e);
   };
 
+  const place = 'TPHCM';
+
   //submit form
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);

@@ -39,7 +39,7 @@ const AddRequest = (props: AddRequestProps) => {
     keyNames.KEY_NAME_REQUEST_WIDTH,
     keyNames.KEY_NAME_REQUEST_HEIGHT,
     keyNames.KEY_NAME_REQUEST_IMAGE,
-    keyNames.KEY_NAME_REQUEST_PLACEMENT,
+    // keyNames.KEY_NAME_REQUEST_PLACEMENT,
     keyNames.KEY_NAME_REQUEST_AMOUNT,
     keyNames.KEY_NAME_REQUEST_ADVERTISING_TYPE,
     keyNames.KEY_NAME_REQUEST_COMPANY,
@@ -66,6 +66,13 @@ const AddRequest = (props: AddRequestProps) => {
 
   const { mUploadImage, mCreateRequest } = userRequestMutation();
 
+  const [selectedPlacement, setSelectedPlacement] = useState<{ id?: string } | undefined>();
+
+  const handleSetSelectedPlacement = (selectedPlacement: { id?: string } | undefined) => {
+    setSelectedPlacement(selectedPlacement);
+    console.log('selectedPlacement:', selectedPlacement);
+  };
+
   //when submit error, call this
   const onError = (errors: any, e: any) => {
     console.log('error', errors, e);
@@ -81,6 +88,10 @@ const AddRequest = (props: AddRequestProps) => {
 
     const imageUrl = await mUploadImage.mutateAsync(paramUpload);
     parsedParams.image = imageUrl;
+
+    if (selectedPlacement) {
+      parsedParams.placementId = selectedPlacement.id;
+    }
     console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
 
     await mCreateRequest.mutateAsync(parsedParams, {
@@ -99,7 +110,7 @@ const AddRequest = (props: AddRequestProps) => {
     <>
       <Toolbar placementId={''} />
 
-      <MiniMap />
+      <MiniMap onSelectedPlacement={handleSetSelectedPlacement} />
 
       <form style={{ height: 300 }}>
         <Suspense fallback={<></>}>

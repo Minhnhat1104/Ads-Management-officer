@@ -46,15 +46,6 @@ export const getMapColumns = () => {
               <Visibility fontSize="small" />
             </IconButton>
           </Tooltip>
-          {data?.status === 0 ? (
-            <Tooltip title="Hủy yêu cầu" placement="top">
-              <IconButton size="small" onClick={() => extra?.cancelRequest && extra?.cancelRequest(data)} color="error">
-                <Close fontSize="small" />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            ''
-          )}
         </Stack>
       );
     },

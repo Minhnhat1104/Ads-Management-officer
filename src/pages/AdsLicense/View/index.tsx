@@ -18,7 +18,7 @@ const View = () => {
 
   return (
     <>
-      <Toolbar />
+      <Toolbar data={data} />
       <Stack spacing={1} py={1}>
         {/* report field */}
         {/* <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin bảng quảng cáo</Typography> */}
@@ -51,11 +51,13 @@ const View = () => {
           </>
         )}
         {/* approver field */}
-        {data?.requester && (
+        {data?.approver ? (
           <>
-            <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Người Xử lí</Typography>
+            <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Người xử lí</Typography>
             <ViewFields data={data?.approver} fieldConfigs={approverField} />
           </>
+        ) : (
+          <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Chưa có người xử lí</Typography>
         )}
       </Stack>
     </>

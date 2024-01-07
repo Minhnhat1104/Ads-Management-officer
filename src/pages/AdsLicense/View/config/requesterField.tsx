@@ -14,12 +14,15 @@ export const requesterField: ViewFieldConfig[] = [
     value: 'email',
   },
   {
-    label: 'SĐt',
+    label: 'SĐT',
     value: 'phone',
   },
   {
     label: 'Vai trò',
     value: 'roleName',
+    getValue(value, keyName) {
+      return value?.roleName === 'WARD' ? 'Cán bộ phường' : 'Cán bộ sở';
+    },
   },
   {
     label: 'Phường',

@@ -14,7 +14,6 @@ const writeConfig: WriteConfig = {
     defaultValue: 0,
     componentProps: {
       type: 'number',
-      endAdornment: 'm',
     },
     validate: (value: any) => (!!value && value !== '0') || 'Hãy nhập chiều dài và chiều dài phải lớn hơn 0',
   },

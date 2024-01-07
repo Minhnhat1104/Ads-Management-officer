@@ -24,16 +24,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface AddRequestProps {}
 
-interface WritePageProps {
-  title?: string;
-  isOpen: boolean;
-  onClose: () => void;
-  updateData?: any;
-}
-
 const AddRequest = (props: AddRequestProps) => {
-  // const { title, isOpen, onClose, updateData } = props;
-  const updateData = '';
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [
@@ -80,7 +71,6 @@ const AddRequest = (props: AddRequestProps) => {
   //when submit error, call this
   const onError = (errors: any, e: any) => {
     // console.log('error', errors, e);
-    // enqueueErrorBar(errors.response.data.message);
   };
 
   //submit form
@@ -101,7 +91,6 @@ const AddRequest = (props: AddRequestProps) => {
         enqueueErrorBar('Vui lòng chọn vị trí quảng cáo từ bản đồ');
         return;
       }
-      console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
 
       await mCreateRequest.mutateAsync(parsedParams, {
         onSuccess(data, variables: any, context) {
@@ -109,21 +98,19 @@ const AddRequest = (props: AddRequestProps) => {
             queryClient.invalidateQueries([queryKeys.requests]);
           }, SET_TIMEOUT);
 
-          // onClose && onClose();
-          navigate(-1);
+          navigate('/ads-license');
           reset && reset();
         },
       });
     } catch (error: any) {
       // Handle any errors that occur during the submission
       console.log('error:', error);
-      // enqueueErrorBar(error.response.data.message);
     }
   };
 
   return (
     <>
-      <Toolbar placementId={''} />
+      <Toolbar />
       <Box px={2} height={500} mb={2}>
         <InputLabel sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography sx={{ fontWeight: theme.typography.fontWeightMedium }}>{'Điểm đặt'}</Typography>
@@ -134,28 +121,20 @@ const AddRequest = (props: AddRequestProps) => {
       <form style={{ height: 300 }}>
         <Suspense fallback={<></>}>
           <Box padding={2}>
-            <WriteFields
-              fields={fields}
-              watch={watch}
-              setValue={setValue}
-              control={control}
-              errors={errors}
-              isEdit={!!updateData}
-              // updateData={updateData}
-            />
+            <WriteFields fields={fields} watch={watch} setValue={setValue} control={control} errors={errors} />
           </Box>
-          <Stack direction="row" spacing={2} alignItems="center" marginLeft={2} paddingBottom={4}>
+          <Stack direction="row" spacing={2} alignItems="center" justifyContent="flex-end" mr={2} pb={4}>
             <LoadingButton
               size="medium"
               sx={{ paddingLeft: 4, paddingRight: 4 }}
               variant="contained"
-              // loading={mAdd.isLoading}
+              loading={mUploadImage.isLoading || mCreateRequest.isLoading}
               onClick={() => {
                 handleSubmit((data) => onSubmit(data), onError)();
                 // handleSubmit((data) => console.log(data))();
               }}
             >
-              Gửi yêu cầu
+              Tạo yêu cầu cấp phép
             </LoadingButton>
           </Stack>
         </Suspense>

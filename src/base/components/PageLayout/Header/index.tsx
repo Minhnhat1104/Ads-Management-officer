@@ -9,6 +9,8 @@ import { HEADER_HEIGHT } from '@base/config/constants';
 import { useAccount } from 'src/hooks/useAccount';
 import { AuthContext } from '@base/auth/AuthProvider';
 import UserInfoModal from '../UserInfoModal';
+import { useRecoilState } from 'recoil';
+import { profileAtom } from '@base/store/atoms/profileAtom';
 
 const navItems: LabelValue[] = [
   {
@@ -38,6 +40,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { setIsAuthenticated } = useContext(AuthContext);
+  const [profile, setProfile] = useRecoilState(profileAtom);
 
   const [open, setOpen] = useState<boolean>(false);
   const [account, setAccount] = useState<any>();
@@ -47,8 +50,10 @@ const Header = () => {
   useEffect(() => {
     if (data) {
       setAccount(data);
+      setProfile(data);
     } else {
       setAccount(null);
+      setProfile(null);
     }
   }, [data]);
 

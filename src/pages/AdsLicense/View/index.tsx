@@ -21,7 +21,6 @@ const View = () => {
       <Toolbar data={data} />
       <Stack spacing={1} py={1}>
         {/* report field */}
-        {/* <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin bảng quảng cáo</Typography> */}
         <ViewFields data={{ ...data }} fieldConfigs={requestField} />
         {/* report field */}
         <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin bảng quảng cáo</Typography>

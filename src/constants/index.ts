@@ -17,3 +17,17 @@ export const REQUEST_STATUS_OPTIONS: LabelValue<string, number>[] = [
     extra: 'success',
   },
 ];
+
+export const USER_ROLE_DEPARTMENT = 'DEPARTMENT';
+export const USER_ROLE_WARD = 'WARD';
+
+export const USER_ROLE_OPTIONS: LabelValue[] = [
+  {
+    label: 'Cán bộ sở',
+    value: USER_ROLE_DEPARTMENT,
+  },
+  {
+    label: 'Cán bộ phường',
+    value: USER_ROLE_WARD,
+  },
+];

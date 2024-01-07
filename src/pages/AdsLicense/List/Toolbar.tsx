@@ -6,6 +6,9 @@ import { Add, Refresh } from '@mui/icons-material';
 import { queryKeys } from '@base/config/queryKeys';
 import WritePage from '../Write';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { profileAtom } from '@base/store/atoms/profileAtom';
+import { USER_ROLE_WARD } from 'src/constants';
 
 interface ToolbarProps {}
 
@@ -14,6 +17,7 @@ const Toolbar = (props: ToolbarProps) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
+  const profile = useRecoilValue(profileAtom);
 
   const border = `1px solid ${theme.palette.divider}`;
 
@@ -30,12 +34,14 @@ const Toolbar = (props: ToolbarProps) => {
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 1 }}>
         <Stack></Stack>
         <Stack direction="row" spacing={1}>
-          <Button onClick={gotoView} size="small" variant="contained" startIcon={<Add />}>
-            Thêm yêu cầu FINAL
-          </Button>
-          <Button onClick={() => setOpen(true)} size="small" variant="contained" startIcon={<Add />}>
+          {profile?.roleName === USER_ROLE_WARD && (
+            <Button onClick={gotoView} size="small" variant="contained" startIcon={<Add />}>
+              Thêm yêu cầu
+            </Button>
+          )}
+          {/* <Button onClick={() => setOpen(true)} size="small" variant="contained" startIcon={<Add />}>
             Thêm yêu cầu
-          </Button>
+          </Button> */}
           <IconButton onClick={handleRefresh} sx={{ border }}>
             <Refresh fontSize="small" />
           </IconButton>

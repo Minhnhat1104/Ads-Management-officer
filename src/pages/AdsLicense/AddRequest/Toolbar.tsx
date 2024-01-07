@@ -7,9 +7,7 @@ import { Refresh, West } from '@mui/icons-material';
 import { queryKeys } from '@base/config/queryKeys';
 import { useNavigate } from 'react-router';
 
-interface ToolbarProps {
-  placementId: string;
-}
+interface ToolbarProps {}
 
 const Toolbar = (props: ToolbarProps) => {
   const queryClient = useQueryClient();
@@ -26,7 +24,7 @@ const Toolbar = (props: ToolbarProps) => {
   };
 
   const handleBack = () => {
-    navigate(-1);
+    navigate('/ads-license');
   };
 
   return (

@@ -39,6 +39,36 @@ export const userRequestMutation = () => {
     }
   );
 
+  const mAccept = useMutation(
+    [queryKeys.requestCancel],
+    (payload: any) => {
+      return axiosAPI(`requests/${payload?.id}/approve`, 'PUT');
+    },
+    {
+      onSuccess: (data: any, variables: any, context: any) => {
+        enqueueSuccessBar('Accept Successfully');
+      },
+      onError: (error: any, variables: any, context: any) => {
+        enqueueErrorBar('Accept Fail');
+      },
+    }
+  );
+
+  const mDeny = useMutation(
+    [queryKeys.requestCancel],
+    (payload: any) => {
+      return axiosAPI(`requests/${payload?.id}/deny`, 'PUT');
+    },
+    {
+      onSuccess: (data: any, variables: any, context: any) => {
+        enqueueSuccessBar('Deny Successfully');
+      },
+      onError: (error: any, variables: any, context: any) => {
+        enqueueErrorBar('Deny Fail');
+      },
+    }
+  );
+
   const mCreateRequest = useMutationCustom([queryKeys.requestCreate], `requests`, 'POST', {
     onSuccess: (data: any, variables: any, context: any) => {
       enqueueSuccessBar('Create Resquest Successfully');
@@ -48,5 +78,5 @@ export const userRequestMutation = () => {
     },
   });
 
-  return { mUploadImage, mCancel, mCreateRequest };
+  return { mUploadImage, mCancel, mCreateRequest, mAccept, mDeny };
 };

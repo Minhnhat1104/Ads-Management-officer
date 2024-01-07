@@ -14,12 +14,10 @@ interface WriteFieldsProps {
   setValue: UseFormSetValue<any>;
   control: Control<any, any>; //hook-from
   errors: Partial<FieldErrorsImpl<any>>; //hook-from
-  updateData?: any;
-  isEdit: boolean;
 }
 
 const WriteFields = (props: WriteFieldsProps) => {
-  const { fields, watch, setValue, control, errors, updateData } = props;
+  const { fields, watch, setValue, control, errors } = props;
 
   return (
     <Stack spacing={1}>

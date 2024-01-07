@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useEffect, useMemo, useState } from 'react';
-
+import { useSnackBar } from '@base/hooks/useSnackbar';
 import { Box, Button, Grid, Stack, useTheme } from '@mui/material';
 
 // project
@@ -20,6 +20,7 @@ import WriteFields from '../WriteFields';
 import Toolbar from '../Toolbar';
 import LoadingButton from '@base/components/LoadingButton';
 import MiniMap from '../Map';
+import { useNavigate } from 'react-router-dom';
 
 interface AddRequestProps {}
 
@@ -49,6 +50,8 @@ const AddRequest = (props: AddRequestProps) => {
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
+  const { enqueueSuccessBar, enqueueErrorBar } = useSnackBar();
+
   //react-hook
   const {
     handleSubmit,
@@ -72,38 +75,50 @@ const AddRequest = (props: AddRequestProps) => {
     setSelectedPlacement(selectedPlacement);
     console.log('selectedPlacement:', selectedPlacement);
   };
+  const navigate = useNavigate();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
-    console.log('error', errors, e);
+    // console.log('error', errors, e);
+    // enqueueErrorBar(errors.response.data.message);
   };
 
   //submit form
   const onSubmit = async (formData: any) => {
-    const params = getParams(formData);
-    const parsedParams = finalizeParams(params); // define add or update here
-    const paramUpload: any = {
-      file: params[keyNames.KEY_NAME_REQUEST_IMAGE]?.[0],
-    };
+    try {
+      const params = getParams(formData);
+      const parsedParams = finalizeParams(params);
+      const paramUpload: any = {
+        file: params[keyNames.KEY_NAME_REQUEST_IMAGE]?.[0],
+      };
 
-    const imageUrl = await mUploadImage.mutateAsync(paramUpload);
-    parsedParams.image = imageUrl;
+      const imageUrl = await mUploadImage.mutateAsync(paramUpload);
+      parsedParams.image = imageUrl;
 
-    if (selectedPlacement) {
-      parsedParams.placementId = selectedPlacement.id;
+      if (selectedPlacement) {
+        parsedParams.placementId = selectedPlacement.id;
+      } else {
+        enqueueErrorBar('Vui lòng chọn vị trí quảng cáo từ bản đồ');
+        return;
+      }
+      console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
+
+      await mCreateRequest.mutateAsync(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.requests]);
+          }, SET_TIMEOUT);
+
+          // onClose && onClose();
+          navigate(-1);
+          reset && reset();
+        },
+      });
+    } catch (error: any) {
+      // Handle any errors that occur during the submission
+      console.log('error:', error);
+      // enqueueErrorBar(error.response.data.message);
     }
-    console.log('🚀 ~ file: index.tsx:68 ~ parsedParams:', parsedParams);
-
-    await mCreateRequest.mutateAsync(parsedParams, {
-      onSuccess(data, variables: any, context) {
-        setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.requests]);
-        }, SET_TIMEOUT);
-
-        // onClose && onClose();
-        reset && reset();
-      },
-    });
   };
 
   return (
@@ -125,7 +140,7 @@ const AddRequest = (props: AddRequestProps) => {
               // updateData={updateData}
             />
           </Box>
-          <Stack direction="row" spacing={2} alignItems="center" marginLeft={2}>
+          <Stack direction="row" spacing={2} alignItems="center" marginLeft={2} paddingBottom={4}>
             <LoadingButton
               size="medium"
               sx={{ paddingLeft: 4, paddingRight: 4 }}
@@ -136,7 +151,7 @@ const AddRequest = (props: AddRequestProps) => {
                 // handleSubmit((data) => console.log(data))();
               }}
             >
-              Save
+              Gửi yêu cầu
             </LoadingButton>
           </Stack>
         </Suspense>

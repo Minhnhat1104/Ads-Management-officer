@@ -16,7 +16,7 @@ export const userRequestMutation = () => {
         enqueueSuccessBar('Upload Successfully');
       },
       onError: (error: any, variables: any, context: any) => {
-        enqueueSuccessBar('Upload Fail');
+        enqueueErrorBar('Upload Fail');
       },
     },
     { 'Content-Type': 'multipart/form-data' },
@@ -34,17 +34,17 @@ export const userRequestMutation = () => {
         enqueueSuccessBar('Cancel Successfully');
       },
       onError: (error: any, variables: any, context: any) => {
-        enqueueSuccessBar('Cancel Fail');
+        enqueueErrorBar('Cancel Fail');
       },
     }
   );
 
   const mCreateRequest = useMutationCustom([queryKeys.requestCreate], `requests`, 'POST', {
     onSuccess: (data: any, variables: any, context: any) => {
-      enqueueSuccessBar('Create Report Successfully');
+      enqueueSuccessBar('Create Resquest Successfully');
     },
     onError: (error: any, variables: any, context: any) => {
-      enqueueSuccessBar('Create Report Fail');
+      enqueueErrorBar('Create Resquest Fail');
     },
   });
 

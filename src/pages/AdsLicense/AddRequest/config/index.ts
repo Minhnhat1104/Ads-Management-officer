@@ -9,23 +9,23 @@ import Button from '@base/themes/overrides/Button';
 
 const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_REQUEST_WIDTH]: {
-    languageKey: 'Chiều dài',
+    languageKey: 'Chiều dài (m)',
     Component: TextField,
     defaultValue: 0,
     componentProps: {
       type: 'number',
       endAdornment: 'm',
     },
-    validate: (value: any) => !!value || 'Hãy nhập chiều dài',
+    validate: (value: any) => (!!value && value !== '0') || 'Hãy nhập chiều dài và chiều dài phải lớn hơn 0',
   },
   [keyNames.KEY_NAME_REQUEST_HEIGHT]: {
-    languageKey: 'Chiều rộng',
+    languageKey: 'Chiều rộng (m)',
     Component: TextField,
     defaultValue: 0,
     componentProps: {
       type: 'number',
     },
-    validate: (value: any) => !!value || 'Hãy nhập chiều rộng',
+    validate: (value: any) => (!!value && value !== '0') || 'Hãy nhập chiều rộng và chiều rộng phải lớn hơn 0',
   },
   [keyNames.KEY_NAME_REQUEST_IMAGE]: {
     languageKey: 'Hình ảnh',
@@ -64,7 +64,6 @@ const writeConfig: WriteConfig = {
     componentProps: {},
     validate: (value: any) => !!value || 'Hãy chọn công ty',
   },
-
   [keyNames.KEY_NAME_REQUEST_START_DATE]: {
     languageKey: 'Ngày bắt đầu',
     Component: baseComponents.DatePicker,
@@ -77,7 +76,10 @@ const writeConfig: WriteConfig = {
     Component: baseComponents.DatePicker,
     defaultValue: null,
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập ngày kết thúc',
+    validate: (value: any, allValues: any) => {
+      const startDate = allValues[keyNames.KEY_NAME_REQUEST_START_DATE];
+      return (startDate && value && value > startDate) || 'Ngày kết thúc phải lớn hơn ngày bắt đầu';
+    },
   },
 };
 

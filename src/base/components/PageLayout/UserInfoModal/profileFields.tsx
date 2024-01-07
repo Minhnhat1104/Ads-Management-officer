@@ -6,7 +6,7 @@ export const profileFields: ViewFieldConfig[] = [
     label: 'Vai trò',
     value: 'roleName',
     getValue(value, keyName) {
-      if (value.roleName === 'DEPARTMENT') return 'Cán bộ sở';
+      if (value?.roleName === 'DEPARTMENT') return 'Cán bộ sở';
       return 'Cán bộ phường';
     },
   },
@@ -29,7 +29,7 @@ export const profileFields: ViewFieldConfig[] = [
     label: 'Địa bàn',
     value: 'phone',
     getValue(value, keyName) {
-      return value.ward + ', ' + value?.district;
+      return value?.ward + ', ' + value?.district;
     },
   },
 ];

@@ -104,7 +104,7 @@ const WritePage = (props: WritePageProps) => {
                 onClose && onClose();
               }}
             >
-              'Cancel'
+              Hủy
             </Button>
             <LoadingButton
               size="medium"
@@ -114,7 +114,7 @@ const WritePage = (props: WritePageProps) => {
                 handleSubmit((data) => onSubmit(data), onError)();
               }}
             >
-              Save
+              Lưu
             </LoadingButton>
           </Stack>
         </Grid>

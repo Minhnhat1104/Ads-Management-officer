@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { useSnackBar } from '@base/hooks/useSnackbar';
-import { Box, Button, Grid, Stack, useTheme } from '@mui/material';
+import { Box, Button, Grid, InputLabel, Stack, Typography, useTheme } from '@mui/material';
 
 // project
 import { useQueryClient } from '@tanstack/react-query';
@@ -124,8 +124,12 @@ const AddRequest = (props: AddRequestProps) => {
   return (
     <>
       <Toolbar placementId={''} />
-
-      <MiniMap onSelectedPlacement={handleSetSelectedPlacement} />
+      <Box px={2} height={500} mb={2}>
+        <InputLabel sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography sx={{ fontWeight: theme.typography.fontWeightMedium }}>{'Điểm đặt'}</Typography>
+        </InputLabel>
+        <MiniMap onSelectedPlacement={handleSetSelectedPlacement} />
+      </Box>
 
       <form style={{ height: 300 }}>
         <Suspense fallback={<></>}>

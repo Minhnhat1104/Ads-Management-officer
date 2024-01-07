@@ -22,7 +22,7 @@ const Toolbar = (props: ToolbarProps) => {
   const border = `1px solid ${theme.palette.divider}`;
 
   const handleRefresh = () => {
-    queryClient.invalidateQueries([queryKeys.advertisements]);
+    queryClient.invalidateQueries([queryKeys.companies]);
   };
 
   const handleBack = () => {

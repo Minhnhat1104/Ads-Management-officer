@@ -3,6 +3,7 @@ export const queryKeys = {
 
   //company
   companies: 'company_companies',
+  companyCreate: 'company_companyCreate',
 
   // ađvertisement
   adTypes: 'advertisement_adTypes',

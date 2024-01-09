@@ -1,6 +1,11 @@
 export const queryKeys = {
   auth_login: 'auth_login',
 
+  districts: 'advertisement_districts',
+  districtAdd: 'advertisement_districtAdd',
+  districtUpdate: 'advertisement_districtUpdate',
+  districtDelete: 'advertisement_districtDelete',
+
   placementFormats: 'company_placementFormats',
   wards: 'company_wards',
   locationTypes: 'company_locationTypes',

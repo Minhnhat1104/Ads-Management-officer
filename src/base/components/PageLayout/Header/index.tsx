@@ -35,6 +35,17 @@ const navItems: LabelValue[] = [
   },
 ];
 
+export const departmentNavItems: LabelValue[] = [
+  {
+    label: 'District',
+    value: 'district',
+  },
+  {
+    label: 'Ward',
+    value: 'ward',
+  },
+];
+
 const Header = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -73,7 +84,7 @@ const Header = () => {
             py={1}
             marginLeft={3}
           >
-            {navItems.map((_item: LabelValue) => (
+            {navItems.concat(departmentNavItems).map((_item: LabelValue) => (
               <NavLink key={_item.value} to={_item.value} style={{ textDecoration: 'none' }}>
                 {({ isActive, isPending }: any) => {
                   return (

@@ -15,6 +15,8 @@ const AdsLicenseView = lazy(() => import('@pages/AdsLicense/View'));
 const Login = lazy(() => import('@pages/Login'));
 const AddRequest = lazy(() => import('@pages/AdsLicense/AddRequest'));
 
+const District = lazy(() => import('@pages/District/List'));
+
 export const routes: RouteObject[] = [
   {
     path: '*',
@@ -55,6 +57,11 @@ export const routes: RouteObject[] = [
       {
         path: 'ads-license/add-request',
         element: <AddRequest />,
+      },
+      // department role
+      {
+        path: 'district',
+        element: <District />,
       },
       {
         path: 'demo-page',

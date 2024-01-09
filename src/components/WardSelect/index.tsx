@@ -1,7 +1,7 @@
 import SelectBox from '@base/components/SelectBox';
 import { Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useWards } from 'src/hooks/useWards';
+import { useWards } from 'src/hooks/ward/useWards';
 
 interface WardSelectProps {
   value: any;

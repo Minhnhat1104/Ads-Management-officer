@@ -102,9 +102,9 @@ const Toolbar = (props: ToolbarProps) => {
         </Stack>
 
         <Stack direction="row" spacing={1}>
-          <Button size="small" variant="contained" sx={{ width: 'fit-content' }} onClick={() => setOpen(true)}>
+          {/* <Button size="small" variant="contained" sx={{ width: 'fit-content' }} onClick={() => setOpen(true)}>
             Add
-          </Button>
+          </Button> */}
           <IconButton onClick={handleRefresh} sx={{ border }}>
             <Refresh fontSize="small" />
           </IconButton>

@@ -16,6 +16,7 @@ import ListTable, { ListTableProps } from '@base/components/List/ListTable';
 import { usePlacements } from 'src/hooks/usePlacements';
 import { ListPaginationProps } from '@base/components/List/ListPagination';
 import { useNavigate } from 'react-router';
+import PlacementWrite from '../PlacementWrite';
 
 interface AdsManagementProps {}
 
@@ -29,6 +30,7 @@ const AdsManagement = (props: AdsManagementProps) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [items, setItems] = useState<any[]>([]);
   const [paging, setPaging] = useState<{ page: number; size: number }>({ page: 1, size: LIST_TABLE_PAGE_SIZE });
+  const [openEdit, setOpenEdit] = useState<{ open: boolean; data: any }>({ open: false, data: null });
 
   // call data
   const params = {
@@ -53,6 +55,10 @@ const AdsManagement = (props: AdsManagementProps) => {
 
   const gotoView = (data: any) => {
     navigate(`/ads-management/${data?.id}`);
+  };
+
+  const handleEdit = (data: any) => {
+    setOpenEdit({ open: true, data: data });
   };
 
   const handleFilter = (label: any, value: any) => {
@@ -110,7 +116,7 @@ const AdsManagement = (props: AdsManagementProps) => {
     },
   ];
 
-  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { gotoView }, [])], []);
+  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { gotoView, handleEdit }, [])], []);
 
   const handlePagingChange = (page: number, size: number) => {
     const newPaging = { ...paging, page, size };
@@ -156,6 +162,14 @@ const AdsManagement = (props: AdsManagementProps) => {
     <>
       <Toolbar fields={fields} items={items} onHandleFilter={handleFilter} />
       {TableMemo}
+
+      {openEdit.open && (
+        <PlacementWrite
+          isOpen={openEdit.open}
+          onClose={() => setOpenEdit({ open: false, data: null })}
+          updateData={openEdit.data}
+        />
+      )}
     </>
   );
 };

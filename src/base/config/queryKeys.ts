@@ -1,6 +1,9 @@
 export const queryKeys = {
   auth_login: 'auth_login',
 
+  placementFormats: 'company_placementFormats',
+  wards: 'company_wards',
+  locationTypes: 'company_locationTypes',
   //company
   companies: 'company_companies',
   companyCreate: 'company_companyCreate',
@@ -14,6 +17,7 @@ export const queryKeys = {
   requestStorageImage: 'request_storageImage',
   requestCancel: 'request_requestCancel',
   requestCreate: 'request_requestCreate',
+  requestEditPlacement: 'request_requestEditPlacement',
 
   // report
   reports: 'report_reports',

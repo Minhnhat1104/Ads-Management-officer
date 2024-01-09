@@ -2,7 +2,7 @@ import { Box, Button, IconButton, Stack, Theme, Tooltip, Typography } from '@mui
 import CancelIcon from '@mui/icons-material/Cancel';
 
 import * as keyNames from './keyNames';
-import { Visibility } from '@mui/icons-material';
+import { EditOutlined, Visibility } from '@mui/icons-material';
 
 export const getMapColumns = () => {
   return {
@@ -40,11 +40,19 @@ export const getMapColumns = () => {
     },
     [keyNames.KEY_NAME_PLACEMENT_ACTIONS](col: string, data: any, extra: any) {
       return (
-        <Tooltip title="Xem chi tiết" placement="top">
-          <IconButton size="small" onClick={() => extra?.gotoView && extra?.gotoView(data)} color="primary">
-            <Visibility fontSize="small" />
-          </IconButton>
-        </Tooltip>
+        <Stack direction="row" spacing={1}>
+          <Tooltip title="Xem chi tiết" placement="top">
+            <IconButton size="small" onClick={() => extra?.gotoView && extra?.gotoView(data)} color="primary">
+              <Visibility fontSize="small" />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Yêu cầu chỉnh sửa điểm đặt" placement="top">
+            <IconButton size="small" onClick={() => extra?.handleEdit && extra?.handleEdit(data)} color="success">
+              <EditOutlined fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </Stack>
       );
     },
   };

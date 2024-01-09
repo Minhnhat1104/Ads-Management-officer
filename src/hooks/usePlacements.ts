@@ -8,3 +8,10 @@ export const usePlacements = (params?: any, options: any = {}) => {
     ...options,
   });
 };
+
+export const usePlacement = (id: string, options: any = {}) => {
+  return useGet<any>([queryKeys.placementView, id], `placements/detail/${id}`, null, {
+    keepPreviousData: true,
+    ...options,
+  });
+};

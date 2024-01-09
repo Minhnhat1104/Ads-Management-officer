@@ -68,7 +68,7 @@ const Toolbar = (props: ToolbarProps) => {
   return (
     <>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 1 }}>
-        <Stack direction="row" alignItems="center" minWidth={250} justifyContent="space-between">
+        <Stack direction="row" alignItems="center" minWidth={250} spacing={1} justifyContent="space-between">
           <Stack>
             <InputLabel id="demo-simple-select-label">Title</InputLabel>
             <SelectBox

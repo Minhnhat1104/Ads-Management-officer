@@ -16,6 +16,7 @@ import ListTable, { ListTableProps } from '@base/components/List/ListTable';
 import { ListPaginationProps } from '@base/components/List/ListPagination';
 import { useNavigate, useParams } from 'react-router';
 import { useAdvertisements } from 'src/hooks/useAdvertisements';
+import PlacementWrite from '../PlacementWrite';
 
 interface ViewProps {}
 
@@ -31,6 +32,7 @@ const View = (props: ViewProps) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [items, setItems] = useState<any[]>([]);
   const [paging, setPaging] = useState<{ page: number; size: number }>({ page: 1, size: LIST_TABLE_PAGE_SIZE });
+  const [openEdit, setOpenEdit] = useState<{ open: boolean; data: any }>({ open: false, data: null });
 
   // call data
   const params = {
@@ -53,8 +55,8 @@ const View = (props: ViewProps) => {
     console.log(checkedIds);
   };
 
-  const gotoView = (data: any) => {
-    navigate(`/ads-management/${data?.id}`);
+  const handleEdit = (data: any) => {
+    setOpenEdit({ open: true, data: data });
   };
 
   //table props
@@ -99,11 +101,17 @@ const View = (props: ViewProps) => {
       languageKey: 'Ngày hết hạn',
       keyName: keyNames.KEY_NAME_ADS_END_DATE,
       enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: '',
+      keyName: keyNames.KEY_NAME_ADS_END_ACTION,
+      enableSorting: false,
       width: 50,
     },
   ];
 
-  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { gotoView }, [])], []);
+  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { handleEdit }, [])], []);
 
   const handlePagingChange = (page: number, size: number) => {
     const newPaging = { ...paging, page, size };
@@ -149,8 +157,18 @@ const View = (props: ViewProps) => {
     <>
       <Toolbar placementId={placementId || ''} />
       {TableMemo}
+
+      {openEdit && <PlacementWrite isOpen={openEdit.open} onClose={() => setOpenEdit({ open: false, data: null })} />}
     </>
   );
 };
 
 export default View;
+
+// Programing Learning website for kid
+
+// Cloud based storage system based on SeaWeedFS
+
+// Entertainmain Photography software -> Anigan
+
+// android: Entertainmain Photography software -> Anigan

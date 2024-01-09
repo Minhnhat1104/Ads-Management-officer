@@ -19,6 +19,7 @@ import { CircularProgress } from '@mui/material';
 import AuthProvider from '@base/auth/AuthProvider';
 import { routes } from '@base/routes';
 import LinearLoader from './LinearLoader';
+import NotificationContext from 'src/contexts/NotificationContext';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -59,7 +60,9 @@ function App() {
             <LinearLoader />
             <Suspense fallback={<CircularProgress />}>
               <AuthProvider>
-                <Routes>{getRoutes(routes)}</Routes>
+                <NotificationContext>
+                  <Routes>{getRoutes(routes)}</Routes>
+                </NotificationContext>
               </AuthProvider>
             </Suspense>
             <ReactQueryDevtools initialIsOpen={false} />

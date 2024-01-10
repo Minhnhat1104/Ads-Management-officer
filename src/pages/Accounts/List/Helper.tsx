@@ -6,6 +6,8 @@ import { CheckCircle, ClearOutlined, DeleteOutline, DoneOutlined, EditOutlined, 
 import WritePage from '../Write';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import { USER_ROLE_OPTIONS } from 'src/constants';
+import { LabelValue } from '@base/types';
 
 export const getMapColumns = () => {
   // const [open, setOpen] = useState<boolean>(false);
@@ -27,7 +29,9 @@ export const getMapColumns = () => {
       return <Typography>{dayjs(data?.[col]).format('DD/MM/YYYY HH:mm') || ''}</Typography>;
     },
     [keyNames.KEY_NAME_ACCOUNT_ROLE_NAME](col: string, data: any) {
-      return <Typography>{[data?.approver?.lastName, data?.approver?.firstName].join(' ')}</Typography>;
+      return (
+        <Typography>{USER_ROLE_OPTIONS.find((_option: LabelValue) => _option.value === data?.[col])?.label}</Typography>
+      );
     },
     [keyNames.KEY_NAME_ACCOUNT_WARD](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;

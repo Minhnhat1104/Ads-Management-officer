@@ -1,5 +1,6 @@
 export const queryKeys = {
   auth_login: 'auth_login',
+  auth_changePassword: 'auth_changePassword',
 
   // request edit
   requestEdits: 'requestEdits',
@@ -44,4 +45,5 @@ export const queryKeys = {
 
   //account
   accounts: 'account',
+  info: 'account_info',
 };

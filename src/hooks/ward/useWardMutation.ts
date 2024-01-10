@@ -10,7 +10,7 @@ export const useWardMutation = () => {
   const mAdd = useMutation(
     [queryKeys.districtAdd],
     (payload: any) => {
-      return axiosAPI(`ward`, 'POST');
+      return axiosAPI(`ward`, 'POST', payload);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

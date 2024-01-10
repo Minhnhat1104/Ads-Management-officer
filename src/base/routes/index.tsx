@@ -16,6 +16,7 @@ const Login = lazy(() => import('@pages/Login'));
 const AddRequest = lazy(() => import('@pages/AdsLicense/AddRequest'));
 
 const District = lazy(() => import('@pages/District/List'));
+const Ward = lazy(() => import('@pages/Ward/List'));
 
 export const routes: RouteObject[] = [
   {
@@ -62,6 +63,10 @@ export const routes: RouteObject[] = [
       {
         path: 'district',
         element: <District />,
+      },
+      {
+        path: 'ward',
+        element: <Ward />,
       },
       {
         path: 'demo-page',

@@ -13,6 +13,8 @@ const AdsManagementView = lazy(() => import('@pages/AdsManagement/View'));
 const AdsLicense = lazy(() => import('@pages/AdsLicense'));
 const AdsLicenseView = lazy(() => import('@pages/AdsLicense/View'));
 const Login = lazy(() => import('@pages/Login'));
+const DetailInfo = lazy(() => import('@pages/DetailInfo'));
+const ChangePassword = lazy(() => import('@pages/ChangePassword'));
 const AddRequest = lazy(() => import('@pages/AdsLicense/AddRequest'));
 
 export const routes: RouteObject[] = [
@@ -55,6 +57,14 @@ export const routes: RouteObject[] = [
       {
         path: 'ads-license/add-request',
         element: <AddRequest />,
+      },
+      {
+        path: 'detail-info',
+        element: <DetailInfo />,
+      },
+      {
+        path: 'change-password',
+        element: <ChangePassword />,
       },
       {
         path: 'demo-page',

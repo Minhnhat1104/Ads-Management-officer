@@ -23,5 +23,15 @@ export const useAuthMutation = () => {
     false
   );
 
-  return { mLogin };
+  const mChangePassword = useMutationCustom([queryKeys.auth_changePassword], `auth/reset-password`, 'PUT', {
+    onSuccess: (data: any, variables: any, context: any) => {
+      enqueueSuccessBar('Change password Successfully');
+    },
+    onError: (error: any, variables: any, context: any) => {
+      console.log(error);
+      enqueueErrorBar('Change password Fail');
+    },
+  });
+
+  return { mLogin, mChangePassword };
 };

@@ -3,6 +3,8 @@ import React from 'react';
 import MiModal from '@base/components/MiModal';
 import { profileFields } from './profileFields';
 import ViewFields from './ViewFields';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface UserInfoModalProps {
   isOpen: boolean;
@@ -13,20 +15,19 @@ interface UserInfoModalProps {
 const UserInfoModal = (props: UserInfoModalProps) => {
   const { isOpen, onClose, account } = props;
 
+  const navigate = useNavigate();
+
+  const gotoView = (data: any) => {
+    onClose();
+    navigate(`/detail-info`, { state: { account } });
+  };
+
   return (
     <MiModal title={'Thông tin cá nhân'} isOpen={isOpen} onClose={onClose} size="sm">
-      {/* <Stack alignItems="center" justifyContent="center" padding={4}>
-        <Typography style={{ fontSize: 24, fontWeight: 800, padding: 4 }}>{account?.roleName}</Typography>
-        <Typography style={{ fontSize: 18, fontWeight: 600 }}>
-          Họ tên: {account?.firstName + ' ' + account?.lastName}
-        </Typography>
-        <Typography style={{ fontSize: 18, fontWeight: 600, padding: 4 }}>Email: {account?.email}</Typography>
-        <Typography style={{ fontSize: 18, fontWeight: 600, padding: 4 }}>Số điện thoại: {account?.phone}</Typography>
-        <Typography style={{ fontSize: 18, fontWeight: 600, padding: 4 }}>
-          Địa bàn: {account.ward + ', ' + account?.district}
-        </Typography>
-      </Stack> */}
       <ViewFields data={account} fieldConfigs={profileFields} />
+      <Button variant="contained" sx={{ marginTop: 2, marginBottom: 2, marginLeft: 2 }} onClick={gotoView}>
+        Thay đổi thông tin
+      </Button>
     </MiModal>
   );
 };

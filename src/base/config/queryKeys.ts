@@ -1,5 +1,6 @@
 export const queryKeys = {
   auth_login: 'auth_login',
+  auth_changePassword: 'auth_changePassword',
 
   placementFormats: 'company_placementFormats',
   wards: 'company_wards',
@@ -32,4 +33,5 @@ export const queryKeys = {
 
   //account
   accounts: 'account',
+  info: 'account_info',
 };

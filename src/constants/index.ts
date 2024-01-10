@@ -31,3 +31,14 @@ export const USER_ROLE_OPTIONS: LabelValue[] = [
     value: USER_ROLE_WARD,
   },
 ];
+
+export const REQUEST_EDIT_TYPE_OPTIONS: LabelValue[] = [
+  {
+    label: 'Điểm đặt',
+    value: 'placement',
+  },
+  {
+    label: 'Bảng quảng cáo',
+    value: 'advertisement',
+  },
+];

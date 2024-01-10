@@ -6,6 +6,8 @@ import { CheckCircle, ClearOutlined, DoneOutlined, Visibility } from '@mui/icons
 import WritePage from '../Write';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import { LabelValue } from '@base/types';
+import { REQUEST_EDIT_TYPE_OPTIONS } from 'src/constants';
 
 export const getMapColumns = () => {
   // const [open, setOpen] = useState<boolean>(false);
@@ -26,7 +28,11 @@ export const getMapColumns = () => {
       );
     },
     [keyNames.KEY_NAME_REQUEST_TYPE](col: string, data: any) {
-      return <Typography>{data?.[col] || ''}</Typography>;
+      return (
+        <Typography>
+          {REQUEST_EDIT_TYPE_OPTIONS.find((_option: LabelValue) => _option.value === data?.[col])?.label}
+        </Typography>
+      );
     },
     [keyNames.KEY_NAME_REQUEST_REQUESTER](col: string, data: any) {
       return <Typography>{[data?.requester?.lastName, data?.requester?.firstName].join(' ')}</Typography>;

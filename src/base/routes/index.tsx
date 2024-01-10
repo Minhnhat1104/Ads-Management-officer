@@ -17,6 +17,7 @@ const AddRequest = lazy(() => import('@pages/AdsLicense/AddRequest'));
 
 const District = lazy(() => import('@pages/District/List'));
 const Ward = lazy(() => import('@pages/Ward/List'));
+const RequestEdit = lazy(() => import('@pages/RequestEdit/List'));
 
 export const routes: RouteObject[] = [
   {
@@ -67,6 +68,10 @@ export const routes: RouteObject[] = [
       {
         path: 'ward',
         element: <Ward />,
+      },
+      {
+        path: 'request-edit',
+        element: <RequestEdit />,
       },
       {
         path: 'demo-page',

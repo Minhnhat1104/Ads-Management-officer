@@ -14,19 +14,19 @@ import { profileAtom } from '@base/store/atoms/profileAtom';
 
 const navItems: LabelValue[] = [
   {
-    label: '  Home',
+    label: 'Bản đồ',
     value: '/',
   },
   {
-    label: 'Ads Management',
+    label: 'Quản lý quảng cáo',
     value: 'ads-management',
   },
   {
-    label: 'Resident Report',
+    label: 'Quảng lý báo cáo',
     value: 'resident-report',
   },
   {
-    label: 'Ads license',
+    label: 'Yêu cầu cấp phép',
     value: 'ads-license',
   },
   {
@@ -37,12 +37,16 @@ const navItems: LabelValue[] = [
 
 export const departmentNavItems: LabelValue[] = [
   {
-    label: 'District',
+    label: 'Quản lý quận',
     value: 'district',
   },
   {
-    label: 'Ward',
+    label: 'Quản lý phường',
     value: 'ward',
+  },
+  {
+    label: 'Yêu cầu chỉnh sửa',
+    value: 'request-edit',
   },
 ];
 

@@ -16,6 +16,8 @@ import ListTable, { ListTableProps } from '@base/components/List/ListTable';
 import { ListPaginationProps } from '@base/components/List/ListPagination';
 import { useNavigate } from 'react-router';
 import { useRequestEdits } from 'src/hooks/requestEdit/useRequestEdits';
+import { useRequestEditMutation } from 'src/hooks/requestEdit/useRequestEditMutation';
+import { queryKeys } from '@base/config/queryKeys';
 
 interface ResidentReportProps {}
 
@@ -36,6 +38,7 @@ const ResidentReport = (props: ResidentReportProps) => {
     limit: paging?.size,
   };
   const { data } = useRequestEdits(params);
+  const { mPlacementApprove, mPlacementDeny, mAdApprove, mAdDeny } = useRequestEditMutation();
 
   useEffect(() => {
     if (data?.data) {
@@ -53,6 +56,52 @@ const ResidentReport = (props: ResidentReportProps) => {
 
   const gotoView = (data: any) => {
     navigate(`/resident-report/${data?.id}`);
+  };
+
+  const handleApprove = (data: any) => {
+    const params = {
+      id: data?.id,
+    };
+    if (data?.type === 'placement') {
+      mPlacementApprove.mutate(params, {
+        onSuccess(data, variables, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.requestEdits]);
+          }, SET_TIMEOUT);
+        },
+      });
+    } else if (data?.type === 'advertisement') {
+      mPlacementDeny.mutate(params, {
+        onSuccess(data, variables, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.requestEdits]);
+          }, SET_TIMEOUT);
+        },
+      });
+    }
+  };
+
+  const handleDeny = (data: any) => {
+    const params = {
+      id: data?.id,
+    };
+    if (data?.type === 'placement') {
+      mAdApprove.mutate(params, {
+        onSuccess(data, variables, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.requestEdits]);
+          }, SET_TIMEOUT);
+        },
+      });
+    } else if (data?.type === 'advertisement') {
+      mAdDeny.mutate(params, {
+        onSuccess(data, variables, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.requestEdits]);
+          }, SET_TIMEOUT);
+        },
+      });
+    }
   };
 
   //table props
@@ -107,7 +156,10 @@ const ResidentReport = (props: ResidentReportProps) => {
     },
   ];
 
-  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { gotoView }, [])], []);
+  const tableColumns = useMemo(
+    () => [...makeTable8Columns(fields, getMapColumns(), { gotoView, handleApprove, handleDeny }, [])],
+    []
+  );
 
   const handlePagingChange = (page: number, size: number) => {
     const newPaging = { ...paging, page, size };

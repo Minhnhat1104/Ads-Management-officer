@@ -16,7 +16,7 @@ const Toolbar = (props: ToolbarProps) => {
   const border = `1px solid ${theme.palette.divider}`;
 
   const handleRefresh = () => {
-    queryClient.invalidateQueries([queryKeys.reports]);
+    queryClient.invalidateQueries([queryKeys.requestEdits]);
   };
   return (
     <>

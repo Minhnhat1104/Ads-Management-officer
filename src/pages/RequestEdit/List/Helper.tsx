@@ -2,7 +2,7 @@ import { Box, Button, Chip, IconButton, Stack, Theme, Tooltip, Typography } from
 import CancelIcon from '@mui/icons-material/Cancel';
 
 import * as keyNames from './keyNames';
-import { CheckCircle, Visibility } from '@mui/icons-material';
+import { CheckCircle, ClearOutlined, DoneOutlined, Visibility } from '@mui/icons-material';
 import WritePage from '../Write';
 import { useState } from 'react';
 import dayjs from 'dayjs';
@@ -42,15 +42,25 @@ export const getMapColumns = () => {
     },
     [keyNames.KEY_NAME_REQUEST_ACTIONS](col: string, data: any, extra: any) {
       return (
-        <Tooltip title="Xem chi tiết" placement="top">
-          <IconButton
-            size="small"
-            // onClick={() => extra?.gotoView && extra?.gotoView(data)}
-            color="primary"
-          >
-            <Visibility fontSize="small" />
-          </IconButton>
-        </Tooltip>
+        data?.status === 0 && (
+          <Stack direction="row" spacing={1}>
+            <Tooltip title="Chấp nhận" placement="top">
+              <IconButton
+                size="small"
+                onClick={() => extra?.handleApprove && extra?.handleApprove(data)}
+                color="success"
+              >
+                <DoneOutlined fontSize="small" />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Từ chối" placement="top">
+              <IconButton size="small" onClick={() => extra?.handleDeny && extra?.handleDeny(data)} color="error">
+                <ClearOutlined fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          </Stack>
+        )
       );
     },
   };

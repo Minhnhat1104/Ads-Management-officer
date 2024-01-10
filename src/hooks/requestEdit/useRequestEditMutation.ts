@@ -10,8 +10,7 @@ export const useRequestEditMutation = () => {
   const mPlacementApprove = useMutation(
     [queryKeys.requestEditsPlacementsApprove],
     (payload: any) => {
-      const { id, ...others } = payload;
-      return axiosAPI(`requests/edit/placement/approve/${id}`, 'PUT', others);
+      return axiosAPI(`requests/edit/placement/approve/${payload?.id}`, 'PUT');
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {
@@ -26,8 +25,7 @@ export const useRequestEditMutation = () => {
   const mPlacementDeny = useMutation(
     [queryKeys.requestEditsPlacementsApprove],
     (payload: any) => {
-      const { id, ...others } = payload;
-      return axiosAPI(`requests/edit/placement/deny/${id}`, 'PUT', others);
+      return axiosAPI(`requests/edit/placement/deny/${payload?.id}`, 'PUT');
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {
@@ -42,8 +40,7 @@ export const useRequestEditMutation = () => {
   const mAdApprove = useMutation(
     [queryKeys.requestEditsAdsApprove],
     (payload: any) => {
-      const { id, ...others } = payload;
-      return axiosAPI(`requests/edit/advertisement/approve/${id}`, 'PUT', others);
+      return axiosAPI(`requests/edit/advertisement/approve/${payload?.id}`, 'PUT');
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {
@@ -58,8 +55,7 @@ export const useRequestEditMutation = () => {
   const mAdDeny = useMutation(
     [queryKeys.requestEditsAdsDeny],
     (payload: any) => {
-      const { id, ...others } = payload;
-      return axiosAPI(`requests/edit/advertisement/deny/${id}`, 'PUT', others);
+      return axiosAPI(`requests/edit/advertisement/deny/${payload?.id}`, 'PUT');
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

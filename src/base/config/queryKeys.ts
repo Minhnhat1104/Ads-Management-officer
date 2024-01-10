@@ -1,6 +1,13 @@
 export const queryKeys = {
   auth_login: 'auth_login',
 
+  // request edit
+  requestEdits: 'requestEdits',
+  requestEditsPlacementsApprove: 'requestEditsPlacementsApprove',
+  requestEditsPlacementsDeny: 'requestEditsPlacementsDeny',
+  requestEditsAdsApprove: 'requestEditsAdsApprove',
+  requestEditsAdsDeny: 'requestEditsAdsDeny',
+
   districts: 'advertisement_districts',
   districtAdd: 'advertisement_districtAdd',
   districtUpdate: 'advertisement_districtUpdate',

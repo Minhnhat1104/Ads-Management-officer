@@ -6,7 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { HEADER_HEIGHT } from '@base/config/constants';
-import { useAccount } from 'src/hooks/useAccount';
+import { useAccountProfile } from 'src/hooks/useAccountProfile';
 import { AuthContext } from '@base/auth/AuthProvider';
 import UserInfoModal from '../UserInfoModal';
 import { useRecoilState } from 'recoil';
@@ -48,6 +48,10 @@ export const departmentNavItems: LabelValue[] = [
     label: 'Yêu cầu chỉnh sửa',
     value: 'request-edit',
   },
+  {
+    label: 'Quản lý tài khoản cán bộ',
+    value: 'account',
+  },
 ];
 
 const Header = () => {
@@ -60,7 +64,7 @@ const Header = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [account, setAccount] = useState<any>();
 
-  const { data } = useAccount();
+  const { data } = useAccountProfile();
 
   useEffect(() => {
     if (data) {

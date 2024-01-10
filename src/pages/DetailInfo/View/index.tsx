@@ -12,7 +12,7 @@ import { getWriteForm } from '@base/utils/getWriteForm';
 import { SET_TIMEOUT } from '@base/config/constants';
 import LoadingButton from '@base/components/LoadingButton';
 import { queryKeys } from '@base/config/queryKeys';
-import { useAccount } from 'src/hooks/useAccount';
+import { useAccountProfile } from 'src/hooks/useAccountProfile';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { userProfileMutation } from 'src/hooks/userInforMutation';
 import Toolbar from './Toolbar';
@@ -39,7 +39,7 @@ const DetailInfo = (props: WritePageProps) => {
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
   const account = location.state && location.state.account;
-  const { data: viewData } = useAccount();
+  const { data: viewData } = useAccountProfile();
 
   //react-hook-form
   const {

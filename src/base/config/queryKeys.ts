@@ -2,6 +2,12 @@ export const queryKeys = {
   auth_login: 'auth_login',
   auth_changePassword: 'auth_changePassword',
 
+  // account
+  accounts: 'accounts',
+  accountAdd: 'accountAdd',
+  accountDelete: 'accountDelete',
+  accountRoleChange: 'accountRoleChange',
+
   // request edit
   requestEdits: 'requestEdits',
   requestEditsPlacementsApprove: 'requestEditsPlacementsApprove',
@@ -9,41 +15,42 @@ export const queryKeys = {
   requestEditsAdsApprove: 'requestEditsAdsApprove',
   requestEditsAdsDeny: 'requestEditsAdsDeny',
 
-  districts: 'advertisement_districts',
-  districtAdd: 'advertisement_districtAdd',
-  districtUpdate: 'advertisement_districtUpdate',
-  districtDelete: 'advertisement_districtDelete',
+  // district
+  districts: 'districts',
+  districtAdd: 'districtAdd',
+  districtUpdate: 'districtUpdate',
+  districtDelete: 'districtDelete',
 
-  placementFormats: 'company_placementFormats',
-  wards: 'company_wards',
-  locationTypes: 'company_locationTypes',
-  //company
-  companies: 'company_companies',
-  companyCreate: 'company_companyCreate',
+  placementFormats: 'placementFormats',
+  wards: 'wards',
+  locationTypes: 'locationTypes',
+  // company
+  companies: 'companies',
+  companyCreate: 'companyCreate',
 
   // ađvertisement
-  adTypes: 'advertisement_adTypes',
+  adTypes: 'adTypes',
 
   // request
-  requests: 'request_requests',
-  requestView: 'request_requestView',
-  requestStorageImage: 'request_storageImage',
-  requestCancel: 'request_requestCancel',
-  requestCreate: 'request_requestCreate',
-  requestEditPlacement: 'request_requestEditPlacement',
+  requests: 'requests',
+  requestView: 'requestView',
+  requestStorageImage: 'requestStorageImage',
+  requestCancel: 'requestCancel',
+  requestCreate: 'requestCreate',
+  requestEditPlacement: 'requestEditPlacement',
 
   // report
-  reports: 'report_reports',
-  reportViewByReportId: 'report_reportViewByReportId',
+  reports: 'reports',
+  reportViewByReportId: 'reportViewByReportId',
 
   // ads management
-  advertisements: 'ads_advertisements',
+  advertisements: 'advertisements',
 
   // home
   placements: 'home_placements',
   placementView: 'home_placementView',
 
   //account
-  accounts: 'account',
   info: 'account_info',
+  accountProfile: 'accountProfile',
 };

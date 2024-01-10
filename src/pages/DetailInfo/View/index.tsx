@@ -10,13 +10,9 @@ import { finalizeParams } from '../payload';
 import WriteFields from '../WriteFields';
 import { getWriteForm } from '@base/utils/getWriteForm';
 import { SET_TIMEOUT } from '@base/config/constants';
-import MiModal from '@base/components/MiModal';
 import LoadingButton from '@base/components/LoadingButton';
-import { userRequestMutation } from 'src/hooks/userRequestMutation';
 import { queryKeys } from '@base/config/queryKeys';
-import { usePlacement } from 'src/hooks/usePlacements';
 import { useAccount } from 'src/hooks/useAccount';
-import { useWards } from 'src/hooks/useWards';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { userProfileMutation } from 'src/hooks/userInforMutation';
 import Toolbar from './Toolbar';
@@ -44,7 +40,6 @@ const DetailInfo = (props: WritePageProps) => {
 
   const account = location.state && location.state.account;
   const { data: viewData } = useAccount();
-  const { data: viewDataWard } = useWards();
 
   //react-hook-form
   const {

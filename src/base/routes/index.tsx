@@ -19,6 +19,10 @@ const AddRequest = lazy(() => import('@pages/AdsLicense/AddRequest'));
 
 const District = lazy(() => import('@pages/District/List'));
 const Ward = lazy(() => import('@pages/Ward/List'));
+const AdsFormat = lazy(() => import('@pages/AdsFormat/List'));
+const ReportsType = lazy(() => import('@pages/ReportsType/List'));
+const PlacementLocationType = lazy(() => import('@pages/PlacementLocationType/List'));
+const AdvertisementType = lazy(() => import('@pages/AdvertisementsType/List'));
 const RequestEdit = lazy(() => import('@pages/RequestEdit/List'));
 
 export const routes: RouteObject[] = [
@@ -70,6 +74,22 @@ export const routes: RouteObject[] = [
       {
         path: 'ward',
         element: <Ward />,
+      },
+      {
+        path: 'ads-format',
+        element: <AdsFormat />,
+      },
+      {
+        path: 'report-type',
+        element: <ReportsType />,
+      },
+      {
+        path: 'placement-location-type',
+        element: <PlacementLocationType />,
+      },
+      {
+        path: 'advertisement-type',
+        element: <AdvertisementType />,
       },
       {
         path: 'request-edit',

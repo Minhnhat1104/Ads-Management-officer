@@ -56,7 +56,7 @@ const InfoEdit = (props: InfoEditProps) => {
       const newFormData = {
         [keyNames.KEY_NAME_ACCOUNT_ROLE]:
           USER_ROLE_OPTIONS.find((_option) => _option.value === viewData?.roleName) || null,
-        [keyNames.KEY_NAME_ACCOUNT_WARD]: { label: viewData?.ward, value: '' },
+        [keyNames.KEY_NAME_ACCOUNT_WARD]: { label: viewData?.ward, value: viewData?.wardId },
       };
 
       reset && reset(newFormData);

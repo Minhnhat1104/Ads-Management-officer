@@ -21,7 +21,6 @@ export const queryKeys = {
   districtUpdate: 'districtUpdate',
   districtDelete: 'districtDelete',
 
-  placementFormats: 'placementFormats',
   wards: 'wards',
   locationTypes: 'locationTypes',
   // company
@@ -30,6 +29,20 @@ export const queryKeys = {
 
   // ađvertisement
   adTypes: 'adTypes',
+  placementFormats: 'company_placementFormats',
+  placementFormatsAdd: 'company_placementFormatsAdd',
+  placementFormatsUpdate: 'company_placementFormatsUpdate',
+  placementFormatsDelete: 'company_placementFormatsDelete',
+
+  placementLocationType: 'company_placementLocationType',
+  placementLocationTypeAdd: 'company_placementLocationTypeAdd',
+  placementLocationTypeUpdate: 'company_placementLocationTypeUpdate',
+  placementLocationTypeDelete: 'company_placementLocationTypeDelete',
+
+  // ađvertisement
+  adsFormatsAdd: 'advertisement_adsFormatsAdd',
+  adsFormatsUpdate: 'advertisement_adsFormatsUpdate',
+  adsFormatsDelete: 'advertisement_adsFormatsDelete',
 
   // request
   requests: 'requests',
@@ -43,8 +56,18 @@ export const queryKeys = {
   reports: 'reports',
   reportViewByReportId: 'reportViewByReportId',
 
+  //reportsType
+  reportsType: 'reportsType',
+  reportsTypeAdd: 'reportsTypeAdd',
+  reportsTypeUpdate: 'reportsTypeUpdate',
+  reportsTypeDelete: 'reportsTypeDelete',
+
   // ads management
   advertisements: 'advertisements',
+  advertisementsType: 'ads_advertisementsType',
+  advertisementsTypeAdd: 'ads_advertisementsTypeAdd',
+  advertisementsTypeUpdate: 'ads_advertisementsTypeUpdate',
+  advertisementsTypeDelete: 'ads_advertisementsTypeDelete',
 
   // home
   placements: 'home_placements',

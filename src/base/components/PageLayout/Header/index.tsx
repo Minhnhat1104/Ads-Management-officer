@@ -45,6 +45,18 @@ export const departmentNavItems: LabelValue[] = [
     value: 'ward',
   },
   {
+    label: 'Quản lý loại bảng quảng cáo',
+    value: 'ads-format',
+  },
+  {
+    label: 'Quản lý loại hình thức báo cáo',
+    value: 'report-type',
+  },
+  {
+    label: 'Quản lý các điểm đặt quảng cáo',
+    value: 'placement-location-type',
+  },
+  {
     label: 'Yêu cầu chỉnh sửa',
     value: 'request-edit',
   },

@@ -42,8 +42,8 @@ export const getMapColumns = () => {
     [keyNames.KEY_NAME_ACCOUNT_ACTIONS](col: string, data: any, extra: any) {
       return (
         <Stack direction="row" spacing={1}>
-          <Tooltip title="Phân công quản lý" placement="top">
-            <IconButton size="small" onClick={() => extra?.handleApprove && extra?.handleApprove(data)} color="success">
+          <Tooltip title="Cập nhật thông tin" placement="top">
+            <IconButton size="small" onClick={() => extra?.handleEdit && extra?.handleEdit(data)} color="success">
               <EditOutlined fontSize="small" />
             </IconButton>
           </Tooltip>

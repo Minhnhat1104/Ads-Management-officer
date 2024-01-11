@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router';
 import { queryKeys } from '@base/config/queryKeys';
 import { useAccounts } from 'src/hooks/account/useAccounts';
 import { useAccountMutation } from 'src/hooks/account/useAccountMutation';
+import InfoEdit from '../InfoEdit';
 
 interface ListProps {}
 
@@ -31,6 +32,7 @@ const List = (props: ListProps) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [items, setItems] = useState<any[]>([]);
   const [paging, setPaging] = useState<{ page: number; size: number }>({ page: 1, size: LIST_TABLE_PAGE_SIZE });
+  const [openEdit, setOpenEdit] = useState<{ open: boolean; data: any }>({ open: false, data: null });
 
   // call data
   const params = {
@@ -52,6 +54,10 @@ const List = (props: ListProps) => {
   const handleOnChecked = (checkedIds: string[]) => {
     setSelectedIds(checkedIds);
     console.log(checkedIds);
+  };
+
+  const handleEdit = (data: any) => {
+    setOpenEdit({ open: true, data: data });
   };
 
   const handleDelete = (data: any) => {
@@ -125,7 +131,10 @@ const List = (props: ListProps) => {
     },
   ];
 
-  const tableColumns = useMemo(() => [...makeTable8Columns(fields, getMapColumns(), { handleDelete }, [])], []);
+  const tableColumns = useMemo(
+    () => [...makeTable8Columns(fields, getMapColumns(), { handleEdit, handleDelete }, [])],
+    []
+  );
 
   const handlePagingChange = (page: number, size: number) => {
     const newPaging = { ...paging, page, size };
@@ -171,6 +180,14 @@ const List = (props: ListProps) => {
     <>
       <Toolbar />
       {TableMemo}
+
+      {openEdit.open && (
+        <InfoEdit
+          isOpen={openEdit.open}
+          onClose={() => setOpenEdit({ open: false, data: null })}
+          updateData={openEdit.data}
+        />
+      )}
     </>
   );
 };

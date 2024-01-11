@@ -4,6 +4,7 @@ export const queryKeys = {
 
   // account
   accounts: 'accounts',
+  accountView: 'accountView',
   accountAdd: 'accountAdd',
   accountDelete: 'accountDelete',
   accountRoleChange: 'accountRoleChange',

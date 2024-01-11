@@ -8,3 +8,10 @@ export const useAccounts = (params: any, options: any = {}) => {
     ...options,
   });
 };
+
+export const useAccount = (id: any, options: any = {}) => {
+  return useGet<any>([queryKeys.accountView], `accounts/${id}`, null, {
+    keepPreviousData: true,
+    ...options,
+  });
+};

@@ -25,7 +25,8 @@ export const useAccountMutation = () => {
   const mRoleChange = useMutation(
     [queryKeys.accountRoleChange],
     (payload: any) => {
-      return axiosAPI(`accounts/role/${payload?.id}`, 'PATCH', payload);
+      const { id, ...others } = payload;
+      return axiosAPI(`accounts/role/${id}`, 'PATCH', others);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

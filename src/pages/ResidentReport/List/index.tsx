@@ -16,6 +16,7 @@ import ListTable, { ListTableProps } from '@base/components/List/ListTable';
 import { ListPaginationProps } from '@base/components/List/ListPagination';
 import { useNavigate } from 'react-router';
 import { useReports } from 'src/hooks/useReports';
+import { LabelValue } from '@base/types';
 
 interface ResidentReportProps {}
 
@@ -29,9 +30,10 @@ const ResidentReport = (props: ResidentReportProps) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [items, setItems] = useState<any[]>([]);
   const [paging, setPaging] = useState<{ page: number; size: number }>({ page: 1, size: LIST_TABLE_PAGE_SIZE });
-
+  const [ward, setward] = useState<LabelValue | null>(null);
   // call data
   const params = {
+    ward: ward?.value || 'all',
     page: paging?.page,
     limit: paging?.size,
   };
@@ -163,7 +165,7 @@ const ResidentReport = (props: ResidentReportProps) => {
 
   return (
     <>
-      <Toolbar />
+      <Toolbar ward={ward} setward={setward} />
       {TableMemo}
     </>
   );

@@ -116,13 +116,7 @@ const WritePage = (props: WritePageProps) => {
 
   return (
     <>
-      <MiModal
-        title={title ? title : 'Yêu cầu chỉnh sửa điểm đặt'}
-        isOpen={isOpen}
-        footer={Footer}
-        onClose={onClose}
-        size="sm"
-      >
+      <MiModal title={title ? title : 'Xử lí báo cáo'} isOpen={isOpen} footer={Footer} onClose={onClose} size="sm">
         <form>
           <Suspense fallback={<></>}>
             <Box padding={2}>

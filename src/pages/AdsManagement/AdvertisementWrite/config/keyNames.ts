@@ -1,0 +1,10 @@
+export const KEY_NAME_AD_WIDTH = 'width';
+export const KEY_NAME_AD_HEIGHT = 'height';
+export const KEY_NAME_AD_IMAGE = 'image';
+export const KEY_NAME_AD_PLACEMENT_ID = 'placementId';
+export const KEY_NAME_AD_AMOUNT = 'amount';
+export const KEY_NAME_AD_ADVERTISING_TYPE_ID = 'advertisingTypeId';
+export const KEY_NAME_AD_COMPANY_ID = 'companyId';
+export const KEY_NAME_AD_START_DATE = 'startDate';
+export const KEY_NAME_AD_END_DATE = 'endDate';
+export const KEY_NAME_AD_EDIT_REASON = 'editReason';

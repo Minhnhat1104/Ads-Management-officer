@@ -14,9 +14,6 @@ const Toolbar = (props: ToolbarProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  // state
-  const [open, setOpen] = useState<boolean>(false);
-
   const border = `1px solid ${theme.palette.divider}`;
 
   const handleRefresh = () => {

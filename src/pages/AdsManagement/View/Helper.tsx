@@ -42,11 +42,7 @@ export const getMapColumns = () => {
     [keyNames.KEY_NAME_ADS_END_ACTION](col: string, data: any, extra: any) {
       return (
         <Tooltip title="Yêu cầu chỉnh sửa bảng quảng cáo" placement="top">
-          <IconButton
-            size="small"
-            // onClick={() => extra?.handleEdit && extra?.handleEdit(data)}
-            color="success"
-          >
+          <IconButton size="small" onClick={() => extra?.handleEdit && extra?.handleEdit(data)} color="success">
             <EditOutlined fontSize="small" />
           </IconButton>
         </Tooltip>

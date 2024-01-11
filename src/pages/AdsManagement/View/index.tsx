@@ -16,7 +16,7 @@ import ListTable, { ListTableProps } from '@base/components/List/ListTable';
 import { ListPaginationProps } from '@base/components/List/ListPagination';
 import { useNavigate, useParams } from 'react-router';
 import { useAdvertisements } from 'src/hooks/useAdvertisements';
-import PlacementWrite from '../PlacementWrite';
+import AdvertisementWrite from '../AdvertisementWrite';
 
 interface ViewProps {}
 
@@ -158,7 +158,13 @@ const View = (props: ViewProps) => {
       <Toolbar placementId={placementId || ''} />
       {TableMemo}
 
-      {openEdit && <PlacementWrite isOpen={openEdit.open} onClose={() => setOpenEdit({ open: false, data: null })} />}
+      {openEdit?.open && (
+        <AdvertisementWrite
+          isOpen={openEdit.open}
+          onClose={() => setOpenEdit({ open: false, data: null })}
+          updateData={openEdit.data}
+        />
+      )}
     </>
   );
 };

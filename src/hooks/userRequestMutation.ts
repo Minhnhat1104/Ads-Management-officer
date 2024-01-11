@@ -87,5 +87,14 @@ export const userRequestMutation = () => {
     },
   });
 
-  return { mUploadImage, mCancel, mCreateRequest, mAccept, mDeny, mRequestEditPlacement };
+  const mRequestEditAd = useMutationCustom([queryKeys.requestEditPlacement], `requests/edit/advertisement`, 'POST', {
+    onSuccess: (data: any, variables: any, context: any) => {
+      enqueueSuccessBar('Resquest edit advertisement Successfully');
+    },
+    onError: (error: any, variables: any, context: any) => {
+      enqueueErrorBar('Resquest edit advertisement Fail');
+    },
+  });
+
+  return { mUploadImage, mCancel, mCreateRequest, mAccept, mDeny, mRequestEditPlacement, mRequestEditAd };
 };

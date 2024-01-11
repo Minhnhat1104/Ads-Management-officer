@@ -13,3 +13,9 @@ export const useAdvertisements = (params?: any, placementId?: string, opts?: any
     }
   );
 };
+
+export const useAdvertisementDetail = (id?: any, opts?: any) => {
+  return useGet<any>([queryKeys.advertisementView, id], `advertisement/detail/${id}`, null, {
+    ...opts,
+  });
+};

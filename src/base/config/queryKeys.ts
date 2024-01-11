@@ -65,6 +65,7 @@ export const queryKeys = {
 
   // ads management
   advertisements: 'advertisements',
+  advertisementView: 'advertisementView',
   advertisementsType: 'ads_advertisementsType',
   advertisementsTypeAdd: 'ads_advertisementsTypeAdd',
   advertisementsTypeUpdate: 'ads_advertisementsTypeUpdate',

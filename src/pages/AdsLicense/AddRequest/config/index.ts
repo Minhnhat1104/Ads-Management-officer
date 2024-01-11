@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material';
 
 import * as baseComponents from '@base/config/WriteField/components';
+import * as components from 'src/components';
 import { WriteConfig } from '@base/types/common';
 
 import * as keyNames from './keyNames';
@@ -8,6 +9,13 @@ import { DEMO_OPTIONS } from 'src/constants/demo';
 import Button from '@base/themes/overrides/Button';
 
 const writeConfig: WriteConfig = {
+  [keyNames.KEY_NAME_REQUEST_MAP]: {
+    languageKey: 'Điểm đặt',
+    Component: components.MiniMap,
+    defaultValue: null,
+    componentProps: {},
+    validate: (value: any) => (!!value && value !== '0') || 'Hãy chọn điểm đặt',
+  },
   [keyNames.KEY_NAME_REQUEST_WIDTH]: {
     languageKey: 'Chiều dài (m)',
     Component: TextField,

@@ -11,7 +11,11 @@ const geolocateControlStyle = {
   top: 10,
 };
 
-const MiniMap = (props: any) => {
+interface MiniMapProps {
+  onChange: any;
+}
+
+const MiniMap = (props: MiniMapProps) => {
   // MAP
   const [viewport, setViewport] = useState({
     width: '100%',
@@ -34,7 +38,7 @@ const MiniMap = (props: any) => {
 
   const handleSetSelectedPin = (selectedPin: any) => {
     setSelectedPin(selectedPin);
-    props.onSelectedPlacement(selectedPin);
+    props.onChange(selectedPin);
     // console.log('selectedPin:', selectedPin);
   };
 
@@ -72,6 +76,7 @@ const MiniMap = (props: any) => {
       goongApiAccessToken={GOONG_MAPTILES_KEY}
       touchRotate={true}
       transitionDuration={100}
+      height={500}
     >
       <ControlPanel viewport={viewport} onViewportChange={handleViewportChange} selectedPin={selectedPin} />
 

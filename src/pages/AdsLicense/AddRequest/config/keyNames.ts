@@ -1,3 +1,4 @@
+export const KEY_NAME_REQUEST_MAP = 'map';
 export const KEY_NAME_REQUEST_WIDTH = 'width';
 export const KEY_NAME_REQUEST_HEIGHT = 'height';
 export const KEY_NAME_REQUEST_IMAGE = 'image';

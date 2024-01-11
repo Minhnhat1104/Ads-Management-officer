@@ -24,7 +24,8 @@ export const useAdsFormatMutation = () => {
   const mUpdate = useMutation(
     [queryKeys.placementFormatsUpdate],
     (payload: any) => {
-      return axiosAPI(`placements/format/${payload?.id}`, 'PATCH');
+      const { id, ...others } = payload;
+      return axiosAPI(`placements/format/${id}`, 'PATCH', others);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

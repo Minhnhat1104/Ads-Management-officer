@@ -21,7 +21,12 @@ export const queryKeys = {
   districtUpdate: 'districtUpdate',
   districtDelete: 'districtDelete',
 
+  // ward
   wards: 'wards',
+  wardAdd: 'wardAdd',
+  wardUpdate: 'wardUpdate',
+  wardDelete: 'wardDelete',
+
   locationTypes: 'locationTypes',
   // company
   companies: 'companies',

@@ -24,7 +24,8 @@ export const useAdvertisementsTypeMutation = () => {
   const mUpdate = useMutation(
     [queryKeys.advertisementsTypeUpdate],
     (payload: any) => {
-      return axiosAPI(`advertisement/type/${payload?.id}`, 'PATCH');
+      const { id, ...others } = payload;
+      return axiosAPI(`advertisement/type/${id}`, 'PATCH', others);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

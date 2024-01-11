@@ -26,7 +26,6 @@ interface WritePageProps {
 
 const WritePage = (props: WritePageProps) => {
   const { title, isOpen, onClose, updateData } = props;
-  console.log('🚀 ~ updateData:', updateData);
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_NAME];
@@ -48,7 +47,17 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  const { mAdd } = usePlacementLocationTypeMutation();
+  useEffect(() => {
+    if (updateData) {
+      const newFormData = {
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_NAME]: updateData?.name,
+      };
+
+      reset && reset(newFormData);
+    }
+  }, [updateData]);
+
+  const { mAdd, mUpdate } = usePlacementLocationTypeMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -59,16 +68,30 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
-    mAdd.mutate(parsedParams, {
-      onSuccess(data, variables: any, context) {
-        setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.placementLocationType]);
-        }, SET_TIMEOUT);
 
-        onClose && onClose();
-        reset && reset();
-      },
-    });
+    if (updateData) {
+      mUpdate.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.placementLocationType]);
+          }, SET_TIMEOUT);
+
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    } else {
+      mAdd.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.placementLocationType]);
+          }, SET_TIMEOUT);
+
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    }
   };
 
   const border = `1px solid ${theme.palette.divider}`;
@@ -98,7 +121,7 @@ const WritePage = (props: WritePageProps) => {
                 handleSubmit((data) => onSubmit(data), onError)();
               }}
             >
-              Tạo
+              {updateData ? 'Cập nhật' : 'Thêm'}
             </LoadingButton>
           </Stack>
         </Grid>
@@ -109,7 +132,7 @@ const WritePage = (props: WritePageProps) => {
   return (
     <>
       <MiModal
-        title={title ? title : 'Thêm điểm đặt quảng cáo'}
+        title={updateData ? 'Cập nhật điểm đặt quảng cáo' : 'Thêm điểm đặt quảng cáo'}
         isOpen={isOpen}
         footer={Footer}
         onClose={onClose}

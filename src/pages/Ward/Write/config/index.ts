@@ -14,14 +14,14 @@ const writeConfig: WriteConfig = {
     Component: components.DistrictSelect,
     defaultValue: null,
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên quận',
+    validate: (value: any) => !!value || 'Hãy nhập tên phường',
   },
   [keyNames.KEY_NAME_WARD_NAME]: {
     languageKey: 'Tên Phường',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên quận',
+    validate: (value: any) => !!value || 'Hãy nhập tên phường',
   },
 };
 

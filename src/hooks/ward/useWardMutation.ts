@@ -8,7 +8,7 @@ export const useWardMutation = () => {
   const { enqueueSuccessBar, enqueueErrorBar } = useSnackBar();
 
   const mAdd = useMutation(
-    [queryKeys.districtAdd],
+    [queryKeys.wardAdd],
     (payload: any) => {
       return axiosAPI(`ward`, 'POST', payload);
     },
@@ -23,9 +23,10 @@ export const useWardMutation = () => {
   );
 
   const mUpdate = useMutation(
-    [queryKeys.districtUpdate],
+    [queryKeys.wardUpdate],
     (payload: any) => {
-      return axiosAPI(`ward/${payload?.id}`, 'PATCH');
+      const { id, ...others } = payload;
+      return axiosAPI(`ward/${id}`, 'PATCH', others);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {
@@ -38,7 +39,7 @@ export const useWardMutation = () => {
   );
 
   const mDelete = useMutation(
-    [queryKeys.districtDelete],
+    [queryKeys.wardDelete],
     (payload: any) => {
       return axiosAPI(`ward/${payload?.id}`, 'DELETE');
     },

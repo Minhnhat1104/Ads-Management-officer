@@ -52,7 +52,17 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  const { mAdd } = useAdvertisementsTypeMutation();
+  useEffect(() => {
+    if (updateData) {
+      const newFormData = {
+        [keyNames.KEY_NAME_ADVERTISEMENT_TYPE_NAME]: updateData?.name,
+      };
+
+      reset && reset(newFormData);
+    }
+  }, [updateData]);
+
+  const { mAdd, mUpdate } = useAdvertisementsTypeMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -63,16 +73,29 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
-    mAdd.mutate(parsedParams, {
-      onSuccess(data, variables: any, context) {
-        setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.advertisementsType]);
-        }, SET_TIMEOUT);
+    if (updateData) {
+      mUpdate.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.advertisementsType]);
+          }, SET_TIMEOUT);
 
-        onClose && onClose();
-        reset && reset();
-      },
-    });
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    } else {
+      mAdd.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.advertisementsType]);
+          }, SET_TIMEOUT);
+
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    }
   };
 
   const border = `1px solid ${theme.palette.divider}`;
@@ -102,7 +125,7 @@ const WritePage = (props: WritePageProps) => {
                 handleSubmit((data) => onSubmit(data), onError)();
               }}
             >
-              Tạo
+              {updateData ? 'Cập nhật' : 'Thêm'}
             </LoadingButton>
           </Stack>
         </Grid>
@@ -113,7 +136,7 @@ const WritePage = (props: WritePageProps) => {
   return (
     <>
       <MiModal
-        title={title ? title : 'Thêm loại bảng quảng cáo'}
+        title={!updateData ? 'Thêm loại bảng quảng cáo' : 'Cập nhật loại bảng quảng cáo'}
         isOpen={isOpen}
         footer={Footer}
         onClose={onClose}

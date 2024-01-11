@@ -69,6 +69,7 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
+    console.log('🚀 ~ parsedParams:', parsedParams);
     if (updateData) {
       mUpdate.mutate(parsedParams, {
         onSuccess(data, variables: any, context) {
@@ -121,7 +122,7 @@ const WritePage = (props: WritePageProps) => {
                 handleSubmit((data) => onSubmit(data), onError)();
               }}
             >
-              {updateData ? 'Cập nhật' : 'Tạo'}
+              {updateData ? 'Cập nhật' : 'Thêm'}
             </LoadingButton>
           </Stack>
         </Grid>

@@ -24,7 +24,9 @@ export const usePlacementLocationTypeMutation = () => {
   const mUpdate = useMutation(
     [queryKeys.placementLocationTypeUpdate],
     (payload: any) => {
-      return axiosAPI(`placements/location-type/${payload?.id}`, 'PATCH');
+      const { id, ...others } = payload;
+      console.log('payload', payload);
+      return axiosAPI(`placements/location-type/${id}`, 'PATCH', others);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

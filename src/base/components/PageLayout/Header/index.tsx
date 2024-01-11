@@ -11,6 +11,8 @@ import { AuthContext } from '@base/auth/AuthProvider';
 import UserInfoModal from '../UserInfoModal';
 import { useRecoilState } from 'recoil';
 import { profileAtom } from '@base/store/atoms/profileAtom';
+import DepartmentItems from './DepartmentItems';
+import { USER_ROLE_DEPARTMENT } from 'src/constants';
 
 const navItems: LabelValue[] = [
   {
@@ -29,41 +31,10 @@ const navItems: LabelValue[] = [
     label: 'Yêu cầu cấp phép',
     value: 'ads-license',
   },
-  {
-    label: 'Demo Page',
-    value: 'demo-page',
-  },
-];
-
-export const departmentNavItems: LabelValue[] = [
-  {
-    label: 'Quản lý quận',
-    value: 'district',
-  },
-  {
-    label: 'Quản lý phường',
-    value: 'ward',
-  },
-  {
-    label: 'Quản lý loại bảng quảng cáo',
-    value: 'ads-format',
-  },
-  {
-    label: 'Quản lý loại hình thức báo cáo',
-    value: 'report-type',
-  },
-  {
-    label: 'Quản lý các điểm đặt quảng cáo',
-    value: 'placement-location-type',
-  },
-  {
-    label: 'Yêu cầu chỉnh sửa',
-    value: 'request-edit',
-  },
-  {
-    label: 'Quản lý tài khoản cán bộ',
-    value: 'account',
-  },
+  // {
+  //   label: 'Demo Page',
+  //   value: 'demo-page',
+  // },
 ];
 
 const Header = () => {
@@ -104,7 +75,7 @@ const Header = () => {
             py={1}
             marginLeft={3}
           >
-            {navItems.concat(departmentNavItems).map((_item: LabelValue) => (
+            {navItems.map((_item: LabelValue) => (
               <NavLink key={_item.value} to={_item.value} style={{ textDecoration: 'none' }}>
                 {({ isActive, isPending }: any) => {
                   return (
@@ -122,6 +93,7 @@ const Header = () => {
                 }}
               </NavLink>
             ))}
+            {profile?.roleName === USER_ROLE_DEPARTMENT && <DepartmentItems />}
           </Stack>
         </Grid>
         <Grid item xs={4}>

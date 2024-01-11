@@ -6,16 +6,10 @@ import { useReportByReportId } from 'src/hooks/useReportByReportId';
 import { placementFields } from './config/placementField';
 import { Stack, Typography } from '@mui/material';
 import { contractFields } from './config/contractFields';
-import Write from '../Write/index2';
 import { advertisementFields } from './config/advertisementFields';
 import Toolbar from './Toolbar';
-import { useRecoilValue } from 'recoil';
-import { profileAtom } from '@base/store/atoms/profileAtom';
-import { USER_ROLE_DEPARTMENT, USER_ROLE_WARD } from 'src/constants';
-
 const View = () => {
   const { id } = useParams();
-  const profile = useRecoilValue(profileAtom);
 
   // const { data } = useReportByReportId(id);
   const { data } = useReportByReportId(id);
@@ -52,7 +46,6 @@ const View = () => {
         ) : (
           <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Không có hợp đồng quảng cáo</Typography>
         )}
-        {profile?.roleName === USER_ROLE_WARD && <Write id={id || ''} />}
       </Stack>
     </>
   );

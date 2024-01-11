@@ -1,6 +1,8 @@
 import { Box, Chip, Typography } from '@mui/material';
 import { ViewFieldConfig } from '../ViewFields';
 import dayjs from 'dayjs';
+import { REPORT_STATUS_OPTIONS } from 'src/constants';
+import { LabelValue } from '@base/types';
 
 export const reportFields: ViewFieldConfig[] = [
   {
@@ -45,15 +47,10 @@ export const reportFields: ViewFieldConfig[] = [
     label: 'Trạng thái',
     value: 'state',
     getValue(value, keyName) {
-      return (
-        <>
-          {value?.[keyName] === 1 ? (
-            <Chip color="success" size="small" label="Đã xử lí" />
-          ) : (
-            <Chip color="warning" size="small" label="Chưa xử lí" />
-          )}
-        </>
-      );
+      const option =
+        REPORT_STATUS_OPTIONS.find((_option: LabelValue<string, number>) => _option?.value === value?.[keyName]) ||
+        null;
+      return <Chip label={option?.label || ''} size="small" color={option?.extra || 'secondary'} />;
     },
   },
   {

@@ -4,6 +4,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import * as keyNames from './keyNames';
 import { CheckCircle, Visibility } from '@mui/icons-material';
 import dayjs from 'dayjs';
+import { REPORT_STATUS_OPTIONS } from 'src/constants';
+import { LabelValue } from '@base/types';
 
 export const getMapColumns = () => {
   // const [open, setOpen] = useState<boolean>(false);
@@ -31,15 +33,9 @@ export const getMapColumns = () => {
       return <Typography>{data?.[col] || ''}</Typography>;
     },
     [keyNames.KEY_NAME_REPORT_STATE](col: string, data: any) {
-      return (
-        <>
-          {data?.[col] === 1 ? (
-            <Chip color="success" size="small" label="Đã xử lí" />
-          ) : (
-            <Chip color="warning" size="small" label="Chưa xử lí" />
-          )}
-        </>
-      );
+      const option =
+        REPORT_STATUS_OPTIONS.find((_option: LabelValue<string, number>) => _option?.value === data?.[col]) || null;
+      return <Chip label={option?.label || ''} size="small" color={option?.extra || 'secondary'} />;
     },
     [keyNames.KEY_NAME_REPORT_TYPE](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;

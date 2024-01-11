@@ -42,3 +42,21 @@ export const REQUEST_EDIT_TYPE_OPTIONS: LabelValue[] = [
     value: 'advertisement',
   },
 ];
+
+export const REPORT_STATUS_OPTIONS: LabelValue<string, number>[] = [
+  {
+    label: 'Chưa xử lý',
+    value: -1,
+    extra: 'secondary',
+  },
+  {
+    label: 'Đang xử lý',
+    value: 0,
+    extra: 'primary',
+  },
+  {
+    label: 'Đã xử lý',
+    value: 1,
+    extra: 'success',
+  },
+];

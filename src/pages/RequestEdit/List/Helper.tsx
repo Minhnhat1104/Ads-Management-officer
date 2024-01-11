@@ -7,7 +7,7 @@ import WritePage from '../Write';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import { LabelValue } from '@base/types';
-import { REQUEST_EDIT_TYPE_OPTIONS } from 'src/constants';
+import { REPORT_STATUS_OPTIONS, REQUEST_EDIT_TYPE_OPTIONS } from 'src/constants';
 
 export const getMapColumns = () => {
   // const [open, setOpen] = useState<boolean>(false);
@@ -17,15 +17,9 @@ export const getMapColumns = () => {
       return <Typography>{dayjs(data?.[col]).format('DD/MM/YYYY HH:mm') || ''}</Typography>;
     },
     [keyNames.KEY_NAME_REQUEST_STATUS](col: string, data: any) {
-      return (
-        <>
-          {data?.[col] === 1 ? (
-            <Chip color="success" size="small" label="Đã xử lí" />
-          ) : (
-            <Chip color="warning" size="small" label="Chưa xử lí" />
-          )}
-        </>
-      );
+      const option =
+        REPORT_STATUS_OPTIONS.find((_option: LabelValue<string, number>) => _option?.value === data?.[col]) || null;
+      return <Chip label={option?.label || ''} size="small" color={option?.extra || 'secondary'} />;
     },
     [keyNames.KEY_NAME_REQUEST_TYPE](col: string, data: any) {
       return (

@@ -5,23 +5,14 @@ import { useSnackBar } from '@base/hooks/useSnackbar';
 export const useReportMutation = (id: string) => {
   const { enqueueSuccessBar, enqueueErrorBar } = useSnackBar();
 
-  const mSave = useMutationCustom(
-    [queryKeys.auth_login],
-    `reports/${id}`,
-    'PATCH',
-    {
-      onSuccess: (data: any, variables: any, context: any) => {
-        enqueueSuccessBar('Login Successfully');
-      },
-      onError: (error: any, variables: any, context: any) => {
-        enqueueSuccessBar('Login Fail');
-      },
+  const mSave = useMutationCustom([queryKeys.auth_login], `reports/${id}`, 'PATCH', {
+    onSuccess: (data: any, variables: any, context: any) => {
+      enqueueSuccessBar('Update Successfully');
     },
-    undefined,
-    undefined,
-    undefined,
-    false
-  );
+    onError: (error: any, variables: any, context: any) => {
+      enqueueSuccessBar('Update Fail');
+    },
+  });
 
   return { mSave };
 };

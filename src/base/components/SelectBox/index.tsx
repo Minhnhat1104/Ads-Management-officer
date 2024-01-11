@@ -72,8 +72,8 @@ const SelectBox = (props: SelectBoxProps) => {
         '& .MuiSelect-iconOutlined': { display: useClear && selectedValue ? 'none' : '' },
         '&.Mui-focused .MuiIconButton-root': { color: 'primary.main' },
       }}
-      renderValue={(value) => {
-        return value ? (
+      renderValue={(value: any) => {
+        return value || value === 0 ? (
           <SpanLang keyLang={options.find((v) => v.value == value)?.label || ''} textOnly />
         ) : (
           <Typography color={'secondary'}>{placeholder}</Typography>

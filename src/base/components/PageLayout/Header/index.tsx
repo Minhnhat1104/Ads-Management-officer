@@ -24,7 +24,7 @@ const navItems: LabelValue[] = [
     value: 'ads-management',
   },
   {
-    label: 'Quảng lý báo cáo',
+    label: 'Quản lý báo cáo',
     value: 'resident-report',
   },
   {

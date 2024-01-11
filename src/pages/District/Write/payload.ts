@@ -7,5 +7,10 @@ export const finalizeParams = (params: any, updateData: any) => {
   parsedParams = {
     ...params,
   };
+
+  if (updateData) {
+    parsedParams.id = updateData?.id;
+  }
+
   return parsedParams;
 };

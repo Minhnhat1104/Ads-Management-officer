@@ -25,7 +25,8 @@ export const useDistrictMutation = () => {
   const mUpdate = useMutation(
     [queryKeys.districtUpdate],
     (payload: any) => {
-      return axiosAPI(`district/${payload?.id}`, 'PATCH');
+      const { id, ...others } = payload;
+      return axiosAPI(`district/${id}`, 'PATCH', others);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

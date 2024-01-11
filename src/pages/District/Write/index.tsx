@@ -33,10 +33,6 @@ const WritePage = (props: WritePageProps) => {
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
-  const { data: viewData } = usePlacement(updateData?.id, {
-    enabled: !!updateData?.id,
-  });
-
   //react-hook-form
   const {
     handleSubmit,
@@ -52,17 +48,17 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  // useEffect(() => {
-  //   if (viewData) {
-  //     const newFormData = {
-  //       // [keyNames.KEY_NAME_PLACEMENT_LAT]: viewData?.lat,
-  //     };
+  useEffect(() => {
+    if (updateData) {
+      const newFormData = {
+        [keyNames.KEY_NAME_DISTRICT_NAME]: updateData?.districtName,
+      };
 
-  //     reset && reset(newFormData);
-  //   }
-  // }, [viewData]);
+      reset && reset(newFormData);
+    }
+  }, [updateData]);
 
-  const { mAdd } = useDistrictMutation();
+  const { mAdd, mUpdate } = useDistrictMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -73,16 +69,29 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
-    mAdd.mutate(parsedParams, {
-      onSuccess(data, variables: any, context) {
-        setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.districts]);
-        }, SET_TIMEOUT);
+    if (updateData) {
+      mUpdate.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.districts]);
+          }, SET_TIMEOUT);
 
-        onClose && onClose();
-        reset && reset();
-      },
-    });
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    } else {
+      mAdd.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.districts]);
+          }, SET_TIMEOUT);
+
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    }
   };
 
   const border = `1px solid ${theme.palette.divider}`;
@@ -112,7 +121,7 @@ const WritePage = (props: WritePageProps) => {
                 handleSubmit((data) => onSubmit(data), onError)();
               }}
             >
-              Tạo
+              {updateData ? 'Cập nhật' : 'Tạo'}
             </LoadingButton>
           </Stack>
         </Grid>
@@ -123,7 +132,7 @@ const WritePage = (props: WritePageProps) => {
   return (
     <>
       <MiModal
-        title={title ? title : 'Yêu cầu chỉnh sửa điểm đặt'}
+        title={updateData ? 'Cập nhật quận' : 'Thêm quận'}
         isOpen={isOpen}
         footer={Footer}
         onClose={onClose}

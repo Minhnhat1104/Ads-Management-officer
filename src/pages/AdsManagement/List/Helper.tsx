@@ -6,6 +6,9 @@ import { EditOutlined, Visibility } from '@mui/icons-material';
 
 export const getMapColumns = () => {
   return {
+    [keyNames.KEY_NAME_PLACEMENT_ADDRESS](col: string, data: any) {
+      return <Typography>{data?.[col] || ''}</Typography>;
+    },
     [keyNames.KEY_NAME_PLACEMENT_WARD](col: string, data: any) {
       return <Typography>{data?.[col] || ''}</Typography>;
     },

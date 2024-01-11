@@ -3,8 +3,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 import * as keyNames from './keyNames';
 import { CheckCircle, Visibility } from '@mui/icons-material';
-import WritePage from '../Write';
-import { useState } from 'react';
 import dayjs from 'dayjs';
 
 export const getMapColumns = () => {

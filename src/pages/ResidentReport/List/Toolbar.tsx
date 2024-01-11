@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-import { Button, Grid, IconButton, Stack, useTheme } from '@mui/material';
+import { Grid, IconButton, useTheme } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-import WritePage from '../Write';
 import { Refresh } from '@mui/icons-material';
 import { queryKeys } from '@base/config/queryKeys';
 import WardSelect from 'src/components/WardSelect';

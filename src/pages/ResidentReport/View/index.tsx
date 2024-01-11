@@ -6,7 +6,7 @@ import { useReportByReportId } from 'src/hooks/useReportByReportId';
 import { placementFields } from './config/placementField';
 import { Stack, Typography } from '@mui/material';
 import { contractFields } from './config/contractFields';
-import Write from '../Write';
+import Write from '../Write/index2';
 import { advertisementFields } from './config/advertisementFields';
 import Toolbar from './Toolbar';
 import { useRecoilValue } from 'recoil';

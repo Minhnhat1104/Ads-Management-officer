@@ -79,6 +79,12 @@ const AdsManagement = (props: AdsManagementProps) => {
   //table props
   const fields: FieldsData = [
     {
+      languageKey: 'Địa chỉ',
+      keyName: keyNames.KEY_NAME_PLACEMENT_ADDRESS,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
       languageKey: 'Phường',
       keyName: keyNames.KEY_NAME_PLACEMENT_WARD,
       enableSorting: false,

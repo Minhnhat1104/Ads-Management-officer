@@ -1,3 +1,4 @@
+export const KEY_NAME_PLACEMENT_ADDRESS = 'address';
 export const KEY_NAME_PLACEMENT_WARD = 'ward';
 export const KEY_NAME_PLACEMENT_DISTRICT = 'district';
 export const KEY_NAME_PLACEMENT_PLANNED = 'planned';

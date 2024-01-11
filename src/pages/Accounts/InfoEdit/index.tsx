@@ -121,13 +121,7 @@ const InfoEdit = (props: InfoEditProps) => {
 
   return (
     <>
-      <MiModal
-        title={title ? title : 'Chỉnh sửa tài khoản'}
-        isOpen={isOpen}
-        footer={Footer}
-        onClose={onClose}
-        size="sm"
-      >
+      <MiModal title={title ? title : 'Phân công khu vực'} isOpen={isOpen} footer={Footer} onClose={onClose} size="sm">
         <form>
           <Suspense fallback={<></>}>
             <Box padding={2}>

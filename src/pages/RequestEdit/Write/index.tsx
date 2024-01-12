@@ -58,13 +58,7 @@ const Write = (props: WriteProps) => {
             </LoadingButton>
           </Stack>
         </>
-      ) : (
-        <Stack direction="row" justifyContent="flex-end">
-          <Button onClick={() => setIsEdit(true)} variant="contained">
-            Xử lí báo cáo
-          </Button>
-        </Stack>
-      )}
+      ) : null}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { ViewFieldConfig } from '../ViewFields';
 
-export const newDataField: ViewFieldConfig[] = [
+export const newDataFieldPlacement: ViewFieldConfig[] = [
   {
     label: 'Kinh độ',
     value: 'lat',
@@ -13,7 +13,7 @@ export const newDataField: ViewFieldConfig[] = [
     label: 'Quy hoạch',
     value: 'planned',
     getValue(value, keyName) {
-      return value === true ? 'Đã quy hoạch' : 'Chưa quy hoạch';
+      return value?.[keyName] === true ? 'Đã quy hoạch' : 'Chưa quy hoạch';
     },
   },
   {
@@ -28,7 +28,96 @@ export const newDataField: ViewFieldConfig[] = [
     label: 'Vị trí',
     value: 'ward',
     getValue(value, keyName) {
-      return value?.wardName + ', ' + value?.district.districtName;
+      return value?.[keyName]?.wardName + ', ' + value?.[keyName]?.district?.districtName;
+    },
+  },
+];
+
+export const newDataFieldAdvertisement: ViewFieldConfig[] = [
+  {
+    label: 'Chiều dài',
+    value: 'width',
+  },
+  {
+    label: 'Chiều cao',
+    value: 'height',
+  },
+  {
+    label: 'Quy hoạch',
+    value: 'planned',
+    getValue(value, keyName) {
+      return value?.placement?.[keyName] === true ? 'Đã quy hoạch' : 'Chưa quy hoạch';
+    },
+  },
+  {
+    label: 'Địa chỉ',
+    value: 'address',
+    getValue(value, keyName) {
+      return value?.placement?.[keyName];
+    },
+  },
+  {
+    label: 'Phường',
+    value: 'ward',
+    getValue(value, keyName) {
+      return value?.placement?.[keyName]?.wardName;
+    },
+  },
+  {
+    label: 'Quận',
+    value: 'ward',
+    getValue(value, keyName) {
+      return value?.placement?.[keyName]?.district?.districtName;
+    },
+  },
+  {
+    label: 'Loại điểm đặt',
+    value: 'locationType',
+    getValue(value, keyName) {
+      return value?.placement?.[keyName]?.name;
+    },
+  },
+  {
+    label: 'Hình thức quảng cáo',
+    value: 'format',
+    getValue(value, keyName) {
+      return value?.placement?.[keyName]?.name;
+    },
+  },
+  {
+    label: 'Số lượng',
+    value: 'amount',
+  },
+  {
+    label: 'Loại bảng quảng cáo',
+    value: 'advertisingType',
+  },
+  {
+    label: 'Tên công ty',
+    value: 'name',
+    getValue(value, keyName) {
+      return value?.company?.[keyName];
+    },
+  },
+  {
+    label: 'Email công ty',
+    value: 'email',
+    getValue(value, keyName) {
+      return value?.company?.[keyName];
+    },
+  },
+  {
+    label: 'Số điện thoại công ty',
+    value: 'phone',
+    getValue(value, keyName) {
+      return value?.company?.[keyName];
+    },
+  },
+  {
+    label: 'Địa chỉ công ty',
+    value: 'address',
+    getValue(value, keyName) {
+      return value?.company?.[keyName];
     },
   },
 ];

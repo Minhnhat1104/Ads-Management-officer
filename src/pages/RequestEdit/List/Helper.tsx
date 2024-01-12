@@ -40,27 +40,36 @@ export const getMapColumns = () => {
     [keyNames.KEY_NAME_REQUEST_APPROVER_EMAIL](col: string, data: any) {
       return <Typography>{data?.approver?.email || ''}</Typography>;
     },
+    // [keyNames.KEY_NAME_REQUEST_ACTIONS](col: string, data: any, extra: any) {
+    //   return (
+    //     data?.status === 0 && (
+    //       <Stack direction="row" spacing={1}>
+    //         <Tooltip title="Chấp nhận" placement="top">
+    //           <IconButton
+    //             size="small"
+    //             onClick={() => extra?.handleApprove && extra?.handleApprove(data)}
+    //             color="success"
+    //           >
+    //             <DoneOutlined fontSize="small" />
+    //           </IconButton>
+    //         </Tooltip>
+
+    //         <Tooltip title="Từ chối" placement="top">
+    //           <IconButton size="small" onClick={() => extra?.handleDeny && extra?.handleDeny(data)} color="error">
+    //             <ClearOutlined fontSize="small" />
+    //           </IconButton>
+    //         </Tooltip>
+    //       </Stack>
+    //     )
+    //   );
+    // },
     [keyNames.KEY_NAME_REQUEST_ACTIONS](col: string, data: any, extra: any) {
       return (
-        data?.status === 0 && (
-          <Stack direction="row" spacing={1}>
-            <Tooltip title="Chấp nhận" placement="top">
-              <IconButton
-                size="small"
-                onClick={() => extra?.handleApprove && extra?.handleApprove(data)}
-                color="success"
-              >
-                <DoneOutlined fontSize="small" />
-              </IconButton>
-            </Tooltip>
-
-            <Tooltip title="Từ chối" placement="top">
-              <IconButton size="small" onClick={() => extra?.handleDeny && extra?.handleDeny(data)} color="error">
-                <ClearOutlined fontSize="small" />
-              </IconButton>
-            </Tooltip>
-          </Stack>
-        )
+        <Tooltip title="Xem chi tiết" placement="top">
+          <IconButton size="small" onClick={() => extra?.gotoView && extra?.gotoView(data)} color="primary">
+            <Visibility fontSize="small" />
+          </IconButton>
+        </Tooltip>
       );
     },
   };

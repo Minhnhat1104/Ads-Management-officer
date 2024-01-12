@@ -6,12 +6,15 @@ export const finalizeParams = (params: any, updateData: any) => {
 
   parsedParams = {
     editData: {
-      // lat: Number(params?.[keyNames.KEY_NAME_PLACEMENT_LAT]),
-      // lng: Number(params?.[keyNames.KEY_NAME_PLACEMENT_LNG]),
-      // planned: params?.[keyNames.KEY_NAME_PLACEMENT_PLANNED],
-      // locationTypeId: params?.[keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ID]?.value,
-      // formatId: params?.[keyNames.KEY_NAME_PLACEMENT_FORMAT_ID]?.value,
-      // wardId: params?.[keyNames.KEY_NAME_PLACEMENT_WARD_ID]?.value,
+      width: params?.[keyNames.KEY_NAME_AD_WIDTH],
+      height: params?.[keyNames.KEY_NAME_AD_HEIGHT],
+      image: updateData?.image,
+      placementId: updateData?.placment?.id,
+      amount: params?.[keyNames.KEY_NAME_AD_AMOUNT],
+      advertisingTypeId: params?.[keyNames.KEY_NAME_AD_ADVERTISING_TYPE_ID]?.value,
+      companyId: params?.[keyNames.KEY_NAME_AD_COMPANY_ID]?.value,
+      startDate: params?.[keyNames.KEY_NAME_AD_START_DATE],
+      endDate: params?.[keyNames.KEY_NAME_AD_END_DATE],
     },
     editItemId: updateData?.id,
     editReason: params?.[keyNames.KEY_NAME_AD_EDIT_REASON] || '',

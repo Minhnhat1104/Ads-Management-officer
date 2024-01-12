@@ -30,13 +30,14 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
   const layoutFields: string[] = [
     keyNames.KEY_NAME_AD_WIDTH,
     keyNames.KEY_NAME_AD_HEIGHT,
-    keyNames.KEY_NAME_AD_IMAGE,
-    keyNames.KEY_NAME_AD_PLACEMENT_ID,
+    // keyNames.KEY_NAME_AD_IMAGE,
+    // keyNames.KEY_NAME_AD_PLACEMENT_ID,
     keyNames.KEY_NAME_AD_AMOUNT,
     keyNames.KEY_NAME_AD_ADVERTISING_TYPE_ID,
     keyNames.KEY_NAME_AD_COMPANY_ID,
     keyNames.KEY_NAME_AD_START_DATE,
     keyNames.KEY_NAME_AD_END_DATE,
+    keyNames.KEY_NAME_AD_EDIT_REASON,
   ];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
@@ -44,7 +45,6 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
   const { data: viewData } = useAdvertisementDetail(updateData?.id, {
     enabled: !!updateData?.id,
   });
-  console.log('🚀 ~ viewData:', viewData);
 
   //react-hook-form
   const {
@@ -63,12 +63,9 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
 
   useEffect(() => {
     if (viewData) {
-      // let blob = await fetch(url).then(r => r.blob());
       const newFormData = {
-        // [keyNames.KEY_NAME_PLACEMENT_LAT]: viewData?.lat,
         [keyNames.KEY_NAME_AD_WIDTH]: viewData?.width,
         [keyNames.KEY_NAME_AD_HEIGHT]: viewData?.height,
-        // [keyNames.KEY_NAME_AD_IMAGE]: viewData?.image,
         [keyNames.KEY_NAME_AD_PLACEMENT_ID]: {
           label: viewData?.placement?.ward?.wardName,
           value: viewData?.placement?.id,
@@ -102,7 +99,7 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
     mRequestEditAd.mutate(parsedParams, {
       onSuccess(data, variables: any, context) {
         setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.placements]);
+          queryClient.invalidateQueries([queryKeys.advertisementView]);
         }, SET_TIMEOUT);
 
         onClose && onClose();
@@ -149,7 +146,7 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
   return (
     <>
       <MiModal
-        title={title ? title : 'Yêu cầu chỉnh sửa điểm đặt'}
+        title={title ? title : 'Yêu cầu chỉnh sửa bảng quảng cáo'}
         isOpen={isOpen}
         footer={Footer}
         onClose={onClose}

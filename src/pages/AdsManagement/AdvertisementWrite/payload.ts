@@ -9,7 +9,7 @@ export const finalizeParams = (params: any, updateData: any) => {
       width: params?.[keyNames.KEY_NAME_AD_WIDTH],
       height: params?.[keyNames.KEY_NAME_AD_HEIGHT],
       image: updateData?.image,
-      placementId: updateData?.placment?.id,
+      placementId: updateData?.placement?.id,
       amount: params?.[keyNames.KEY_NAME_AD_AMOUNT],
       advertisingTypeId: params?.[keyNames.KEY_NAME_AD_ADVERTISING_TYPE_ID]?.value,
       companyId: params?.[keyNames.KEY_NAME_AD_COMPANY_ID]?.value,

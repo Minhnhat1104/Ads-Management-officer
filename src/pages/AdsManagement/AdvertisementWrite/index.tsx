@@ -95,7 +95,7 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
   //submit form
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
-    const parsedParams = finalizeParams(params, updateData); // define add or update here
+    const parsedParams = finalizeParams(params, viewData); // define add or update here
     mRequestEditAd.mutate(parsedParams, {
       onSuccess(data, variables: any, context) {
         setTimeout(() => {
@@ -141,7 +141,7 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
         </Grid>
       </Grid>
     );
-  }, [reset, mRequestEditAd.isLoading, isValid, updateData]);
+  }, [reset, mRequestEditAd.isLoading, isValid, viewData]);
 
   return (
     <>

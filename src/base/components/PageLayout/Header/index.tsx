@@ -13,6 +13,7 @@ import { useRecoilState } from 'recoil';
 import { profileAtom } from '@base/store/atoms/profileAtom';
 import DepartmentItems from './DepartmentItems';
 import { USER_ROLE_DEPARTMENT } from 'src/constants';
+import { useQueryClient } from '@tanstack/react-query';
 
 const navItems: LabelValue[] = [
   {
@@ -40,8 +41,9 @@ const navItems: LabelValue[] = [
 const Header = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   const [profile, setProfile] = useRecoilState(profileAtom);
 
   const [open, setOpen] = useState<boolean>(false);
@@ -123,15 +125,7 @@ const Header = () => {
             ) : (
               <Typography style={{ fontSize: 16, fontWeight: 600 }}>UNDEFIND</Typography>
             )}
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => {
-                localStorage.removeItem('refreshToken');
-                console.log('logout');
-                setIsAuthenticated && setIsAuthenticated(false);
-              }}
-            >
+            <Button variant="contained" color="error" onClick={() => logout && logout()}>
               Đăng xuất
             </Button>
           </Stack>

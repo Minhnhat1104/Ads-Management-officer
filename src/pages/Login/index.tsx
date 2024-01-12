@@ -46,7 +46,7 @@ const Login = (props: LoginProps) => {
   });
 
   const { mLogin } = useAuthMutation();
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
@@ -58,20 +58,6 @@ const Login = (props: LoginProps) => {
     console.log('error', errors, e);
   };
 
-  const login = (data: any) => {
-    // Optionally, you can save the token to localStorage or a cookie
-    setAccessToken(data.accessToken);
-    localStorage.setItem('refreshToken', data.refreshToken);
-    setIsAuthenticated && setIsAuthenticated(true);
-  };
-
-  const logout = () => {
-    /* logic to handle user logout */
-    setAccessToken('');
-    localStorage.removeItem('refreshToken');
-    setIsAuthenticated && setIsAuthenticated(false);
-  };
-
   //submit form
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
@@ -79,7 +65,7 @@ const Login = (props: LoginProps) => {
 
     mLogin.mutate(parsedParams, {
       onSuccess(data, variables, context) {
-        login(data);
+        login && login(data);
       },
     });
   };

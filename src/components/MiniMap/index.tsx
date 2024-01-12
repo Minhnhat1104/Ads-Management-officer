@@ -3,7 +3,7 @@ import { usePlacements } from 'src/hooks/usePlacements';
 import ReactMapGL, { GeolocateControl, FullscreenControl, Popup } from '@goongmaps/goong-map-react';
 import { GOONG_MAPTILES_KEY } from 'src/constants/goongmap';
 import Pins from './Pins';
-import AdInfo from '@pages/Home/AdInfo';
+import AdInfo from '@pages/Home/Advertisement/AdInfo';
 import ControlPanel from './ControlPanel';
 
 const geolocateControlStyle = {
@@ -12,15 +12,17 @@ const geolocateControlStyle = {
 };
 
 interface MiniMapProps {
+  value: any;
   onChange: any;
 }
 
 const MiniMap = (props: MiniMapProps) => {
+  const { value, onChange } = props;
   // MAP
   const [viewport, setViewport] = useState({
     width: '100%',
     height: '100%',
-    latitude: -74.1,
+    latitude: 10.7631,
     longitude: 106.68246,
     zoom: 16,
   });
@@ -38,7 +40,7 @@ const MiniMap = (props: MiniMapProps) => {
 
   const handleSetSelectedPin = (selectedPin: any) => {
     setSelectedPin(selectedPin);
-    props.onChange(selectedPin);
+    onChange(selectedPin);
     // console.log('selectedPin:', selectedPin);
   };
 

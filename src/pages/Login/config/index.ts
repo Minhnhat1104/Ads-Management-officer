@@ -10,6 +10,9 @@ const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_LOGIN_USER_NAME]: {
     languageKey: 'Email',
     Component: TextField,
+    componentProps: {
+      autoComplete: 'off',
+    },
     defaultValue: '',
     validate: (value: any) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -20,7 +23,9 @@ const writeConfig: WriteConfig = {
     languageKey: 'Mật khẩu',
     Component: PasswordField,
     defaultValue: '',
-    componentProps: {},
+    componentProps: {
+      autoComplete: 'off',
+    },
     validate: (value: any) => !!value || 'Vui lòng nhập mật khẩu',
   },
 };

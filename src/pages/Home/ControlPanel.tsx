@@ -1,9 +1,11 @@
 import CheckBoxGroup from '@base/components/CheckBoxGroup';
 import { LabelValue } from '@base/types';
-import { Box, InputLabel, Stack, TextField, Typography, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Box, Divider, InputLabel, Stack, TextField, Typography, useTheme } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { GOONG_API_KEY } from 'src/constants/goongmap';
+import Checkbox from '@base/components/CheckBox';
+import _ from 'lodash';
 
 interface Location {
   lat: number;
@@ -39,25 +41,62 @@ const MAP_FILTER_OPTIONS: LabelValue[] = [
   },
 ];
 
-// getCoordinates();
+interface ControlPanelProps {
+  showPins: any;
+  setShowPins: any;
+  setViewport: any;
+  showReports: any;
+  setShowReports: any;
+}
 
-const ControlPanel = (prop: any) => {
+const ControlPanel = (props: ControlPanelProps) => {
+  const { showPins, setShowPins, setViewport, showReports, setShowReports } = props;
   const theme = useTheme();
   const [filter, setFilter] = useState<LabelValue[]>([]);
   const [search, setSearch] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>('');
+  const setSearchTextDebounced = useRef(_.debounce((searchText) => setSearchValue(searchText), 500)).current;
+
   const [ans, setAns] = useState<LocationResult[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const [viewport, setViewport] = React.useState({
-    ...prop.viewport,
-  });
+  useEffect(() => {
+    if (search !== '') {
+      const getCoordinates = async (searchValue: string, apiKey = GOONG_API_KEY) => {
+        const encodedLocationName = encodeURIComponent(searchValue.trim());
+
+        const url = `https://rsapi.goong.io/geocode?address=${encodeURIComponent(
+          encodedLocationName
+        )}&api_key=${apiKey}`;
+
+        try {
+          const response = await axios.get(url);
+          const { data } = response;
+          if (data && data.results && data.results.length > 0) {
+            console.log(data.results);
+            setAns(data.results);
+          } else {
+            setAns([]); // Clear the results in case there were previous results
+          }
+        } catch (error) {
+          throw new Error('Error: ' + JSON.stringify(error));
+        }
+      };
+
+      getCoordinates(searchValue);
+    } else {
+      setAns([]);
+    }
+  }, [searchValue]);
 
   return (
     <Stack
       className="control-panel"
       sx={{ background: 'rgba(255, 255, 255, 1)', float: 'left', width: 300, p: 2, m: 2, borderRadius: 1, zIndex: 999 }}
     >
-      <CheckBoxGroup options={MAP_FILTER_OPTIONS} value={filter} onChange={setFilter} />
+      {/* <CheckBoxGroup options={MAP_FILTER_OPTIONS} value={filter} onChange={setFilter} /> */}
+      <Checkbox label={'Bảng QC'} value={showPins} onChange={setShowPins} />
+      <Checkbox label={'Báo cáo vi phạm'} value={showReports} onChange={setShowReports} />
 
       <InputLabel sx={{ mt: 1 }}>Tìm địa chỉ</InputLabel>
       <TextField
@@ -66,11 +105,12 @@ const ControlPanel = (prop: any) => {
         autoComplete="off"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setSearch(event.target.value);
+          setSearchTextDebounced(event.target.value);
         }}
       />
 
       {ans && (
-        <Stack spacing={1} width={400} maxHeight={200} className="scroll-box">
+        <Stack width="100%" maxHeight={200} sx={{ overflowY: 'scroll' }} divider={<Divider />} mt={1}>
           {ans?.map((_item: LocationResult, i: number) => {
             // Extracting the first long_name
             const firstLongName = _item.address_components[0].long_name;
@@ -83,10 +123,11 @@ const ControlPanel = (prop: any) => {
             const concatenatedNames = detailAddress.join(', ');
 
             return (
-              <div
+              <Stack
                 key={i}
+                p={1}
                 onClick={() => {
-                  prop.onViewportChange({
+                  setViewport({
                     width: '100%',
                     height: '100%',
                     latitude: _item.geometry.location.lat,
@@ -102,11 +143,9 @@ const ControlPanel = (prop: any) => {
                 }}
                 style={{ backgroundColor: hoveredIndex === i ? '#f3f3f3' : 'transparent' }}
               >
-                <Typography sx={{ fontSize: 20, fontWeight: 500 }}>{firstLongName}</Typography>
-                <Typography fontSize={16} fontWeight={400}>
-                  {concatenatedNames}
-                </Typography>
-              </div>
+                <Typography sx={{ fontSize: 16, fontWeight: 500 }}>{firstLongName}</Typography>
+                <Typography fontSize={14}>{concatenatedNames}</Typography>
+              </Stack>
             );
           })}
         </Stack>

@@ -1,6 +1,6 @@
 import CheckBoxGroup from '@base/components/CheckBoxGroup';
 import { LabelValue } from '@base/types';
-import { Box, Stack, TextField, Typography, useTheme } from '@mui/material';
+import { Box, InputLabel, Stack, TextField, Typography, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { GOONG_API_KEY } from 'src/constants/goongmap';
@@ -59,13 +59,11 @@ const ControlPanel = (prop: any) => {
     >
       <CheckBoxGroup options={MAP_FILTER_OPTIONS} value={filter} onChange={setFilter} />
 
+      <InputLabel sx={{ mt: 1 }}>Tìm địa chỉ</InputLabel>
       <TextField
-        id="outlined-basic"
-        label="Tìm địa chỉ"
         variant="outlined"
-        margin="normal"
         value={search}
-        autoComplete="none"
+        autoComplete="off"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setSearch(event.target.value);
         }}

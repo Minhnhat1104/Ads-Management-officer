@@ -26,30 +26,30 @@ const Home = () => {
   const [viewport, setViewport] = useState({
     width: '100%',
     height: '100%',
-    latitude: -74.1,
-    longitude: 106.68246,
+    latitude: 10.7631, //HCMUS lat
+    longitude: 106.68246, /// HCMUS long
     zoom: 16,
   });
 
-  useEffect(() => {
-    // Get user's location using browser's Geolocation API
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        // Set the initial viewport state with user location
-        setViewport((prevViewport) => ({
-          ...prevViewport,
-          latitude,
-          longitude,
-          zoom: 12, // set the zoom level as needed
-        }));
-        console.log(latitude, longitude);
-      },
-      (error) => {
-        console.error('Error getting user location:', error);
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   // Get user's location using browser's Geolocation API
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       // Set the initial viewport state with user location
+  //       setViewport((prevViewport) => ({
+  //         ...prevViewport,
+  //         latitude,
+  //         longitude,
+  //         zoom: 12, // set the zoom level as needed
+  //       }));
+  //       console.log(latitude, longitude);
+  //     },
+  //     (error) => {
+  //       console.error('Error getting user location:', error);
+  //     }
+  //   );
+  // }, []);
 
   // useEffect(() => {
   //   // Thực hiện bất kỳ xử lý nào bạn cần khi viewport thay đổi
@@ -62,6 +62,12 @@ const Home = () => {
   useEffect(() => {
     if (data) {
       setLocationAds(data);
+      setViewport((prevViewport) => ({
+        ...prevViewport,
+        latitude: Number(data?.[0]?.lat),
+        longitude: Number(data?.[0]?.lng),
+        zoom: 12, // set the zoom level as needed
+      }));
     } else {
       setLocationAds([]);
     }

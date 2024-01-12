@@ -9,6 +9,8 @@ import { usePlacements } from 'src/hooks/usePlacements';
 import { GOONG_MAPTILES_KEY } from 'src/constants/goongmap';
 import { useReports } from 'src/hooks/useReports';
 import ReportPins from './Report/ReportPins';
+import ReportInfo from './Report/ReportInfo';
+import ReportList from './Report/ReportList';
 
 const fullscreenControlStyle = {
   right: 10,
@@ -101,6 +103,32 @@ const Home = () => {
         <ReportPins data={reportData} setPopupInfo={setReportPopupInfo} setBoardData={setReportBoardData} />
       )}
 
+      {reportpopupInfo && reportboardData === null && (
+        <Popup
+          tipSize={5}
+          offsetLeft={12}
+          anchor="bottom"
+          longitude={parseFloat(reportpopupInfo?.lng)}
+          latitude={parseFloat(reportpopupInfo?.lat)}
+          capturePointerMove
+        >
+          <ReportInfo info={reportpopupInfo} />
+        </Popup>
+      )}
+
+      {reportboardData && (
+        <Popup
+          tipSize={5}
+          offsetLeft={12}
+          anchor="bottom"
+          longitude={reportboardData.lng}
+          latitude={reportboardData.lat}
+          captureScroll // Stop propagation of mouse wheel event to the map component
+        >
+          <ReportList boardData={reportboardData} setBoardData={setReportBoardData} />
+        </Popup>
+      )}
+
       <ControlPanel
         setViewport={setViewport}
         showPins={showPins}
@@ -110,12 +138,12 @@ const Home = () => {
       />
 
       {/* Current location user */}
-      <GeolocateControl
+      {/* <GeolocateControl
         style={geolocateControlStyle}
         positionOptions={{ enableHighAccuracy: true }}
         trackUserLocation={false}
         auto
-      />
+      /> */}
 
       {/* full screen */}
       <FullscreenControl style={fullscreenControlStyle} />

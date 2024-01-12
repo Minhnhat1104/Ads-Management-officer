@@ -14,32 +14,12 @@ const PinItem = (props: PinItemProps) => {
   const { city, setBoardData, setPopupInfo } = props;
   const theme = useTheme();
 
-  const [enabled, setEnabled] = useState<boolean>(false);
-
-  const { data } = useAdvertisements(null, city.id, {
-    enabled,
-  });
-
-  useEffect(() => {
-    if (data) {
-      setBoardData({
-        lng: parseFloat(city.lng),
-        lat: parseFloat(city.lat),
-        data: data,
-      });
-    }
-  }, [data]);
-
   const handleClick = () => {
-    if (!enabled) {
-      setEnabled(true);
-    } else if (enabled && data) {
-      setBoardData({
-        lng: parseFloat(city.lng),
-        lat: parseFloat(city.lat),
-        data: data,
-      });
-    }
+    setBoardData({
+      ...city,
+      lng: parseFloat(city.lng),
+      lat: parseFloat(city.lat),
+    });
   };
 
   return (

@@ -55,7 +55,7 @@ const ResidentReport = (props: ResidentReportProps) => {
   };
 
   const gotoView = (data: any) => {
-    navigate(`/resident-report/${data?.id}`);
+    navigate(`/request-edit/${data?.id}`);
   };
 
   const handleApprove = (data: any) => {
@@ -149,7 +149,7 @@ const ResidentReport = (props: ResidentReportProps) => {
       width: 'auto',
     },
     {
-      languageKey: '',
+      languageKey: 'Xử lý yêu cầu',
       keyName: keyNames.KEY_NAME_REQUEST_ACTIONS,
       enableSorting: false,
       width: 50,

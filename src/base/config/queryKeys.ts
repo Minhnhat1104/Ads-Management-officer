@@ -11,6 +11,7 @@ export const queryKeys = {
 
   // request edit
   requestEdits: 'requestEdits',
+  requestEditById: 'requestEditById',
   requestEditsPlacementsApprove: 'requestEditsPlacementsApprove',
   requestEditsPlacementsDeny: 'requestEditsPlacementsDeny',
   requestEditsAdsApprove: 'requestEditsAdsApprove',

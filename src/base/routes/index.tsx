@@ -24,6 +24,7 @@ const ReportsType = lazy(() => import('@pages/ReportsType/List'));
 const PlacementLocationType = lazy(() => import('@pages/PlacementLocationType/List'));
 const AdvertisementType = lazy(() => import('@pages/AdvertisementsType/List'));
 const RequestEdit = lazy(() => import('@pages/RequestEdit/List'));
+const RequestEditView = lazy(() => import('@pages/RequestEdit/View'));
 const Account = lazy(() => import('@pages/Accounts/List'));
 
 export const routes: RouteObject[] = [
@@ -95,6 +96,10 @@ export const routes: RouteObject[] = [
       {
         path: 'request-edit',
         element: <RequestEdit />,
+      },
+      {
+        path: 'request-edit/:id',
+        element: <RequestEditView />,
       },
       {
         path: 'account',

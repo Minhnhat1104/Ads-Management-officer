@@ -10,10 +10,12 @@ function AdInfo(props: AdInfoProps) {
 
   return (
     <Stack spacing={1} width={200}>
-      <Typography sx={{ fontWeight: 500, fontSize: 16 }}>{info.format}</Typography>
-      <Typography>{info.locationType}</Typography>
+      <Typography sx={{ fontWeight: 500, fontSize: 16 }}>{info?.format}</Typography>
+      <Typography>{info?.locationType}</Typography>
+      <Typography>{info?.address}</Typography>
+      <Typography>{info?.district + ' ' + info?.ward}</Typography>
       <Typography sx={{ fontWeight: 500, fontSize: 16, fontStyle: 'italic' }}>
-        {info.planned ? 'Đã quy hoạch' : 'Chưa quy hoạch'}
+        {info?.planned ? 'Đã quy hoạch' : 'Chưa quy hoạch'}
       </Typography>
     </Stack>
   );

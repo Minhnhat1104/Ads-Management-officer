@@ -45,17 +45,16 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  // useEffect(() => {
-  //   if (viewData) {
-  //     const newFormData = {
-  //       // [keyNames.KEY_NAME_PLACEMENT_LAT]: viewData?.lat,
-  //     };
+  useEffect(() => {
+    if (updateData) {
+      const newFormData = {
+        [keyNames.KEY_NAME_WARD_NAME]: updateData?.wardName,
+      };
+      reset && reset(newFormData);
+    }
+  }, [updateData]);
 
-  //     reset && reset(newFormData);
-  //   }
-  // }, [viewData]);
-
-  const { mAdd } = useWardMutation();
+  const { mAdd, mUpdate } = useWardMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -66,16 +65,30 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
-    mAdd.mutate(parsedParams, {
-      onSuccess(data, variables: any, context) {
-        setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.wards]);
-        }, SET_TIMEOUT);
+    console.log('🚀 ~ onSubmit ~ parsedParams', parsedParams);
+    if (updateData) {
+      mUpdate.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.wards]);
+          }, SET_TIMEOUT);
 
-        onClose && onClose();
-        reset && reset();
-      },
-    });
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    } else {
+      mAdd.mutate(parsedParams, {
+        onSuccess(data, variables: any, context) {
+          setTimeout(() => {
+            queryClient.invalidateQueries([queryKeys.wards]);
+          }, SET_TIMEOUT);
+
+          onClose && onClose();
+          reset && reset();
+        },
+      });
+    }
   };
 
   const border = `1px solid ${theme.palette.divider}`;
@@ -105,7 +118,7 @@ const WritePage = (props: WritePageProps) => {
                 handleSubmit((data) => onSubmit(data), onError)();
               }}
             >
-              Tạo
+              {updateData ? 'Cập nhật' : 'Thêm'}
             </LoadingButton>
           </Stack>
         </Grid>
@@ -116,7 +129,7 @@ const WritePage = (props: WritePageProps) => {
   return (
     <>
       <MiModal
-        title={title ? title : 'Yêu cầu chỉnh sửa điểm đặt'}
+        title={updateData ? 'Cập nhật phường' : 'Thêm phường'}
         isOpen={isOpen}
         footer={Footer}
         onClose={onClose}

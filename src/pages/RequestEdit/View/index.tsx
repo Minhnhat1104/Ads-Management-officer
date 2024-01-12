@@ -1,14 +1,13 @@
 import React from 'react';
 import ViewFields from './ViewFields';
-import { reportFields } from './config/reportFields';
+import { requesterFields } from './config/requesterFields';
 import { useParams } from 'react-router';
 import { useReportByReportId } from 'src/hooks/useReportByReportId';
-import { placementFields } from './config/placementField';
 import { Stack, Typography } from '@mui/material';
-import { contractFields } from './config/contractFields';
+import { newDataField } from './config/newDataField';
 import Write from '../Write';
-import { advertisementFields } from './config/advertisementFields';
 import Toolbar from './Toolbar';
+import { oldDataField } from './config/oldDataField';
 
 const View = () => {
   const { id } = useParams();
@@ -21,29 +20,31 @@ const View = () => {
       <Toolbar />
       <Stack spacing={1} py={1}>
         {/* report field */}
-        <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin người báo cáo</Typography>
-        <ViewFields data={data} fieldConfigs={reportFields} />
+        <Typography sx={{ fontSize: 16, fontWeight: 500 }}>CHI TIẾT YÊU CẦU CHỈNH SỬA</Typography>
+        <ViewFields data={data} fieldConfigs={requesterFields} />
         {/* placement field */}
-        {data?.placement !== null ? (
+        {data?.requester !== null ? (
           <>
-            <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Địa điểm</Typography>
-            <ViewFields data={data?.placement} fieldConfigs={placementFields} />
+            <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin người yêu cầu chỉnh sửa</Typography>
+            <ViewFields data={data?.requester} fieldConfigs={requesterFields} />
           </>
         ) : null}
+
         {/* advertisement field */}
-        {data?.advertisement !== null ? (
+        {data?.newData !== null ? (
           <>
-            <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Bảng quảng cáo</Typography>
-            <ViewFields data={data?.advertisement} fieldConfigs={advertisementFields} />
+            <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Nội dung mới</Typography>
+            <ViewFields data={data?.newData} fieldConfigs={newDataField} />
           </>
         ) : (
           <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Không có bảng quảng cáo</Typography>
         )}
+
         {/* contract field */}
-        {data?.contract !== null ? (
+        {data?.oldData !== null ? (
           <>
             <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Hợp đồng quảng cáo</Typography>
-            <ViewFields data={data?.contract} fieldConfigs={contractFields} />
+            <ViewFields data={data?.oldData} fieldConfigs={oldDataField} />
           </>
         ) : (
           <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Không có hợp đồng quảng cáo</Typography>

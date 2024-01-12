@@ -14,8 +14,12 @@ export const departmentNavItems: LabelValue[] = [
     value: 'ward',
   },
   {
-    label: 'Quản lý loại bảng quảng cáo',
+    label: 'Quản lý loại hình thức quảng cáo',
     value: 'ads-format',
+  },
+  {
+    label: 'Quản lý loại bảng quảng cáo',
+    value: 'advertisement-type',
   },
   {
     label: 'Quản lý loại hình thức báo cáo',
@@ -63,7 +67,7 @@ const DepartmentItems = (props: DepartmentItemsProps) => {
             lineHeight: '40px',
           }}
         >
-          Thêm
+          Các loại quản lý khác
         </Typography>
         <ExpandMoreOutlined color="secondary" />
       </Stack>

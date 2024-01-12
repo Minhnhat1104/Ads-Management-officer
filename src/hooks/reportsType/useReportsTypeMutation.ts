@@ -24,7 +24,8 @@ export const useReportsTypeMutation = () => {
   const mUpdate = useMutation(
     [queryKeys.reportsTypeUpdate],
     (payload: any) => {
-      return axiosAPI(`reports/type/${payload?.id}`, 'PATCH');
+      const { id, ...others } = payload;
+      return axiosAPI(`reports/type/${id}`, 'PATCH', others);
     },
     {
       onSuccess: (data: any, variables: any, context: any) => {

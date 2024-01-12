@@ -8,5 +8,10 @@ export const finalizeParams = (params: any, updateData: any) => {
     districtId: params?.[keyNames.KEY_NAME_WARD_DISTRICT]?.value,
     wardName: params?.[keyNames.KEY_NAME_WARD_NAME],
   };
+
+  if (updateData) {
+    parsedParams.id = updateData?.id;
+  }
+
   return parsedParams;
 };

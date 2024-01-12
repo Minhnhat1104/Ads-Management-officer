@@ -10,10 +10,11 @@ import { finalizeParams } from './payload';
 import WriteFields from './WriteFields';
 import { getWriteForm } from '@base/utils/getWriteForm';
 import LoadingButton from '@base/components/LoadingButton';
-
+import { accessTokenAtom } from '@base/store/atoms/accessTokenAtom';
 import { useNavigate } from 'react-router-dom';
 import { useAuthMutation } from '@base/hooks/useAuthMutation';
 import { AuthContext } from '@base/auth/AuthProvider';
+import { useRecoilState } from 'recoil';
 
 interface LoginProps {}
 
@@ -21,6 +22,8 @@ const Login = (props: LoginProps) => {
   const theme = useTheme();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenAtom);
 
   const layoutFields: string[] = [keyNames.KEY_NAME_LOGIN_USER_NAME, keyNames.KEY_NAME_LOGIN_PASSWORD];
 
@@ -57,14 +60,14 @@ const Login = (props: LoginProps) => {
 
   const login = (data: any) => {
     // Optionally, you can save the token to localStorage or a cookie
-    localStorage.setItem('accessToken', data.accessToken);
+    setAccessToken(data.accessToken);
     localStorage.setItem('refreshToken', data.refreshToken);
     setIsAuthenticated && setIsAuthenticated(true);
   };
 
   const logout = () => {
     /* logic to handle user logout */
-    localStorage.removeItem('accessToken');
+    setAccessToken('');
     localStorage.removeItem('refreshToken');
     setIsAuthenticated && setIsAuthenticated(false);
   };

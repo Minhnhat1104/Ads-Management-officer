@@ -1,6 +1,8 @@
 // AuthContext.tsx
+import { accessTokenAtom } from '@base/store/atoms/accessTokenAtom';
 import { createContext, useContext, ReactNode, useState, useEffect, Dispatch } from 'react';
 import { useNavigate, useMatch } from 'react-router';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface AuthContextProps {
   isAuthenticated?: boolean;
@@ -16,13 +18,14 @@ interface AuthProviderProps {
 const AuthProvider = (props: AuthProviderProps) => {
   const { children } = props;
   const navigate = useNavigate();
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenAtom);
 
-  const storedToken = localStorage.getItem('accessToken');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const matchLogin = useMatch('/login');
 
   useEffect(() => {
-    if (!storedToken) {
+    if (accessToken === '') {
+      console.log('🚀 ~ useEffect ~ accessToken:', accessToken);
       // Nếu ko có, chuyển đến trang login
       navigate('/login');
       setIsAuthenticated(false);
@@ -31,11 +34,11 @@ const AuthProvider = (props: AuthProviderProps) => {
       if (matchLogin) {
         navigate('/');
       }
+      console.log('🚀 ~ useEffect ~ accessToken:', accessToken);
+
       setIsAuthenticated(true);
     }
-  }, [storedToken, matchLogin]);
-
-  // return <AuthContext.Provider value={{ login, logout }}>{children}</AuthContext.Provider>;
+  }, [accessToken, matchLogin]);
   return (
     <AuthContext.Provider
       value={{

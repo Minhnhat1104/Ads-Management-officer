@@ -4,6 +4,8 @@ import axios, { AxiosRequestConfig, AxiosResponse, ResponseType } from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import merge from 'lodash/merge';
 import { HOST_URL } from '@base/base';
+import { accessTokenAtom } from '@base/store/atoms/accessTokenAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export const contentFormHeaders = {
   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -34,7 +36,8 @@ export const axiosNoInterceptors = axios.create({
 
 axiosApi.interceptors.request.use(
   (config: any) => {
-    const accessToken = localStorage.getItem('accessToken');
+    // const accessToken = useRecoilValue(accessTokenAtom);
+    const accessToken = '';
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -46,12 +49,13 @@ axiosApi.interceptors.request.use(
 axiosApi.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
+    const originalRequest = error?.config;
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error?.response?.status === 401 && !originalRequest?._retry) {
       originalRequest._retry = true;
 
       try {
+        const [accessToken, setAccessToken] = useRecoilState(accessTokenAtom);
         const refreshToken = localStorage.getItem('refreshToken');
         const response = await axiosNoInterceptors.get('auth/refresh', {
           headers: {
@@ -59,7 +63,7 @@ axiosApi.interceptors.response.use(
           },
         });
 
-        localStorage.setItem('accessToken', response.data.accessToken);
+        setAccessToken(response.data.accessToken);
         localStorage.setItem('refreshToken', response.data.refreshToken);
 
         originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;

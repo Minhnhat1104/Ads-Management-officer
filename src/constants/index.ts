@@ -20,6 +20,7 @@ export const REQUEST_STATUS_OPTIONS: LabelValue<string, number>[] = [
 
 export const USER_ROLE_DEPARTMENT = 'DEPARTMENT';
 export const USER_ROLE_WARD = 'WARD';
+export const USER_ROLE_DISTRICT = 'DISTRICT';
 
 export const USER_ROLE_OPTIONS: LabelValue[] = [
   {
@@ -29,6 +30,10 @@ export const USER_ROLE_OPTIONS: LabelValue[] = [
   {
     label: 'Cán bộ phường',
     value: USER_ROLE_WARD,
+  },
+  {
+    label: 'Cán bộ quận',
+    value: USER_ROLE_DISTRICT,
   },
 ];
 

@@ -15,28 +15,28 @@ const writeConfig: WriteConfig = {
     Component: TextField,
     defaultValue: '',
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên Tên',
+    validate: (value: any) => !!value || 'Hãy nhập Tên',
   },
   [keyNames.KEY_NAME_ACCOUNT_LAST_NAME]: {
     languageKey: 'Họ',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên Họ',
+    validate: (value: any) => !!value || 'Hãy nhập Họ',
   },
   [keyNames.KEY_NAME_ACCOUNT_EMAIL]: {
     languageKey: 'Email',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên Email',
+    validate: (value: any) => !!value || 'Hãy nhập Email',
   },
   [keyNames.KEY_NAME_ACCOUNT_PHONE]: {
     languageKey: 'SĐT',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên SĐT',
+    validate: (value: any) => !!value || 'Hãy nhập SĐT',
   },
   [keyNames.KEY_NAME_ACCOUNT_PASSWORD]: {
     languageKey: 'Mật khẩu',
@@ -45,7 +45,7 @@ const writeConfig: WriteConfig = {
     componentProps: {
       type: 'password',
     },
-    validate: (value: any) => !!value || 'Hãy nhập tên Mật',
+    validate: (value: any) => !!value || 'Hãy nhập mật khẩu',
   },
   [keyNames.KEY_NAME_ACCOUNT_ROLE_NAME]: {
     languageKey: 'Vai trò',
@@ -54,14 +54,14 @@ const writeConfig: WriteConfig = {
     componentProps: {
       options: USER_ROLE_OPTIONS,
     },
-    validate: (value: any) => !!value || 'Hãy nhập tên Vai',
+    validate: (value: any) => !!value || 'Hãy nhập Vai trò',
   },
   [keyNames.KEY_NAME_ACCOUNT_WARD]: {
     languageKey: 'Phường',
     Component: components.WardSelect,
     defaultValue: null,
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên Phường',
+    validate: (value: any) => !!value || 'Hãy nhập Phường',
   },
 };
 

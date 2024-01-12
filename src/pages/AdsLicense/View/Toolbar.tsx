@@ -35,6 +35,9 @@ const Toolbar = (props: ToolbarProps) => {
       onSuccess(data, variables, context) {
         queryClient.invalidateQueries([queryKeys.requests]);
         queryClient.invalidateQueries([queryKeys.requestView]);
+        if (type === 'cancel') {
+          navigate('/ads-license');
+        }
       },
     });
   };

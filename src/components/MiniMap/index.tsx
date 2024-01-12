@@ -33,6 +33,20 @@ const MiniMap = (props: MiniMapProps) => {
 
   const { data } = usePlacements();
 
+  useEffect(() => {
+    if (data) {
+      setLocationAds(data);
+      setViewport((prevViewport) => ({
+        ...prevViewport,
+        latitude: Number(data?.[0]?.lat),
+        longitude: Number(data?.[0]?.lng),
+        zoom: 12, // set the zoom level as needed
+      }));
+    } else {
+      setLocationAds([]);
+    }
+  }, [data]);
+
   const handleViewportChange = (updatedViewport: any) => {
     // Xử lý dữ liệu truyền về từ Component B
     setViewport(updatedViewport);
@@ -51,25 +65,6 @@ const MiniMap = (props: MiniMapProps) => {
       setLocationAds([]);
     }
   }, [data]);
-
-  useEffect(() => {
-    // Get user's location using browser's Geolocation API
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        // Set the initial viewport state with user location
-        setViewport((prevViewport) => ({
-          ...prevViewport,
-          latitude,
-          longitude,
-          zoom: 12, // set the zoom level as needed
-        }));
-      },
-      (error) => {
-        console.error('Error getting user location:', error);
-      }
-    );
-  }, []);
 
   return (
     <ReactMapGL
@@ -103,13 +98,6 @@ const MiniMap = (props: MiniMapProps) => {
           <AdInfo info={popupInfo} />
         </Popup>
       )}
-
-      <GeolocateControl
-        style={geolocateControlStyle}
-        positionOptions={{ enableHighAccuracy: true }}
-        trackUserLocation={true}
-        auto
-      />
     </ReactMapGL>
   );
 };

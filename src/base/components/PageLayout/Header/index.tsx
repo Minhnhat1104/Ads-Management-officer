@@ -116,19 +116,17 @@ const Header = () => {
             onClick={() => setOpen(true)}
           >
             <AccountCircleIcon fontSize="small" />
-            {account ? (
+            {account && (
               <Typography style={{ fontSize: 16, fontWeight: 600 }}>
                 {account.firstName + ' ' + account.lastName}
               </Typography>
-            ) : (
-              <Typography style={{ fontSize: 16, fontWeight: 600 }}>UNDEFIND</Typography>
             )}
             <Button
               variant="contained"
               color="error"
               onClick={() => {
+                localStorage.removeItem('accessToken');
                 localStorage.removeItem('refreshToken');
-                console.log('logout');
                 setIsAuthenticated && setIsAuthenticated(false);
               }}
             >

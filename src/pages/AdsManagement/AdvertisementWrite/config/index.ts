@@ -39,9 +39,11 @@ const writeConfig: WriteConfig = {
   },
   [keyNames.KEY_NAME_AD_AMOUNT]: {
     languageKey: 'Số lượng',
-    Component: components.PlacementFormatSelect,
-    defaultValue: null,
-    componentProps: {},
+    Component: TextField,
+    defaultValue: 0,
+    componentProps: {
+      type: 'number',
+    },
   },
   [keyNames.KEY_NAME_AD_ADVERTISING_TYPE_ID]: {
     languageKey: 'Loại quảng cáo',

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ReactMapGL, { GeolocateControl, FullscreenControl, Popup } from '@goongmaps/goong-map-react';
-import Pins from './Pins';
-import AdInfo from './AdInfo';
+import Pins from './Advertisement/Pins';
+import AdInfo from './Advertisement/AdInfo';
 import ControlPanel from './ControlPanel';
 
-import BoardList from './BoardList';
+import BoardList from './Advertisement/BoardList';
 import { usePlacements } from 'src/hooks/usePlacements';
 import { GOONG_MAPTILES_KEY } from 'src/constants/goongmap';
+import { useReports } from 'src/hooks/useReports';
+import ReportPins from './Report/ReportPins';
 
 const fullscreenControlStyle = {
   right: 10,
@@ -20,9 +22,6 @@ const geolocateControlStyle = {
 
 const Home = () => {
   // state
-  const [popupInfo, setPopupInfo] = useState<any>(null);
-  const [boardData, setBoardData] = useState<any>(null);
-  const [locationAds, setLocationAds] = useState<any[]>([]);
   const [viewport, setViewport] = useState({
     width: '100%',
     height: '100%',
@@ -30,35 +29,21 @@ const Home = () => {
     longitude: 106.68246, /// HCMUS long
     zoom: 16,
   });
+  // ad
+  const [popupInfo, setPopupInfo] = useState<any>(null);
+  const [boardData, setBoardData] = useState<any>(null);
+  const [locationAds, setLocationAds] = useState<any[]>([]);
+
+  // report
+  const [reportpopupInfo, setReportPopupInfo] = useState<any>(null);
+  const [reportboardData, setReportBoardData] = useState<any>(null);
+
+  // control panel
   const [showPins, setShowPins] = useState<boolean>(true);
-
-  // useEffect(() => {
-  //   // Get user's location using browser's Geolocation API
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       const { latitude, longitude } = position.coords;
-  //       // Set the initial viewport state with user location
-  //       setViewport((prevViewport) => ({
-  //         ...prevViewport,
-  //         latitude,
-  //         longitude,
-  //         zoom: 12, // set the zoom level as needed
-  //       }));
-  //       console.log(latitude, longitude);
-  //     },
-  //     (error) => {
-  //       console.error('Error getting user location:', error);
-  //     }
-  //   );
-  // }, []);
-
-  // useEffect(() => {
-  //   // Thực hiện bất kỳ xử lý nào bạn cần khi viewport thay đổi
-  //   // Ví dụ: Gọi API, xử lý dữ liệu, etc.
-  //   console.log('Viewport changed:', viewport);
-  // }, [viewport]);
+  const [showReports, setShowReports] = useState<boolean>(true);
 
   const { data } = usePlacements();
+  const { data: reportData } = useReports();
 
   useEffect(() => {
     if (data) {
@@ -82,6 +67,7 @@ const Home = () => {
       touchRotate={true}
       transitionDuration={100}
     >
+      {/* Ads */}
       {locationAds && showPins && <Pins data={locationAds} setPopupInfo={setPopupInfo} setBoardData={setBoardData} />}
 
       {popupInfo && boardData === null && (
@@ -110,13 +96,24 @@ const Home = () => {
         </Popup>
       )}
 
-      <ControlPanel setViewport={setViewport} showPins={showPins} setShowPins={setShowPins} />
+      {/* Report */}
+      {reportData && showReports && (
+        <ReportPins data={reportData} setPopupInfo={setReportPopupInfo} setBoardData={setReportBoardData} />
+      )}
+
+      <ControlPanel
+        setViewport={setViewport}
+        showPins={showPins}
+        setShowPins={setShowPins}
+        showReports={showReports}
+        setShowReports={setShowReports}
+      />
 
       {/* Current location user */}
       <GeolocateControl
         style={geolocateControlStyle}
         positionOptions={{ enableHighAccuracy: true }}
-        trackUserLocation={true}
+        trackUserLocation={false}
         auto
       />
 

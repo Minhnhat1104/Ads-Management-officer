@@ -45,10 +45,12 @@ interface ControlPanelProps {
   showPins: any;
   setShowPins: any;
   setViewport: any;
+  showReports: any;
+  setShowReports: any;
 }
 
 const ControlPanel = (props: ControlPanelProps) => {
-  const { showPins, setShowPins, setViewport } = props;
+  const { showPins, setShowPins, setViewport, showReports, setShowReports } = props;
   const theme = useTheme();
   const [filter, setFilter] = useState<LabelValue[]>([]);
   const [search, setSearch] = useState<string>('');
@@ -94,6 +96,7 @@ const ControlPanel = (props: ControlPanelProps) => {
     >
       {/* <CheckBoxGroup options={MAP_FILTER_OPTIONS} value={filter} onChange={setFilter} /> */}
       <Checkbox label={'Bảng QC'} value={showPins} onChange={setShowPins} />
+      <Checkbox label={'Báo cáo vi phạm'} value={showReports} onChange={setShowReports} />
 
       <InputLabel sx={{ mt: 1 }}>Tìm địa chỉ</InputLabel>
       <TextField

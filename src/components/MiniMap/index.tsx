@@ -3,7 +3,7 @@ import { usePlacements } from 'src/hooks/usePlacements';
 import ReactMapGL, { GeolocateControl, FullscreenControl, Popup } from '@goongmaps/goong-map-react';
 import { GOONG_MAPTILES_KEY } from 'src/constants/goongmap';
 import Pins from './Pins';
-import AdInfo from '@pages/Home/AdInfo';
+import AdInfo from '@pages/Home/Advertisement/AdInfo';
 import ControlPanel from './ControlPanel';
 
 const geolocateControlStyle = {

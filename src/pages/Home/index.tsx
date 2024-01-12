@@ -30,6 +30,7 @@ const Home = () => {
     longitude: 106.68246, /// HCMUS long
     zoom: 16,
   });
+  const [showPins, setShowPins] = useState<boolean>(true);
 
   // useEffect(() => {
   //   // Get user's location using browser's Geolocation API
@@ -73,11 +74,6 @@ const Home = () => {
     }
   }, [data]);
 
-  const handleViewportChange = (updatedViewport: any) => {
-    // Xử lý dữ liệu truyền về từ Component B
-    setViewport(updatedViewport);
-  };
-
   return (
     <ReactMapGL
       {...viewport}
@@ -86,7 +82,7 @@ const Home = () => {
       touchRotate={true}
       transitionDuration={100}
     >
-      {locationAds && <Pins data={locationAds} setPopupInfo={setPopupInfo} setBoardData={setBoardData} />}
+      {locationAds && showPins && <Pins data={locationAds} setPopupInfo={setPopupInfo} setBoardData={setBoardData} />}
 
       {popupInfo && boardData === null && (
         <Popup
@@ -114,11 +110,7 @@ const Home = () => {
         </Popup>
       )}
 
-      {/* <Marker longitude={viewport.longitude} latitude={viewport.latitude}>
-        <LocationOnIcon />
-      </Marker> */}
-
-      <ControlPanel viewport={viewport} onViewportChange={handleViewportChange} />
+      <ControlPanel setViewport={setViewport} showPins={showPins} setShowPins={setShowPins} />
 
       {/* Current location user */}
       <GeolocateControl

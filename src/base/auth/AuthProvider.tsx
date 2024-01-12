@@ -1,10 +1,13 @@
 // AuthContext.tsx
+import { useQueryClient } from '@tanstack/react-query';
 import { createContext, useContext, ReactNode, useState, useEffect, Dispatch } from 'react';
 import { useNavigate, useMatch } from 'react-router';
 
 interface AuthContextProps {
   isAuthenticated?: boolean;
   setIsAuthenticated?: Dispatch<boolean>;
+  login?: (data: any) => void;
+  logout?: () => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({});
@@ -16,6 +19,7 @@ interface AuthProviderProps {
 const AuthProvider = (props: AuthProviderProps) => {
   const { children } = props;
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const storedToken = localStorage.getItem('accessToken');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -35,12 +39,30 @@ const AuthProvider = (props: AuthProviderProps) => {
     }
   }, [storedToken, matchLogin]);
 
-  // return <AuthContext.Provider value={{ login, logout }}>{children}</AuthContext.Provider>;
+  const login = (data: any) => {
+    // Optionally, you can save the token to localStorage or a cookie
+    localStorage.setItem('accessToken', data.accessToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
+    setIsAuthenticated && setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    /* logic to handle user logout */
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    console.log('clear cache');
+
+    queryClient.clear();
+    setIsAuthenticated && setIsAuthenticated(false);
+  };
+
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         setIsAuthenticated,
+        login,
+        logout,
       }}
     >
       {children}

@@ -16,6 +16,7 @@ import { useAccountProfile } from 'src/hooks/useAccountProfile';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { userProfileMutation } from 'src/hooks/userInforMutation';
 import Toolbar from './Toolbar';
+import { useWards } from 'src/hooks/ward/useWards';
 
 interface WritePageProps {
   title?: string;
@@ -34,12 +35,14 @@ const DetailInfo = (props: WritePageProps) => {
     keyNames.KEY_NAME_INFO_LASTNAME,
     keyNames.KEY_NAME_INFO_EMAIL,
     keyNames.KEY_NAME_INFO_PHONE,
+    keyNames.KEY_NAME_INFO_WARD_ID,
   ];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
   const account = location.state && location.state.account;
   const { data: viewData } = useAccountProfile();
+  const { data: viewWardData } = useWards();
 
   //react-hook-form
   const {
@@ -58,17 +61,17 @@ const DetailInfo = (props: WritePageProps) => {
 
   useEffect(() => {
     if (viewData) {
-      // const ward = viewDataWard.find(
-      //   (ward: { [x: string]: any; wardName: any }) =>
-      //     ward?.wardName === account?.ward && ward?.district === account?.district
-      // );
+      const ward = viewWardData?.find(
+        (ward: { [x: string]: any; wardName: any }) =>
+          ward?.wardName === viewData?.ward && ward?.district === viewData?.district
+      );
       // console.log('WardId: ', wardId);
       const newFormData = {
         [keyNames.KEY_NAME_INFO_LASTNAME]: viewData?.lastName,
         [keyNames.KEY_NAME_INFO_FIRSTNAME]: viewData?.firstName,
         [keyNames.KEY_NAME_INFO_EMAIL]: viewData?.email,
         [keyNames.KEY_NAME_INFO_PHONE]: viewData?.phone,
-        // [keyNames.KEY_NAME_INFO_WARD_ID]: { label: ward?.wardName + ' ' + ward?.district, value: ward?.id }, // need id
+        [keyNames.KEY_NAME_INFO_WARD_ID]: { label: ward?.wardName + ' ' + ward?.district, value: ward?.id }, // need id
       };
       reset && reset(newFormData);
     }

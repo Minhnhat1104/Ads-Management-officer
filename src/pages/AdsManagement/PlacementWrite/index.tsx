@@ -28,8 +28,7 @@ const WritePage = (props: WritePageProps) => {
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [
-    keyNames.KEY_NAME_PLACEMENT_LAT,
-    keyNames.KEY_NAME_PLACEMENT_LNG,
+    keyNames.KEY_NAME_PLACEMENT_POSITION,
     keyNames.KEY_NAME_PLACEMENT_PLANNED,
     keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ID,
     keyNames.KEY_NAME_PLACEMENT_FORMAT_ID,
@@ -62,8 +61,8 @@ const WritePage = (props: WritePageProps) => {
   useEffect(() => {
     if (viewData) {
       const newFormData = {
-        [keyNames.KEY_NAME_PLACEMENT_LAT]: viewData?.lat,
-        [keyNames.KEY_NAME_PLACEMENT_LNG]: viewData?.lng,
+        [keyNames.KEY_NAME_PLACEMENT_POSITION]: { lat: Number(viewData?.lat), lng: Number(viewData?.lng) },
+        // [keyNames.KEY_NAME_PLACEMENT_LNG]: viewData?.lng,
         [keyNames.KEY_NAME_PLACEMENT_PLANNED]: viewData?.planned,
         [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ID]: {
           label: viewData?.locationType?.name,

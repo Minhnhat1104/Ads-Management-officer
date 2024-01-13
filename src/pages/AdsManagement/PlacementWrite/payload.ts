@@ -6,8 +6,8 @@ export const finalizeParams = (params: any, updateData: any) => {
 
   parsedParams = {
     editData: {
-      lat: Number(params?.[keyNames.KEY_NAME_PLACEMENT_LAT]),
-      lng: Number(params?.[keyNames.KEY_NAME_PLACEMENT_LNG]),
+      lat: Number(params?.[keyNames.KEY_NAME_PLACEMENT_POSITION]?.lat),
+      lng: Number(params?.[keyNames.KEY_NAME_PLACEMENT_POSITION]?.lng),
       planned: params?.[keyNames.KEY_NAME_PLACEMENT_PLANNED],
       locationTypeId: params?.[keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ID]?.value,
       formatId: params?.[keyNames.KEY_NAME_PLACEMENT_FORMAT_ID]?.value,

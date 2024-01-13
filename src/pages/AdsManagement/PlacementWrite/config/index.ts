@@ -9,23 +9,15 @@ import { DEMO_OPTIONS } from 'src/constants/demo';
 import * as components from 'src/components';
 
 const writeConfig: WriteConfig = {
-  [keyNames.KEY_NAME_PLACEMENT_LAT]: {
-    languageKey: 'Tung độ',
-    Component: TextField,
-    defaultValue: 0,
-    componentProps: {
-      type: 'number',
+  [keyNames.KEY_NAME_PLACEMENT_POSITION]: {
+    languageKey: 'Vị trí',
+    Component: components.MiniMapSelectPoint,
+    defaultValue: {
+      lng: 106.68246,
+      lat: 10.7631,
     },
-    validate: (value: any) => !!value || 'Hãy nhập Tung độ',
-  },
-  [keyNames.KEY_NAME_PLACEMENT_LNG]: {
-    languageKey: 'Vĩ độ',
-    Component: TextField,
-    defaultValue: 0,
-    componentProps: {
-      type: 'number',
-    },
-    validate: (value: any) => !!value || 'Hãy nhập Vĩ độ',
+    componentProps: {},
+    validate: (value: any) => (!!value?.lat && !!value?.lng) || 'Hãy chọn vị trí',
   },
   [keyNames.KEY_NAME_PLACEMENT_PLANNED]: {
     languageKey: 'Trạng thái quy hoạch',

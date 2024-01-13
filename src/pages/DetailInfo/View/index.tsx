@@ -25,7 +25,6 @@ interface WritePageProps {
 
 const DetailInfo = (props: WritePageProps) => {
   const { title, updateData } = props;
-  console.log('🚀 ~ updateData:', updateData);
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -92,7 +91,7 @@ const DetailInfo = (props: WritePageProps) => {
     mEditInfo.mutate(parsedParams.editData, {
       onSuccess(data, variables: any, context) {
         setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.info]);
+          queryClient.invalidateQueries([queryKeys.accountProfile]);
         }, SET_TIMEOUT);
 
         reset && reset();

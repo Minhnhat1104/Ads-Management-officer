@@ -19,7 +19,7 @@ const Toolbar = (props: ToolbarProps) => {
   const border = `1px solid ${theme.palette.divider}`;
 
   const handleRefresh = () => {
-    queryClient.invalidateQueries([queryKeys.districts]);
+    queryClient.invalidateQueries([queryKeys.advertisement2]);
   };
 
   return (

@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router';
 import Write from '../Write';
 import { useDistrictMutation } from 'src/hooks/district/useDistrictMutation';
 import { queryKeys } from '@base/config/queryKeys';
-import { useAdvertisements2 } from 'src/hooks/useAdvertisements';
+import { useAdvertisements2, useAdvertisements2Mutation } from 'src/hooks/useAdvertisements';
 
 interface ListProps {}
 
@@ -37,7 +37,7 @@ const List = (props: ListProps) => {
 
   // call data
   const { data } = useAdvertisements2();
-  const { mDelete } = useDistrictMutation();
+  const { mDelete } = useAdvertisements2Mutation();
 
   useEffect(() => {
     if (data && Array.isArray(data)) {
@@ -64,7 +64,7 @@ const List = (props: ListProps) => {
     mDelete.mutate(params, {
       onSuccess(data, variables, context) {
         setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.districts]);
+          queryClient.invalidateQueries([queryKeys.advertisement2]);
         }, SET_TIMEOUT);
       },
     });
@@ -102,12 +102,12 @@ const List = (props: ListProps) => {
       enableSorting: false,
       width: 'auto',
     },
-    {
-      languageKey: 'Loại',
-      keyName: keyNames.KEY_NAME_AD_ADVERTISING_TYPE_ID,
-      enableSorting: false,
-      width: 'auto',
-    },
+    // {
+    //   languageKey: 'Loại',
+    //   keyName: keyNames.KEY_NAME_AD_ADVERTISING_TYPE_ID,
+    //   enableSorting: false,
+    //   width: 'auto',
+    // },
     // {
     //   languageKey: 'Quận',
     //   keyName: keyNames.KEY_NAME_AD_ADVERTISEMENT_CONTRACT_ID,

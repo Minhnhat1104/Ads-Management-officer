@@ -16,6 +16,7 @@ import { userRequestMutation } from 'src/hooks/userRequestMutation';
 import { queryKeys } from '@base/config/queryKeys';
 import { usePlacement } from 'src/hooks/usePlacements';
 import { useDistrictMutation } from 'src/hooks/district/useDistrictMutation';
+import { useAdvertisements2Mutation } from 'src/hooks/useAdvertisements';
 
 interface WritePageProps {
   title?: string;
@@ -29,7 +30,17 @@ const WritePage = (props: WritePageProps) => {
   console.log('🚀 ~ updateData:', updateData);
   const theme = useTheme();
   const queryClient = useQueryClient();
-  const layoutFields: string[] = [keyNames.KEY_NAME_DISTRICT_NAME];
+  const layoutFields: string[] = [
+    keyNames.KEY_NAME_AD_WIDTH,
+    keyNames.KEY_NAME_AD_HEIGH,
+    keyNames.KEY_NAME_AD_IMAGE,
+    keyNames.KEY_NAME_AD_PLACEMENT_ID,
+    keyNames.KEY_NAME_AD_AMOUNT,
+    keyNames.KEY_NAME_AD_ADVERTISING_TYPE,
+    keyNames.KEY_NAME_AD_COMPANY,
+    keyNames.KEY_NAME_AD_START_DATE,
+    keyNames.KEY_NAME_AD_END_DATE,
+  ];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
@@ -48,17 +59,18 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    if (updateData) {
-      const newFormData = {
-        [keyNames.KEY_NAME_DISTRICT_NAME]: updateData?.districtName,
-      };
+  // useEffect(() => {
+  //   if (updateData) {
+  //     const newFormData = {
+  //       [keyNames.KEY_NAME_DISTRICT_NAME]: updateData?.districtName,
+  //     };
 
-      reset && reset(newFormData);
-    }
-  }, [updateData]);
+  //     reset && reset(newFormData);
+  //   }
+  // }, [updateData]);
 
-  const { mAdd, mUpdate } = useDistrictMutation();
+  const { mAdd, mUpdate } = useAdvertisements2Mutation();
+  const { mUploadImage } = userRequestMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -70,11 +82,17 @@ const WritePage = (props: WritePageProps) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
     console.log('🚀 ~ parsedParams:', parsedParams);
+    const paramUpload: any = {
+      file: params[keyNames.KEY_NAME_AD_IMAGE]?.[0],
+    };
+    const imageUrl = await mUploadImage.mutateAsync(paramUpload);
+    parsedParams.image = imageUrl;
+
     if (updateData) {
       mUpdate.mutate(parsedParams, {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
-            queryClient.invalidateQueries([queryKeys.districts]);
+            queryClient.invalidateQueries([queryKeys.advertisement2]);
           }, SET_TIMEOUT);
 
           onClose && onClose();
@@ -85,7 +103,7 @@ const WritePage = (props: WritePageProps) => {
       mAdd.mutate(parsedParams, {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
-            queryClient.invalidateQueries([queryKeys.districts]);
+            queryClient.invalidateQueries([queryKeys.advertisement2]);
           }, SET_TIMEOUT);
 
           onClose && onClose();
@@ -133,7 +151,7 @@ const WritePage = (props: WritePageProps) => {
   return (
     <>
       <MiModal
-        title={updateData ? 'Cập nhật quận' : 'Thêm quận'}
+        title={updateData ? 'Cập nhật quảng cáo' : 'Thêm quảng cáo'}
         isOpen={isOpen}
         footer={Footer}
         onClose={onClose}

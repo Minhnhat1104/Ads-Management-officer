@@ -85,6 +85,9 @@ export const queryKeys = {
 
   // ad
   advertisement2: 'advertisement2',
+  advertisementAdd: 'advertisementAdd',
+  advertisementUpdate: 'advertisementUpdate',
+  advertisementDelete: 'advertisementDelete',
 
   // home
   placements: 'home_placements',

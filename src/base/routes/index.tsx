@@ -22,6 +22,7 @@ const Ward = lazy(() => import('@pages/Ward/List'));
 const AdsFormat = lazy(() => import('@pages/AdsFormat/List'));
 const ReportsType = lazy(() => import('@pages/ReportsType/List'));
 const PlacementLocationType = lazy(() => import('@pages/PlacementLocationType/List'));
+const PlacementLocation = lazy(() => import('@pages/PlacementLocation/List'));
 const AdvertisementType = lazy(() => import('@pages/AdvertisementsType/List'));
 const RequestEdit = lazy(() => import('@pages/RequestEdit/List'));
 const RequestEditView = lazy(() => import('@pages/RequestEdit/View'));
@@ -93,6 +94,10 @@ export const routes: RouteObject[] = [
       {
         path: 'placement-location-type',
         element: <PlacementLocationType />,
+      },
+      {
+        path: 'placement-location',
+        element: <PlacementLocation />,
       },
       {
         path: 'advertisement-type',

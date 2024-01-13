@@ -26,8 +26,12 @@ export const departmentNavItems: LabelValue[] = [
     value: 'report-type',
   },
   {
-    label: 'Quản lý các điểm đặt quảng cáo',
+    label: 'Quản lý các loại điểm đặt quảng cáo',
     value: 'placement-location-type',
+  },
+  {
+    label: 'Quản lý các điểm đặt quảng cáo',
+    value: 'placement-location',
   },
   {
     label: 'Yêu cầu chỉnh sửa',

@@ -62,7 +62,7 @@ const ChangePassword = (props: WritePageProps) => {
     mChangePassword.mutate(parsedParams.editData, {
       onSuccess(data, variables: any, context) {
         setTimeout(() => {
-          queryClient.invalidateQueries([queryKeys.auth_changePassword]);
+          queryClient.invalidateQueries([queryKeys.accountProfile]);
         }, SET_TIMEOUT);
 
         reset && reset();
@@ -88,7 +88,7 @@ const ChangePassword = (props: WritePageProps) => {
               isEdit={!!updateData}
               updateData={updateData}
             />
-            <Stack direction="row" spacing={2} alignItems="center" sx={{ marginTop: 2 }}>
+            <Stack direction="row" spacing={2} alignItems="center" justifyContent="flex-end" sx={{ marginTop: 2 }}>
               <Button
                 size="medium"
                 variant="outlined"

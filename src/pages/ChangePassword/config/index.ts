@@ -13,14 +13,30 @@ const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_PASS_OLD]: {
     languageKey: 'Mật khẩu cũ',
     Component: PasswordField,
+    defaultValue: '',
+    componentProps: {
+      autoComplete: 'off',
+    },
     validate: (value: any) => !!value || 'Hãy nhập mật khẩu cũ',
   },
   [keyNames.KEY_NAME_PASS_NEW]: {
     languageKey: 'Mật khẩu mới',
     Component: PasswordField,
+    defaultValue: '',
+    componentProps: {
+      autoComplete: 'off',
+    },
     validate: (value: any, allValues: any) => {
       const oldPass = allValues[keyNames.KEY_NAME_PASS_OLD];
-      return (oldPass && value && value !== oldPass) || 'Mật khẩu mới phải khác mật khẩu cũ';
+      if (oldPass && value && value === oldPass) {
+        return 'Mật khẩu mới phải khác mật khẩu cũ';
+      }
+
+      if (!value) {
+        return 'Hãy nhập mật khẩu mới';
+      }
+
+      return true;
     },
   },
 };

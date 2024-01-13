@@ -114,7 +114,7 @@ const DetailInfo = (props: WritePageProps) => {
               isEdit={!!updateData}
               updateData={updateData}
             />
-            <Stack direction="row" spacing={2} alignItems="center" sx={{ marginTop: 2 }}>
+            <Stack direction="row" spacing={2} alignItems="center" justifyContent="flex-end" sx={{ marginTop: 2 }}>
               <Button
                 size="medium"
                 variant="outlined"

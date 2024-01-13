@@ -28,8 +28,9 @@ export const useAuthMutation = () => {
       enqueueSuccessBar('Change password Successfully');
     },
     onError: (error: any, variables: any, context: any) => {
-      console.log(error);
-      enqueueErrorBar('Change password Fail');
+      console.log('🚀 ~ error:', error);
+
+      enqueueErrorBar(error?.response?.data?.message || 'Change password Fail');
     },
   });
 

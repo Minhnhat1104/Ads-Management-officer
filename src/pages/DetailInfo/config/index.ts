@@ -12,21 +12,25 @@ const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_INFO_FIRSTNAME]: {
     languageKey: 'Tên',
     Component: TextField,
+    defaultValue: '',
     validate: (value: any) => !!value || 'Hãy nhập Tên',
   },
   [keyNames.KEY_NAME_INFO_LASTNAME]: {
     languageKey: 'Họ',
     Component: TextField,
+    defaultValue: '',
     validate: (value: any) => !!value || 'Hãy nhập Họ',
   },
   [keyNames.KEY_NAME_INFO_EMAIL]: {
     languageKey: 'Email',
     Component: TextField,
+    defaultValue: '',
     validate: (value: any) => !!value || 'Hãy nhập Email',
   },
   [keyNames.KEY_NAME_INFO_PHONE]: {
     languageKey: 'Số điện thoại',
     Component: TextField,
+    defaultValue: '',
     validate: (value: string) => {
       const pattern = new RegExp(/^\d{1,10}$/);
       return pattern.test(value);

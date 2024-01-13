@@ -79,9 +79,9 @@ const Login = (props: LoginProps) => {
           <Stack padding={2} spacing={2} width={500} border={border}>
             <WriteFields fields={fields} watch={watch} setValue={setValue} control={control} errors={errors} />
             <Stack>
-              <Typography color={theme.palette.primary.main} sx={{ cursor: 'pointer' }}>
+              {/* <Typography color={theme.palette.primary.main} sx={{ cursor: 'pointer' }}>
                 Quên mật khẩu
-              </Typography>
+              </Typography> */}
               <LoadingButton
                 size="medium"
                 variant="contained"

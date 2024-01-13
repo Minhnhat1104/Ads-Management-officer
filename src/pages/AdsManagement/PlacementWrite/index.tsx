@@ -34,6 +34,7 @@ const WritePage = (props: WritePageProps) => {
     keyNames.KEY_NAME_PLACEMENT_PLANNED,
     keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ID,
     keyNames.KEY_NAME_PLACEMENT_FORMAT_ID,
+    keyNames.KEY_NAME_PLACEMENT_ADDRESS,
     keyNames.KEY_NAME_PLACEMENT_WARD_ID,
     keyNames.KEY_NAME_PLACEMENT_REASON,
   ];
@@ -70,6 +71,7 @@ const WritePage = (props: WritePageProps) => {
           value: viewData?.locationType?.id,
         }, // need id
         [keyNames.KEY_NAME_PLACEMENT_FORMAT_ID]: { label: viewData?.format?.name, value: viewData?.format?.id }, // need id
+        [keyNames.KEY_NAME_PLACEMENT_ADDRESS]: viewData?.address,
         [keyNames.KEY_NAME_PLACEMENT_WARD_ID]: { label: viewData?.ward?.name, value: viewData?.ward?.id }, // need id
       };
 

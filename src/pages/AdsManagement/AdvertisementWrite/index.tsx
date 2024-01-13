@@ -96,6 +96,8 @@ const AdvertisementWrite = (props: AdvertisementWriteProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, viewData); // define add or update here
+    console.log('🚀 ~ onSubmit ~ parsedParams:', parsedParams);
+
     mRequestEditAd.mutate(parsedParams, {
       onSuccess(data, variables: any, context) {
         setTimeout(() => {

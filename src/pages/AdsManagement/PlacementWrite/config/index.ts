@@ -45,6 +45,12 @@ const writeConfig: WriteConfig = {
     defaultValue: null,
     componentProps: {},
   },
+  [keyNames.KEY_NAME_PLACEMENT_ADDRESS]: {
+    languageKey: 'Địa chỉ',
+    Component: TextField,
+    defaultValue: '',
+    componentProps: {},
+  },
   [keyNames.KEY_NAME_PLACEMENT_WARD_ID]: {
     languageKey: 'Phường',
     Component: components.WardSelect,

@@ -5,7 +5,6 @@ import { useReportStatistics } from 'src/hooks/useReports';
 
 const ReportStatistics = () => {
   const { data } = useReportStatistics();
-  console.log('🚀 ~ data:', data);
 
   const series = data?.data;
 

@@ -14,24 +14,22 @@ export const departmentNavItems: LabelValue[] = [
     value: 'ward',
   },
   {
-    label: 'Quản lý loại hình thức quảng cáo',
+    label: 'Quản lý các loại hình quảng cáo',
     value: 'ads-format',
   },
+
   {
-    label: 'Quản lý loại bảng quảng cáo',
-    value: 'advertisement-type',
-  },
-  {
-    label: 'Quản lý loại hình thức báo cáo',
+    label: 'Quản lý các loại hình thức báo cáo',
     value: 'report-type',
   },
-  {
-    label: 'Quản lý các loại điểm đặt quảng cáo',
-    value: 'placement-location-type',
-  },
+
   {
     label: 'Quản lý các điểm đặt quảng cáo',
     value: 'placement-location',
+  },
+  {
+    label: 'Quản lý các bảng quảng cáo',
+    value: 'advertisement-manage',
   },
   {
     label: 'Yêu cầu chỉnh sửa',
@@ -44,6 +42,14 @@ export const departmentNavItems: LabelValue[] = [
   {
     label: 'Quản lý tài khoản cán bộ',
     value: 'account',
+  },
+  {
+    label: 'Quản lý loại bảng quảng cáo',
+    value: 'advertisement-type',
+  },
+  {
+    label: 'Quản lý các loại điểm đặt quảng cáo',
+    value: 'placement-location-type',
   },
 ];
 

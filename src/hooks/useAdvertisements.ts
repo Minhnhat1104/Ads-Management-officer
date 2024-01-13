@@ -19,3 +19,10 @@ export const useAdvertisementDetail = (id?: any, opts?: any) => {
     ...opts,
   });
 };
+
+export const useAdvertisements2 = (params?: any, opts?: any) => {
+  return useGet<any>([queryKeys.advertisement2, keyStringify(params)], `advertisement`, params, {
+    keepPreviousData: true,
+    ...opts,
+  });
+};

@@ -7,7 +7,7 @@ export const REQUEST_STATUS_OPTIONS: LabelValue<string, number>[] = [
     extra: 'error',
   },
   {
-    label: 'Đang xử lí',
+    label: 'Đang xem xét',
     value: 0,
     extra: 'secondary',
   },

@@ -65,6 +65,7 @@ const Toolbar = (props: ToolbarProps) => {
         onSuccess(data, variables, context) {
           setTimeout(() => {
             queryClient.invalidateQueries([queryKeys.requestEdits]);
+            queryClient.invalidateQueries([queryKeys.requestEditById]);
           }, SET_TIMEOUT);
           navigate(-1);
         },
@@ -74,6 +75,7 @@ const Toolbar = (props: ToolbarProps) => {
         onSuccess(data, variables, context) {
           setTimeout(() => {
             queryClient.invalidateQueries([queryKeys.requestEdits]);
+            queryClient.invalidateQueries([queryKeys.requestEditById]);
           }, SET_TIMEOUT);
           navigate(-1);
         },
@@ -95,14 +97,16 @@ const Toolbar = (props: ToolbarProps) => {
             Trở về
           </Button>
         </Stack>
-        <Stack direction="row">
-          <Button variant="outlined" size="small" color="primary" onClick={handleApprove} sx={{ marginRight: 2 }}>
-            Chấp nhận
-          </Button>
-          <Button variant="outlined" size="small" color="primary" onClick={handleDeny}>
-            Từ chối
-          </Button>
-        </Stack>
+        {data?.status === 0 && (
+          <Stack direction="row" spacing={1}>
+            <Button variant="contained" color="success" onClick={handleApprove}>
+              Chấp nhận
+            </Button>
+            <Button variant="contained" color="error" onClick={handleDeny}>
+              Từ chối
+            </Button>
+          </Stack>
+        )}
       </Stack>
     </>
   );

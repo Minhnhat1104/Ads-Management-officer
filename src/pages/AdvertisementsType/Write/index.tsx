@@ -13,8 +13,6 @@ import { SET_TIMEOUT } from '@base/config/constants';
 import MiModal from '@base/components/MiModal';
 import LoadingButton from '@base/components/LoadingButton';
 import { queryKeys } from '@base/config/queryKeys';
-import { usePlacement } from 'src/hooks/usePlacements';
-import { useReportsTypeMutation } from 'src/hooks/reportsType/useReportsTypeMutation';
 import { useAdvertisementsTypeMutation } from 'src/hooks/advertisementType/useAdvertisementTypeMutation';
 
 interface WritePageProps {
@@ -26,16 +24,11 @@ interface WritePageProps {
 
 const WritePage = (props: WritePageProps) => {
   const { title, isOpen, onClose, updateData } = props;
-  console.log('🚀 ~ updateData:', updateData);
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [keyNames.KEY_NAME_ADVERTISEMENT_TYPE_NAME];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
-
-  const { data: viewData } = usePlacement(updateData?.id, {
-    enabled: !!updateData?.id,
-  });
 
   //react-hook-form
   const {

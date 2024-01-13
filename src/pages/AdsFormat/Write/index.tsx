@@ -12,10 +12,7 @@ import { getWriteForm } from '@base/utils/getWriteForm';
 import { SET_TIMEOUT } from '@base/config/constants';
 import MiModal from '@base/components/MiModal';
 import LoadingButton from '@base/components/LoadingButton';
-import { userRequestMutation } from 'src/hooks/userRequestMutation';
 import { queryKeys } from '@base/config/queryKeys';
-import { usePlacement } from 'src/hooks/usePlacements';
-import { useDistrictMutation } from 'src/hooks/district/useDistrictMutation';
 import { useAdsFormatMutation } from 'src/hooks/adsFormat/useAdsFormatMutation';
 
 interface WritePageProps {
@@ -33,10 +30,6 @@ const WritePage = (props: WritePageProps) => {
   const layoutFields: string[] = [keyNames.KEY_NAME_FORMAT_ADS_NAME];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
-
-  const { data: viewData } = usePlacement(updateData?.id, {
-    enabled: !!updateData?.id,
-  });
 
   //react-hook-form
   const {

@@ -3,7 +3,7 @@ import ViewFields from './ViewFields';
 import { requesterFields } from './config/requesterFields';
 import { useParams } from 'react-router';
 import { useReportByReportId } from 'src/hooks/useReportByReportId';
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { newDataFieldPlacement, newDataFieldAdvertisement } from './config/newDataField';
 import Write from '../Write';
 import Toolbar from './Toolbar';
@@ -23,6 +23,8 @@ const View = () => {
           <Typography sx={{ fontSize: 18, fontWeight: 500 }}>CHI TIẾT YÊU CẦU CHỈNH SỬA BẢNG QUẢNG CÁO</Typography>
           <Toolbar data={data} />
           {/* Requester field */}
+          <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Lý do chỉnh sửa</Typography>
+          <Box dangerouslySetInnerHTML={{ __html: data.editReason }} />
           {data?.requester !== null ? (
             <>
               <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin người yêu cầu chỉnh sửa</Typography>

@@ -39,6 +39,7 @@ const WritePage = (props: WritePageProps) => {
     keyNames.KEY_NAME_AD_WIDTH,
     keyNames.KEY_NAME_AD_HEIGH,
     keyNames.KEY_NAME_AD_IMAGE,
+    keyNames.KEY_NAME_AD_ADDRES,
     keyNames.KEY_NAME_AD_PLACEMENT_ID,
     keyNames.KEY_NAME_AD_AMOUNT,
     keyNames.KEY_NAME_AD_ADVERTISING_TYPE,
@@ -75,7 +76,7 @@ const WritePage = (props: WritePageProps) => {
       const newFormData = {
         [keyNames.KEY_NAME_AD_WIDTH]: viewData?.width,
         [keyNames.KEY_NAME_AD_HEIGH]: viewData?.height,
-        // [keyNames.KEY_NAME_AD_IMAGE]: viewData?.image,
+        [keyNames.KEY_NAME_AD_ADDRES]: viewData?.address,
         [keyNames.KEY_NAME_AD_PLACEMENT_ID]: {
           label: viewData?.placement?.ward?.wardName + ', ' + viewData?.placement?.ward?.district?.districtName,
           value: viewData?.placement.id,

@@ -22,6 +22,9 @@ export const requesterFields: ViewFieldConfig[] = [
   {
     label: 'Vai trò',
     value: 'roleName',
+    getValue(value, keyName) {
+      return value === 'WARD' ? 'Cán bộ phường' : 'Cán bộ sở';
+    },
   },
   {
     label: 'Phường',

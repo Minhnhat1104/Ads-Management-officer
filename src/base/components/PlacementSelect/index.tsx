@@ -18,7 +18,7 @@ const PlacementSelect = (props: PlacementSelectProps) => {
     if (data && Array.isArray(data)) {
       const nOptions = data?.map((_item: any) => ({
         value: _item?.id,
-        label: [_item?.ward, _item?.district].join(', '),
+        label: [_item?.address, _item?.ward, _item?.district].join(', '),
       }));
       setOptions(nOptions);
     }

@@ -75,7 +75,7 @@ const WritePage = (props: WritePageProps) => {
       const newFormData = {
         [keyNames.KEY_NAME_AD_WIDTH]: viewData?.width,
         [keyNames.KEY_NAME_AD_HEIGH]: viewData?.height,
-        [keyNames.KEY_NAME_AD_IMAGE]: viewData?.image,
+        // [keyNames.KEY_NAME_AD_IMAGE]: viewData?.image,
         [keyNames.KEY_NAME_AD_PLACEMENT_ID]: {
           label: viewData?.placement?.ward?.wardName + ', ' + viewData?.placement?.ward?.district?.districtName,
           value: viewData?.placement.id,
@@ -110,8 +110,13 @@ const WritePage = (props: WritePageProps) => {
     const paramUpload: any = {
       file: params[keyNames.KEY_NAME_AD_IMAGE]?.[0],
     };
-    const imageUrl = await mUploadImage.mutateAsync(paramUpload);
-    parsedParams.image = imageUrl;
+
+    if (paramUpload?.file) {
+      const imageUrl = await mUploadImage.mutateAsync(paramUpload);
+      parsedParams.image = imageUrl;
+    } else if (updateData && updateData?.image) {
+      parsedParams.image = updateData?.image;
+    }
 
     if (updateData) {
       mUpdate.mutate(parsedParams, {

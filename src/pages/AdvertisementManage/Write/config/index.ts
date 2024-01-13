@@ -32,7 +32,7 @@ const writeConfig: WriteConfig = {
     Component: baseComponents.ImageUpload,
     defaultValue: null,
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập Hình ảnh',
+    // validate: (value: any) => !!value || 'Hãy nhập Hình ảnh',
   },
   [keyNames.KEY_NAME_AD_PLACEMENT_ID]: {
     languageKey: 'Điểm đặt',

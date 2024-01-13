@@ -6,11 +6,11 @@ export const finalizeParams = (params: any, updateData: any) => {
 
   parsedParams = {
     editData: {
-      width: params?.[keyNames.KEY_NAME_AD_WIDTH],
-      height: params?.[keyNames.KEY_NAME_AD_HEIGHT],
+      width: Number(params?.[keyNames.KEY_NAME_AD_WIDTH]),
+      height: Number(params?.[keyNames.KEY_NAME_AD_HEIGHT]),
       image: updateData?.image,
       placementId: updateData?.placement?.id,
-      amount: params?.[keyNames.KEY_NAME_AD_AMOUNT],
+      amount: Number(params?.[keyNames.KEY_NAME_AD_AMOUNT]),
       advertisingTypeId: params?.[keyNames.KEY_NAME_AD_ADVERTISING_TYPE_ID]?.value,
       companyId: params?.[keyNames.KEY_NAME_AD_COMPANY_ID]?.value,
       startDate: params?.[keyNames.KEY_NAME_AD_START_DATE],

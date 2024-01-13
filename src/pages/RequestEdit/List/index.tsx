@@ -107,18 +107,6 @@ const ResidentReport = (props: ResidentReportProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Thời điểm gửi',
-      keyName: keyNames.KEY_NAME_REQUEST_CREATED_AT,
-      enableSorting: false,
-      width: 'auto',
-    },
-    {
-      languageKey: 'Trạng thái',
-      keyName: keyNames.KEY_NAME_REQUEST_STATUS,
-      enableSorting: false,
-      width: 'auto',
-    },
-    {
       languageKey: 'Loại',
       keyName: keyNames.KEY_NAME_REQUEST_TYPE,
       enableSorting: false,
@@ -145,6 +133,18 @@ const ResidentReport = (props: ResidentReportProps) => {
     {
       languageKey: 'Email người xử lí',
       keyName: keyNames.KEY_NAME_REQUEST_APPROVER_EMAIL,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Thời điểm gửi',
+      keyName: keyNames.KEY_NAME_REQUEST_CREATED_AT,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Trạng thái',
+      keyName: keyNames.KEY_NAME_REQUEST_STATUS,
       enableSorting: false,
       width: 'auto',
     },

@@ -1,4 +1,4 @@
-export const KEY_NAME_REQUEST_CREATED_AT = 'created_At';
+export const KEY_NAME_REQUEST_CREATED_AT = 'createdAt';
 export const KEY_NAME_REQUEST_STATUS = 'status';
 export const KEY_NAME_REQUEST_TYPE = 'type';
 export const KEY_NAME_REQUEST_REQUESTER = 'requester';

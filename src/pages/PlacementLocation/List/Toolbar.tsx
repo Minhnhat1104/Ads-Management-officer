@@ -17,6 +17,7 @@ const Toolbar = (props: ToolbarProps) => {
 
   const handleRefresh = () => {
     queryClient.invalidateQueries([queryKeys.placementLocationType]);
+    queryClient.invalidateQueries([queryKeys.placements]);
   };
 
   return (

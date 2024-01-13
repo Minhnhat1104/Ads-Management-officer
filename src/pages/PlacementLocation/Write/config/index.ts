@@ -6,25 +6,21 @@ import * as baseComponents from '@base/config/WriteField/components';
 
 const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_PLACEMENT_LOCATION_ADDRESSS]: {
-    languageKey: 'Vị trí điểm đặt quảng cáo',
+    languageKey: 'Địa chỉ',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập vị trí điểm đặt quảng cáo',
+    validate: (value: any) => !!value || 'Hãy nhập Địa chỉ',
   },
-  [keyNames.KEY_NAME_PLACEMENT_LOCATION_LAT]: {
-    languageKey: 'Vĩ độ',
-    Component: TextField,
-    defaultValue: '',
+  [keyNames.KEY_NAME_PLACEMENT_LOCATION_POSITION]: {
+    languageKey: 'Vị trí',
+    Component: components.MiniMapSelectPoint,
+    defaultValue: {
+      lng: 106.68246,
+      lat: 10.7631,
+    },
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập vĩ độ',
-  },
-  [keyNames.KEY_NAME_PLACEMENT_LOCATION_LONG]: {
-    languageKey: 'Tung độ',
-    Component: TextField,
-    defaultValue: '',
-    componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tung độ',
+    validate: (value: any) => (!!value?.lat && !!value?.lng) || 'Hãy chọn vị trí',
   },
   [keyNames.KEY_NAME_PLACEMENT_LOCATION_PLANNED]: {
     languageKey: 'Trạng thái quy hoạch',

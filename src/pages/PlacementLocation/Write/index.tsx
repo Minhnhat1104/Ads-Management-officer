@@ -31,8 +31,7 @@ const WritePage = (props: WritePageProps) => {
   const queryClient = useQueryClient();
   const layoutFields: string[] = [
     keyNames.KEY_NAME_PLACEMENT_LOCATION_ADDRESSS,
-    keyNames.KEY_NAME_PLACEMENT_LOCATION_LAT,
-    keyNames.KEY_NAME_PLACEMENT_LOCATION_LONG,
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_POSITION,
     keyNames.KEY_NAME_PLACEMENT_LOCATION_PLANNED,
     keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPEID,
     keyNames.KEY_NAME_PLACEMENT_LOCATION_FORMATID,
@@ -65,8 +64,7 @@ const WritePage = (props: WritePageProps) => {
       console.log('🚀 ~ useEffect ~ updateData1:', viewData);
       // console.log('🚀 ~ useEffect ~ viewData:', viewData);
       const newFormData = {
-        [keyNames.KEY_NAME_PLACEMENT_LOCATION_LAT]: viewData?.lat,
-        [keyNames.KEY_NAME_PLACEMENT_LOCATION_LONG]: viewData?.lng,
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_POSITION]: { lat: Number(viewData?.lat), lng: Number(viewData?.lng) },
         [keyNames.KEY_NAME_PLACEMENT_LOCATION_PLANNED]: viewData?.planned,
         [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPEID]: {
           label: viewData?.locationType?.name,
@@ -91,15 +89,13 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
-    console.log('🚀 ~ onSubmit ~ parsedParams:', parsedParams);
 
     if (updateData) {
-      console.log('🚀 ~ onSubmit ~ updateData:', updateData);
-
       mUpdate.mutate(parsedParams.editData, {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
             queryClient.invalidateQueries([queryKeys.placementLocation]);
+            queryClient.invalidateQueries([queryKeys.placements]);
           }, SET_TIMEOUT);
           reset && reset();
           onClose && onClose();
@@ -110,6 +106,7 @@ const WritePage = (props: WritePageProps) => {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
             queryClient.invalidateQueries([queryKeys.placementLocation]);
+            queryClient.invalidateQueries([queryKeys.placements]);
           }, SET_TIMEOUT);
           reset && reset();
           onClose && onClose();

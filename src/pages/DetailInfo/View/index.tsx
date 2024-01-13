@@ -27,21 +27,19 @@ const DetailInfo = (props: WritePageProps) => {
   const { title, updateData } = props;
   const theme = useTheme();
   const navigate = useNavigate();
-  const location = useLocation();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [
     keyNames.KEY_NAME_INFO_FIRSTNAME,
     keyNames.KEY_NAME_INFO_LASTNAME,
     keyNames.KEY_NAME_INFO_EMAIL,
     keyNames.KEY_NAME_INFO_PHONE,
-    keyNames.KEY_NAME_INFO_WARD_ID,
+    keyNames.KEY_NAME_INFO_DATE_OF_BIRTH,
+    // keyNames.KEY_NAME_INFO_WARD_ID,
   ];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
-  const account = location.state && location.state.account;
   const { data: viewData } = useAccountProfile();
-  const { data: viewWardData } = useWards();
 
   //react-hook-form
   const {
@@ -60,17 +58,14 @@ const DetailInfo = (props: WritePageProps) => {
 
   useEffect(() => {
     if (viewData) {
-      const ward = viewWardData?.find(
-        (ward: { [x: string]: any; wardName: any }) =>
-          ward?.wardName === viewData?.ward && ward?.district === viewData?.district
-      );
       // console.log('WardId: ', wardId);
       const newFormData = {
         [keyNames.KEY_NAME_INFO_LASTNAME]: viewData?.lastName,
         [keyNames.KEY_NAME_INFO_FIRSTNAME]: viewData?.firstName,
         [keyNames.KEY_NAME_INFO_EMAIL]: viewData?.email,
         [keyNames.KEY_NAME_INFO_PHONE]: viewData?.phone,
-        [keyNames.KEY_NAME_INFO_WARD_ID]: { label: ward?.wardName + ' ' + ward?.district, value: ward?.id }, // need id
+        [keyNames.KEY_NAME_INFO_DATE_OF_BIRTH]: viewData?.dob, // need id
+        // [keyNames.KEY_NAME_INFO_WARD_ID]: { label: viewData?.ward + ' ' + viewData?.district, value: viewData?.wardId }, // need id
       };
       reset && reset(newFormData);
     }
@@ -87,7 +82,7 @@ const DetailInfo = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
-    console.log('submit', parsedParams.editData);
+
     mEditInfo.mutate(parsedParams.editData, {
       onSuccess(data, variables: any, context) {
         setTimeout(() => {

@@ -4,11 +4,11 @@ import * as keyNames from './keyNames';
 
 const writeConfig: WriteConfig = {
   [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_NAME]: {
-    languageKey: 'Tên điểm đặt quảng cáo',
+    languageKey: 'Tên loại điểm đặt quảng cáo',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên điểm đặt quảng cáo',
+    validate: (value: any) => !!value || 'Hãy nhập tên loại điểm đặt quảng cáo',
   },
 };
 

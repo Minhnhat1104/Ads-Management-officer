@@ -16,6 +16,7 @@ import { queryKeys } from '@base/config/queryKeys';
 import { usePlacement } from 'src/hooks/usePlacements';
 import { useReportsTypeMutation } from 'src/hooks/reportsType/useReportsTypeMutation';
 import { usePlacementLocationTypeMutation } from 'src/hooks/placementLocationType/usePlacementLocationTypeMutation';
+import { usePlacementMutation } from 'src/hooks/usePlacementMutation';
 
 interface WritePageProps {
   title?: string;
@@ -28,7 +29,15 @@ const WritePage = (props: WritePageProps) => {
   const { title, isOpen, onClose, updateData } = props;
   const theme = useTheme();
   const queryClient = useQueryClient();
-  const layoutFields: string[] = [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_NAME];
+  const layoutFields: string[] = [
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_ADDRESSS,
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_LAT,
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_LONG,
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_PLANNED,
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPEID,
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_FORMATID,
+    keyNames.KEY_NAME_PLACEMENT_LOCATION_WARDID,
+  ];
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
@@ -47,17 +56,25 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    if (updateData) {
-      const newFormData = {
-        [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_NAME]: updateData?.name,
-      };
+  // useEffect(() => {
+  //   if (updateData) {
+  //     const newFormData = {
+  //       [keyNames.KEY_NAME_PLACEMENT_LAT]: viewData?.lat,
+  //       [keyNames.KEY_NAME_PLACEMENT_LNG]: viewData?.lng,
+  //       [keyNames.KEY_NAME_PLACEMENT_PLANNED]: viewData?.planned,
+  //       [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ID]: {
+  //         label: viewData?.locationType?.name,
+  //         value: viewData?.locationType?.id,
+  //       }, // need id
+  //       [keyNames.KEY_NAME_PLACEMENT_FORMAT_ID]: { label: viewData?.format?.name, value: viewData?.format?.id }, // need id
+  //       [keyNames.KEY_NAME_PLACEMENT_ADDRESS]: viewData?.address,
+  //       [keyNames.KEY_NAME_PLACEMENT_WARD_ID]: { label: viewData?.ward?.name, value: viewData?.ward?.id }, // need id};
 
-      reset && reset(newFormData);
-    }
-  }, [updateData]);
+  //     reset && reset(newFormData);
+  //   }
+  // }, [updateData]);
 
-  const { mAdd, mUpdate } = usePlacementLocationTypeMutation();
+  const { mAdd, mUpdate } = usePlacementMutation();
 
   //when submit error, call this
   const onError = (errors: any, e: any) => {
@@ -68,12 +85,13 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
+    console.log('🚀 ~ onSubmit ~ parsedParams:', parsedParams);
 
     if (updateData) {
       mUpdate.mutate(parsedParams, {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
-            queryClient.invalidateQueries([queryKeys.placementLocationType]);
+            queryClient.invalidateQueries([queryKeys.placementLocation]);
           }, SET_TIMEOUT);
 
           onClose && onClose();
@@ -84,7 +102,7 @@ const WritePage = (props: WritePageProps) => {
       mAdd.mutate(parsedParams, {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
-            queryClient.invalidateQueries([queryKeys.placementLocationType]);
+            queryClient.invalidateQueries([queryKeys.placementLocation]);
           }, SET_TIMEOUT);
 
           onClose && onClose();
@@ -132,7 +150,7 @@ const WritePage = (props: WritePageProps) => {
   return (
     <>
       <MiModal
-        title={updateData ? 'Cập nhật loại điểm đặt quảng cáo' : 'Thêm loại điểm đặt quảng cáo'}
+        title={updateData ? 'Cập nhật điểm đặt quảng cáo' : 'Thêm điểm đặt quảng cáo'}
         isOpen={isOpen}
         footer={Footer}
         onClose={onClose}

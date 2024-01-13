@@ -18,6 +18,8 @@ import Write from '../Write';
 import { queryKeys } from '@base/config/queryKeys';
 import { usePlacementLocationType } from 'src/hooks/placementLocationType/usePlacementLocationType';
 import { usePlacementLocationTypeMutation } from 'src/hooks/placementLocationType/usePlacementLocationTypeMutation';
+import { usePlacement, usePlacements } from 'src/hooks/usePlacements';
+import { usePlacementMutation } from 'src/hooks/usePlacementMutation';
 
 interface ListProps {}
 
@@ -34,8 +36,8 @@ const List = (props: ListProps) => {
   const [openEdit, setOpenEdit] = useState<{ open: boolean; data: any }>({ open: false, data: null });
 
   // call data
-  const { data } = usePlacementLocationType();
-  const { mDelete } = usePlacementLocationTypeMutation();
+  const { data } = usePlacements();
+  const { mDelete } = usePlacementMutation();
 
   useEffect(() => {
     if (data && Array.isArray(data)) {
@@ -71,14 +73,56 @@ const List = (props: ListProps) => {
   //table props
   const fields: FieldsData = [
     {
-      languageKey: 'Loại điểm đặt quảng cáo',
-      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_NAME,
+      languageKey: 'Điểm đặt quảng cáo',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_ADDRESSS,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Tung độ',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_LAT,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Vĩ độ',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_LONG,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Quy hoạch',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_PLANNED,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Loại điểm đặt',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPEID,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Hình thức',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_FORMATID,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Phường',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_WARDID,
+      enableSorting: false,
+      width: 'auto',
+    },
+    {
+      languageKey: 'Quận',
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_DISTRICT,
       enableSorting: false,
       width: 'auto',
     },
     {
       languageKey: '',
-      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ACTIONS,
+      keyName: keyNames.KEY_NAME_PLACEMENT_LOCATION_ACTIONS,
       enableSorting: false,
       width: 50,
     },

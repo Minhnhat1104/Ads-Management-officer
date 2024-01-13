@@ -41,6 +41,11 @@ export const queryKeys = {
   placementFormatsUpdate: 'company_placementFormatsUpdate',
   placementFormatsDelete: 'company_placementFormatsDelete',
 
+  placementLocation: 'company_placementLocation',
+  placementLocationAdd: 'company_placementLocationAdd',
+  placementLocationUpdate: 'company_placementLocationUpdate',
+  placementLocationDelete: 'company_placementLocationDelete',
+
   placementLocationType: 'company_placementLocationType',
   placementLocationTypeAdd: 'company_placementLocationTypeAdd',
   placementLocationTypeUpdate: 'company_placementLocationTypeUpdate',

@@ -19,6 +19,10 @@ export const placementFields: ViewFieldConfig[] = [
     },
   },
   {
+    label: 'Địa chỉ',
+    value: 'address',
+  },
+  {
     label: 'Phường',
     value: 'ward',
   },

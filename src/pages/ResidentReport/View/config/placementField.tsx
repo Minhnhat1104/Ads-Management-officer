@@ -2,6 +2,10 @@ import { ViewFieldConfig } from '../ViewFields';
 
 export const placementFields: ViewFieldConfig[] = [
   {
+    label: 'Địa chỉ',
+    value: 'address',
+  },
+  {
     label: 'Phường',
     value: 'ward',
   },

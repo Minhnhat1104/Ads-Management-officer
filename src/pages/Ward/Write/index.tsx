@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box, Button, Grid, ImageList, ImageListItem, Stack, Typography, useTheme } from '@mui/material';
@@ -14,6 +14,8 @@ import MiModal from '@base/components/MiModal';
 import LoadingButton from '@base/components/LoadingButton';
 import { queryKeys } from '@base/config/queryKeys';
 import { useWardMutation } from 'src/hooks/ward/useWardMutation';
+import { useWards } from 'src/hooks/ward/useWards';
+import { useDistricts } from 'src/hooks/district/useDistricts';
 
 interface WritePageProps {
   title?: string;
@@ -45,14 +47,28 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
+  const { data: viewDistrictData } = useDistricts();
+
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (updateData) {
+    if (viewDistrictData) {
+      setLoading(false);
+    }
+  }, [viewDistrictData]);
+
+  useEffect(() => {
+    if (!loading && updateData) {
+      const district = viewDistrictData?.find(
+        (district: { districtName: any }) => district?.districtName === updateData?.district
+      );
+
       const newFormData = {
         [keyNames.KEY_NAME_WARD_NAME]: updateData?.wardName,
+        [keyNames.KEY_NAME_WARD_DISTRICT]: district ? { label: district?.districtName, value: district?.id } : null,
       };
       reset && reset(newFormData);
     }
-  }, [updateData]);
+  }, [loading, updateData, viewDistrictData]);
 
   const { mAdd, mUpdate } = useWardMutation();
 
@@ -65,7 +81,6 @@ const WritePage = (props: WritePageProps) => {
   const onSubmit = async (formData: any) => {
     const params = getParams(formData);
     const parsedParams = finalizeParams(params, updateData); // define add or update here
-    console.log('🚀 ~ onSubmit ~ parsedParams', parsedParams);
     if (updateData) {
       mUpdate.mutate(parsedParams, {
         onSuccess(data, variables: any, context) {

@@ -14,7 +14,7 @@ const writeConfig: WriteConfig = {
     Component: components.DistrictSelect,
     defaultValue: null,
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập tên phường',
+    validate: (value: any) => !!value || 'Hãy chọn tên quận',
   },
   [keyNames.KEY_NAME_WARD_NAME]: {
     languageKey: 'Tên Phường',

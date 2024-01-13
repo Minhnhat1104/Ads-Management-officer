@@ -35,17 +35,10 @@ export const oldDataFieldPlacement: ViewFieldConfig[] = [
     value: 'address',
   },
   {
-    label: 'Phường',
+    label: 'Vị trí',
     value: 'ward',
     getValue(value, keyName) {
-      return value?.[keyName]?.wardName;
-    },
-  },
-  {
-    label: 'Phường',
-    value: 'ward',
-    getValue(value, keyName) {
-      return value?.[keyName]?.district?.districtName;
+      return value?.[keyName]?.wardName + ', ' + value?.[keyName]?.district?.districtName;
     },
   },
 ];
@@ -58,6 +51,13 @@ export const oldDataFieldAdvertisement: ViewFieldConfig[] = [
   {
     label: 'Chiều cao',
     value: 'height',
+  },
+  {
+    label: 'Quy hoạch',
+    value: 'planned',
+    getValue(value, keyName) {
+      return value?.placement?.[keyName] === true ? 'Đã quy hoạch' : 'Chưa quy hoạch';
+    },
   },
   {
     label: 'Địa chỉ',

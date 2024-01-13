@@ -24,7 +24,7 @@ const View = () => {
           <Toolbar data={data} />
           {/* Requester field */}
           <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Lý do chỉnh sửa</Typography>
-          <Box dangerouslySetInnerHTML={{ __html: data.editReason }} />
+          <Box dangerouslySetInnerHTML={{ __html: data?.editReason }} />
           {data?.requester !== null ? (
             <>
               <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin người yêu cầu chỉnh sửa</Typography>
@@ -56,6 +56,8 @@ const View = () => {
           <Typography sx={{ fontSize: 16, fontWeight: 500 }}>CHI TIẾT YÊU CẦU CHỈNH SỬA ĐIỂM ĐẶT</Typography>
           <Toolbar data={data} />
           {/* requester field */}
+          <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Lý do chỉnh sửa</Typography>
+          <Box dangerouslySetInnerHTML={{ __html: data?.editReason }} />
           {data?.requester !== null ? (
             <>
               <Typography sx={{ fontSize: 16, fontWeight: 500 }}>Thông tin người yêu cầu chỉnh sửa</Typography>

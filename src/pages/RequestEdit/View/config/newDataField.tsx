@@ -25,6 +25,10 @@ export const newDataFieldPlacement: ViewFieldConfig[] = [
     value: 'format',
   },
   {
+    label: 'Địa chỉ',
+    value: 'address',
+  },
+  {
     label: 'Vị trí',
     value: 'ward',
     getValue(value, keyName) {
@@ -68,20 +72,6 @@ export const newDataFieldAdvertisement: ViewFieldConfig[] = [
     value: 'ward',
     getValue(value, keyName) {
       return value?.placement?.[keyName]?.district?.districtName;
-    },
-  },
-  {
-    label: 'Loại điểm đặt',
-    value: 'locationType',
-    getValue(value, keyName) {
-      return value?.placement?.[keyName]?.name;
-    },
-  },
-  {
-    label: 'Hình thức quảng cáo',
-    value: 'format',
-    getValue(value, keyName) {
-      return value?.placement?.[keyName]?.name;
     },
   },
   {

@@ -52,11 +52,9 @@ const Toolbar = (props: ToolbarProps) => {
           </Button>
         </Stack>
         <Stack direction="row" spacing={1} marginRight={2}>
-          {profile?.roleName === USER_ROLE_WARD && (
-            <Button onClick={gotoView} size="small" variant="contained" startIcon={<PasswordIcon />}>
-              Đổi mật khẩu
-            </Button>
-          )}
+          <Button onClick={gotoView} size="small" variant="contained" startIcon={<PasswordIcon />}>
+            Đổi mật khẩu
+          </Button>
         </Stack>
         {/* <Stack direction="row" spacing={1} marginRight={2}>
           <Button onClick={gotoView} size="small" variant="contained" startIcon={<PasswordIcon />}>

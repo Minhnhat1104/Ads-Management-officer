@@ -27,12 +27,37 @@ export const useAdvertisements2 = (params?: any, opts?: any) => {
   });
 };
 
+export const useAdvertisement = (id?: any, opts?: any) => {
+  return useGet<any>([queryKeys.advertisement, id], `advertisement/${id}`, null, {
+    keepPreviousData: true,
+    ...opts,
+  });
+};
+
 import { useSnackBar } from '@base/hooks/useSnackbar';
 import { axiosAPI } from '@base/utils/axios/api';
 import { useMutation } from '@tanstack/react-query';
+import useMutationCustom from '@base/hooks/useMutationCustom';
 
 export const useAdvertisements2Mutation = () => {
   const { enqueueSuccessBar, enqueueErrorBar } = useSnackBar();
+
+  const mUploadImageUpdate = useMutationCustom(
+    [queryKeys.requestStorageImage],
+    `storage`,
+    'POST',
+    {
+      onSuccess: (data: any, variables: any, context: any) => {
+        enqueueSuccessBar('Upload Successfully');
+      },
+      onError: (error: any, variables: any, context: any) => {
+        enqueueErrorBar('Upload Fail');
+      },
+    },
+    { 'Content-Type': 'multipart/form-data' },
+    undefined,
+    undefined
+  );
 
   const mAdd = useMutation(
     [queryKeys.advertisementAdd],
@@ -80,5 +105,5 @@ export const useAdvertisements2Mutation = () => {
     }
   );
 
-  return { mAdd, mUpdate, mDelete };
+  return { mAdd, mUpdate, mDelete, mUploadImageUpdate };
 };

@@ -91,7 +91,7 @@ const List = (props: ListProps) => {
       width: 'auto',
     },
     // {
-    //   languageKey: 'Đeiẻm đặt',
+    //   languageKey: 'Điểm đặt',
     //   keyName: keyNames.KEY_NAME_AD_PLACEMENT_ID,
     //   enableSorting: false,
     //   width: 'auto',

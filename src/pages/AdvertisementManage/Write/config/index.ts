@@ -76,7 +76,15 @@ const writeConfig: WriteConfig = {
     Component: baseComponents.DatePicker,
     defaultValue: null,
     componentProps: {},
-    validate: (value: any) => !!value || 'Hãy nhập Ngày kết thúc',
+    validate: (value: any, allValues: any) => {
+      // Validate that end date is greater than start date
+      const startDate = allValues[keyNames.KEY_NAME_AD_START_DATE];
+      if (startDate && value <= startDate) {
+        return 'Ngày kết thúc phải lớn hơn Ngày bắt đầu';
+      }
+
+      return !!value || 'Hãy nhập Ngày kết thúc';
+    },
   },
 };
 

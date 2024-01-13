@@ -41,6 +41,10 @@ const WritePage = (props: WritePageProps) => {
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
+  const { data: viewData } = usePlacement(updateData?.id, {
+    enabled: !!updateData?.id,
+  });
+
   //react-hook-form
   const {
     handleSubmit,
@@ -56,23 +60,25 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  // useEffect(() => {
-  //   if (updateData) {
-  //     const newFormData = {
-  //       [keyNames.KEY_NAME_PLACEMENT_LAT]: viewData?.lat,
-  //       [keyNames.KEY_NAME_PLACEMENT_LNG]: viewData?.lng,
-  //       [keyNames.KEY_NAME_PLACEMENT_PLANNED]: viewData?.planned,
-  //       [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPE_ID]: {
-  //         label: viewData?.locationType?.name,
-  //         value: viewData?.locationType?.id,
-  //       }, // need id
-  //       [keyNames.KEY_NAME_PLACEMENT_FORMAT_ID]: { label: viewData?.format?.name, value: viewData?.format?.id }, // need id
-  //       [keyNames.KEY_NAME_PLACEMENT_ADDRESS]: viewData?.address,
-  //       [keyNames.KEY_NAME_PLACEMENT_WARD_ID]: { label: viewData?.ward?.name, value: viewData?.ward?.id }, // need id};
-
-  //     reset && reset(newFormData);
-  //   }
-  // }, [updateData]);
+  useEffect(() => {
+    if (viewData) {
+      console.log('🚀 ~ useEffect ~ updateData1:', viewData);
+      // console.log('🚀 ~ useEffect ~ viewData:', viewData);
+      const newFormData = {
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_LAT]: viewData?.lat,
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_LONG]: viewData?.lng,
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_PLANNED]: viewData?.planned,
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_TYPEID]: {
+          label: viewData?.locationType?.name,
+          value: viewData?.locationType?.id,
+        }, // need id
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_FORMATID]: { label: viewData?.format?.name, value: viewData?.format?.id }, // need id
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_ADDRESSS]: viewData?.address,
+        [keyNames.KEY_NAME_PLACEMENT_LOCATION_WARDID]: { label: viewData?.ward?.name, value: viewData?.ward?.id }, // need id};
+      };
+      reset && reset(newFormData);
+    }
+  }, [viewData]);
 
   const { mAdd, mUpdate } = usePlacementMutation();
 
@@ -88,25 +94,25 @@ const WritePage = (props: WritePageProps) => {
     console.log('🚀 ~ onSubmit ~ parsedParams:', parsedParams);
 
     if (updateData) {
-      mUpdate.mutate(parsedParams, {
+      console.log('🚀 ~ onSubmit ~ updateData:', updateData);
+
+      mUpdate.mutate(parsedParams.editData, {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
             queryClient.invalidateQueries([queryKeys.placementLocation]);
           }, SET_TIMEOUT);
-
-          onClose && onClose();
           reset && reset();
+          onClose && onClose();
         },
       });
     } else {
-      mAdd.mutate(parsedParams, {
+      mAdd.mutate(parsedParams.editData, {
         onSuccess(data, variables: any, context) {
           setTimeout(() => {
             queryClient.invalidateQueries([queryKeys.placementLocation]);
           }, SET_TIMEOUT);
-
-          onClose && onClose();
           reset && reset();
+          onClose && onClose();
         },
       });
     }

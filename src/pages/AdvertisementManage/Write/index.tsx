@@ -16,7 +16,12 @@ import { userRequestMutation } from 'src/hooks/userRequestMutation';
 import { queryKeys } from '@base/config/queryKeys';
 import { usePlacement } from 'src/hooks/usePlacements';
 import { useDistrictMutation } from 'src/hooks/district/useDistrictMutation';
-import { useAdvertisements2Mutation } from 'src/hooks/useAdvertisements';
+import {
+  useAdvertisement,
+  useAdvertisementDetail,
+  useAdvertisements2,
+  useAdvertisements2Mutation,
+} from 'src/hooks/useAdvertisements';
 
 interface WritePageProps {
   title?: string;
@@ -44,6 +49,10 @@ const WritePage = (props: WritePageProps) => {
 
   const { fields, defaultValues, getParams } = getWriteForm(layoutFields, writeConfig);
 
+  const { data: viewData } = useAdvertisementDetail(updateData?.id, {
+    enabled: !!updateData?.id,
+  });
+
   //react-hook-form
   const {
     handleSubmit,
@@ -59,15 +68,31 @@ const WritePage = (props: WritePageProps) => {
     mode: 'onChange',
   });
 
-  // useEffect(() => {
-  //   if (updateData) {
-  //     const newFormData = {
-  //       [keyNames.KEY_NAME_DISTRICT_NAME]: updateData?.districtName,
-  //     };
+  useEffect(() => {
+    if (viewData) {
+      console.log('🚀 ~ useEffect ~ viewData:', viewData);
 
-  //     reset && reset(newFormData);
-  //   }
-  // }, [updateData]);
+      const newFormData = {
+        [keyNames.KEY_NAME_AD_WIDTH]: viewData?.width,
+        [keyNames.KEY_NAME_AD_HEIGH]: viewData?.height,
+        [keyNames.KEY_NAME_AD_IMAGE]: viewData?.image,
+        [keyNames.KEY_NAME_AD_PLACEMENT_ID]: {
+          label: viewData?.placement?.ward?.wardName + ', ' + viewData?.placement?.ward?.district?.districtName,
+          value: viewData?.placement.id,
+        }, // need id
+        [keyNames.KEY_NAME_AD_AMOUNT]: viewData?.amount, // need id
+        [keyNames.KEY_NAME_AD_ADVERTISING_TYPE]: {
+          label: viewData?.advertisingType?.name,
+          value: viewData?.advertisingType?.id,
+        },
+        [keyNames.KEY_NAME_AD_COMPANY]: { label: viewData?.company?.name, value: viewData?.company?.id }, // need id};
+        [keyNames.KEY_NAME_AD_START_DATE]: viewData?.startDate, // need id};
+        [keyNames.KEY_NAME_AD_END_DATE]: viewData?.startDate, // need id};
+      };
+
+      reset && reset(newFormData);
+    }
+  }, [viewData]);
 
   const { mAdd, mUpdate } = useAdvertisements2Mutation();
   const { mUploadImage } = userRequestMutation();

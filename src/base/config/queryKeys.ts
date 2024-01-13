@@ -61,6 +61,7 @@ export const queryKeys = {
 
   // report
   reports: 'reports',
+  reportStatistics: 'reportStatistics',
   reportViewByReportId: 'reportViewByReportId',
 
   //reportsType

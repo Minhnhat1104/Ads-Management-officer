@@ -34,6 +34,10 @@ export const departmentNavItems: LabelValue[] = [
     value: 'request-edit',
   },
   {
+    label: 'Thống kê báo cáo',
+    value: 'report-statistics',
+  },
+  {
     label: 'Quản lý tài khoản cán bộ',
     value: 'account',
   },

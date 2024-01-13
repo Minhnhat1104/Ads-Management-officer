@@ -8,3 +8,10 @@ export const useReports = (params?: any, options: any = {}) => {
     ...options,
   });
 };
+
+export const useReportStatistics = (options: any = {}) => {
+  return useGet<any>([queryKeys.reportStatistics], 'reports/statistics', null, {
+    keepPreviousData: true,
+    ...options,
+  });
+};

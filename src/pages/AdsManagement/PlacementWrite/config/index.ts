@@ -16,6 +16,7 @@ const writeConfig: WriteConfig = {
     componentProps: {
       type: 'number',
     },
+    validate: (value: any) => !!value || 'Hãy nhập Tung độ',
   },
   [keyNames.KEY_NAME_PLACEMENT_LNG]: {
     languageKey: 'Vĩ độ',
@@ -24,6 +25,7 @@ const writeConfig: WriteConfig = {
     componentProps: {
       type: 'number',
     },
+    validate: (value: any) => !!value || 'Hãy nhập Vĩ độ',
   },
   [keyNames.KEY_NAME_PLACEMENT_PLANNED]: {
     languageKey: 'Trạng thái quy hoạch',
@@ -35,33 +37,36 @@ const writeConfig: WriteConfig = {
     languageKey: 'Loại điểm đặt',
     Component: components.LocationTypeSelect,
     defaultValue: null,
-    componentProps: {
-      options: DEMO_OPTIONS,
-    },
+    componentProps: {},
+    validate: (value: any) => !!value || 'Hãy nhập Loại điểm đặt',
   },
   [keyNames.KEY_NAME_PLACEMENT_FORMAT_ID]: {
     languageKey: 'Loại bảng quảng cáo',
     Component: components.PlacementFormatSelect,
     defaultValue: null,
     componentProps: {},
+    validate: (value: any) => !!value || 'Hãy nhập Loại bảng quảng cáo',
   },
   [keyNames.KEY_NAME_PLACEMENT_ADDRESS]: {
     languageKey: 'Địa chỉ',
     Component: TextField,
     defaultValue: '',
     componentProps: {},
+    validate: (value: any) => !!value || 'Hãy nhập Địa chỉ',
   },
   [keyNames.KEY_NAME_PLACEMENT_WARD_ID]: {
     languageKey: 'Phường',
     Component: components.WardSelect,
     defaultValue: null,
     componentProps: {},
+    validate: (value: any) => !!value || 'Hãy nhập Phường',
   },
   [keyNames.KEY_NAME_PLACEMENT_REASON]: {
     languageKey: 'Lí do chỉnh sửa',
     Component: baseComponents.QuillEditor,
     defaultValue: '',
     componentProps: {},
+    validate: (value: any) => !!value || 'Hãy nhập Lí do chỉnh sửa',
   },
 };
 

@@ -25,7 +25,6 @@ interface WritePageProps {
 
 const WritePage = (props: WritePageProps) => {
   const { title, isOpen, onClose, updateData } = props;
-  console.log('🚀 ~ updateData:', updateData);
   const theme = useTheme();
   const queryClient = useQueryClient();
   const layoutFields: string[] = [
